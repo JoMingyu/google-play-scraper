@@ -1,32 +1,38 @@
 import json
+from urllib.error import HTTPError
 from urllib.request import urlopen
 
-from google_play_scraper.constants.extraction import ExtractionSpecs
-from google_play_scraper.constants.regex import Regex
-from google_play_scraper.constants.url import URLFormats
+from .constants.element import ElementSpecs
+from .constants.regex import Regex
+from .constants.url import URLFormats
+from .exceptions import (
+    ContentNotFoundException,
+    InvalidURLError,
+    NotFoundError,
+    ExtraHTTPError,
+)
 
 
-"""
-  const scriptRegex = />AF_initDataCallback[\s\S]*?<\/script/g;
-  const keyRegex = /(ds:.*?)'/;
-  const valueRegex = /return ([\s\S]*?)}}\);<\//;
-"""
+def _request(url):
+    # type: (str) -> str
 
+    try:
+        resp = urlopen(url)
+    except HTTPError as e:
+        if e.code == 404:
+            raise NotFoundError("App not found(404).")
+        else:
+            raise ExtraHTTPError(
+                "App not found. Status code {} returned.".format(e.code)
+            )
 
-def _build_url(url, qs):
-    # type: (str, dict) -> str
-    return "{}?{}".format(url, "&".join(["{}={}".format(k, v) for k, v in qs.items()]))
-
-
-def list():
-    pass
+    return resp.read().decode()
 
 
 def app(app_id, lang="en", country="us"):
     url = URLFormats.Detail.build_url({"id": app_id, "hl": lang, "gl": country})
-    resp = urlopen(url)
 
-    dom = resp.read().decode()
+    dom = _request(url)
 
     matches = Regex.SCRIPT.findall(dom)
 
@@ -44,7 +50,14 @@ def app(app_id, lang="en", country="us"):
 
     result = {}
 
-    for k, spec in ExtractionSpecs.Detail.items():
-        result[k] = spec.extract(res)
+    for k, spec in ElementSpecs.Detail.items():
+        try:
+            content = spec.extract_content(res)
+        except ContentNotFoundException:
+            content = None
+
+        result[k] = content
+        result["appId"] = app_id
+        result["url"] = url
 
     return result
