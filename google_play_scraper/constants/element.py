@@ -1,6 +1,7 @@
+from html import unescape
 from typing import Callable, List, Any
 
-from google_play_scraper.exceptions import ContentNotFoundException
+from google_play_scraper.constants.regex import Regex
 from google_play_scraper.utils import nested_lookup
 
 
@@ -18,38 +19,47 @@ class ElementSpec:
             result = nested_lookup(
                 source["ds:{}".format(self.ds_num)], self.extraction_map
             )
-
-            if self.post_processor is not None:
-                result = self.post_processor(result)
-
-            return result
         except (IndexError, TypeError):
-            raise ContentNotFoundException()
+            result = None
+
+        if self.post_processor is not None:
+            result = self.post_processor(result)
+
+        return result
+
+
+def unescape_text(s):
+    return unescape(s.replace('<br>', '\r\n'))
 
 
 class ElementSpecs:
     Detail = {
         "title": ElementSpec(5, [0, 0, 0]),
-        "description": ElementSpec(5, [0, 10, 0, 1]),
+        "description": ElementSpec(5, [0, 10, 0, 1], unescape_text),
         "descriptionHTML": ElementSpec(5, [0, 10, 0, 1]),
-        "summary": ElementSpec(5, [0, 10, 1, 1]),
+        "summary": ElementSpec(5, [0, 10, 1, 1], unescape_text),
+        "summaryHTML": ElementSpec(5, [0, 10, 1, 1]),
         "installs": ElementSpec(5, [0, 12, 9, 0]),
-        "minInstalls": ElementSpec(5, [0, 12, 9, 0]),
+        "minInstalls": ElementSpec(5, [0, 12, 9, 0], lambda s: int(Regex.NOT_NUMBER.sub('', s)) if s else 0),
         "score": ElementSpec(7, [0, 6, 0, 1]),
-        "scoreText": ElementSpec(7, [0, 6, 0, 0]),
         "ratings": ElementSpec(7, [0, 6, 2, 1]),
         "reviews": ElementSpec(7, [0, 6, 3, 1]),
-        "histogram": ElementSpec(7, [0, 6, 1]),
-        "price": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0]),
-        "free": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0]),
+        "histogram": ElementSpec(7, [0, 6, 1], lambda container: [
+            container[1][1],
+            container[2][1],
+            container[3][1],
+            container[4][1],
+            container[5][1],
+        ] if container else [0, 0, 0, 0, 0]),
+        "price": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0], lambda price: (price / 1000000) or 0),
+        "free": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
         "currency": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 1]),
-        "priceText": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 2]),
-        "offersIAP": ElementSpec(5, [0, 12, 12, 0]),
+        "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool),
         "size": ElementSpec(8, [0]),
-        "androidVersion": ElementSpec(8, [2]),
+        "androidVersion": ElementSpec(8, [2], lambda s: s.split()[0]),
         "androidVersionText": ElementSpec(8, [2]),
         "developer": ElementSpec(5, [0, 12, 5, 1]),
-        "developerId": ElementSpec(5, [0, 12, 5, 5, 4, 2]),
+        "developerId": ElementSpec(5, [0, 12, 5, 5, 4, 2], lambda s: s.split('id=')[1]),
         "developerEmail": ElementSpec(5, [0, 12, 5, 2, 0]),
         "developerWebsite": ElementSpec(5, [0, 12, 5, 3, 5, 2]),
         "developerAddress": ElementSpec(5, [0, 12, 5, 4, 0]),
@@ -61,15 +71,16 @@ class ElementSpecs:
         "familyGenreId": ElementSpec(5, [0, 12, 13, 1, 2]),
         "icon": ElementSpec(5, [0, 12, 1, 3, 2]),
         "headerImage": ElementSpec(5, [0, 12, 2, 3, 2]),
-        "screenshots": ElementSpec(5, [0, 12, 0]),
+        "screenshots": ElementSpec(5, [0, 12, 0], lambda container: [item[3][2] for item in container]),
         "video": ElementSpec(5, [0, 12, 3, 0, 3, 2]),
         "videoImage": ElementSpec(5, [0, 12, 3, 1, 3, 2]),
         "contentRating": ElementSpec(5, [0, 12, 4, 0]),
         "contentRatingDescription": ElementSpec(5, [0, 12, 4, 2, 1]),
-        "adSupported": ElementSpec(5, [0, 12, 14, 0]),
+        "adSupported": ElementSpec(5, [0, 12, 14, 0], bool),
         "released": ElementSpec(5, [0, 12, 36]),
         "updated": ElementSpec(5, [0, 12, 8, 0]),
         "version": ElementSpec(8, [1]),
-        "recentChanges": ElementSpec(5, [0, 12, 6, 1]),
-        "comments": ElementSpec(15, [0]),
+        "recentChanges": ElementSpec(5, [0, 12, 6, 1], unescape_text),
+        "recentChangesHTML": ElementSpec(5, [0, 12, 6, 1]),
+        "comments": ElementSpec(15, [0], lambda container: [item[4] for item in container]),
     }

@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="google-play-scraper",
-    version="0.0.1",
+    version="0.0.1.1",
     url="https://github.com/JoMingyu/google-play-scraper",
     license="MIT",
     author="PlanB",
     author_email="mingyu.planb@gmail.com",
-    description="Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python without no external dependencies!",
+    description="Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python without any external dependencies!",
     classifiers=[
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python",

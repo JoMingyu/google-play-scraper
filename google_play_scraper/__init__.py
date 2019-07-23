@@ -51,10 +51,7 @@ def app(app_id, lang="en", country="us"):
     result = {}
 
     for k, spec in ElementSpecs.Detail.items():
-        try:
-            content = spec.extract_content(res)
-        except ContentNotFoundException:
-            content = None
+        content = spec.extract_content(res)
 
         result[k] = content
         result["appId"] = app_id
