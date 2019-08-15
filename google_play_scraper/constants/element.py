@@ -21,7 +21,8 @@ class ElementSpec:
             )
         except (IndexError, TypeError):
             result = None
-
+        if not result:
+            return ""
         if self.post_processor is not None:
             result = self.post_processor(result)
 
