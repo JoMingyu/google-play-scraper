@@ -13,6 +13,9 @@ from .exceptions import (
 )
 
 
+__version__ = "0.0.1.2"
+
+
 def _request(url):
     # type: (str) -> str
 

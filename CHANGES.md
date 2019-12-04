@@ -11,3 +11,10 @@
 - Applied post processing to complex data to provide meaningful data.
 - Added `recentChangesHTML` field : original data of html unescaped 'recentChanges' field.
 - Added `summaryHTML` field : original data of html unescaped `summary` field.
+
+## v0.0.1.2
+> Increased stability - app detail feature
+- By defining default values for each crawled element, crashes in the crawling process are significantly reduced.
+- Therefore, no crash occurs even for a DOM that has no contents at all.
+- It makes it possible to produce more realistic crawl results.
+- Special Thanks to [DestroyLee](https://github.com/DestroyLee)
