@@ -33,8 +33,7 @@ class TestApp(TestCase):
         )
         validators.url(result["icon"])
 
-    @patch("google_play_scraper.urlopen")
-    def test_issue_16(self, mock_urlopen):
+    def test_issue_16(self):
         """
         https://github.com/JoMingyu/google-play-scraper/issues/16
 
@@ -43,7 +42,7 @@ class TestApp(TestCase):
         - Some fields do not match the value, but they are not processed.
         """
 
-        with self._mock_urlopen("mocks/com__trixi__bike__stunts__driving.html"):
+        with self._mock_urlopen("mocks/com.trixi.bike.stunts.driving.html"):
             result = app("com.trixi.bike.stunts.driving")
 
             self.assertDictEqual(
@@ -57,9 +56,9 @@ class TestApp(TestCase):
                     "summaryHTML": "Only 1% can complete all levels of bike stunt game.",
                     "installs": "1,000+",
                     "minInstalls": 1000,
-                    "score": None,
-                    "ratings": None,
-                    "reviews": None,
+                    "score": 0.0,
+                    "ratings": 0,
+                    "reviews": 0,
                     "histogram": None,
                     "price": 0,
                     "free": True,
@@ -106,3 +105,82 @@ class TestApp(TestCase):
                 },
                 result,
             )
+
+    def test_issue_17(self):
+        """
+        https://github.com/JoMingyu/google-play-scraper/issues/17
+
+        - Try fetching com.instagram.igtv
+        - occurs `AttributeError: 'NoneType' object has no attribute 'replace'`
+        """
+
+        with self._mock_urlopen("mocks/com.instagram.igtv.html"):
+            result = app("com.instagram.igtv")
+
+            self.assertDictEqual(
+                {
+                    "title": "IGTV",
+                    "appId": "com.instagram.igtv",
+                    "url": "https://play.google.com/store/apps/details?id=com.instagram.igtv&hl=en&gl=us",
+                    "description": "IGTV now supports landscape video in addition to vertical.\r\n\r\nWatch long-form, video from your favorite Instagram creators. \r\n\r\nIGTV is different from your typical video experience. It’s built for how you actually use your phone and not limited to one minute, which means you can see more of your favorite content.\r\n\r\nFEATURES\r\n\r\n* Download and sign in with your Instagram account. You can start watching videos right away. \r\n* Watch videos from creators you already follow and others you might like. \r\n* Browse other videos or search for a specific creator’s channel as you watch.\r\n* Like or comment on videos and send them to your friends in Direct. \r\n* Discover creators and follow them right from IGTV to see more of who they are on Instagram.",
+                    "descriptionHTML": "IGTV now supports landscape video in addition to vertical.<br><br>Watch long-form, video from your favorite Instagram creators. <br><br>IGTV is different from your typical video experience. It’s built for how you actually use your phone and not limited to one minute, which means you can see more of your favorite content.<br><br>FEATURES<br><br>* Download and sign in with your Instagram account. You can start watching videos right away. <br>* Watch videos from creators you already follow and others you might like. <br>* Browse other videos or search for a specific creator’s channel as you watch.<br>* Like or comment on videos and send them to your friends in Direct. <br>* Discover creators and follow them right from IGTV to see more of who they are on Instagram.",
+                    "summary": "Watch long-form, vertical video from your favorite Instagram creators.",
+                    "summaryHTML": "Watch long-form, vertical video from your favorite Instagram creators.",
+                    "installs": "1,000,000+",
+                    "minInstalls": 1000000,
+                    "score": 3.778658,
+                    "ratings": 21628,
+                    "reviews": 9152,
+                    "histogram": [4756, 967, 1330, 1824, 12749],
+                    "price": 0,
+                    "free": True,
+                    "currency": "USD",
+                    "offersIAP": None,
+                    "size": "Varies with device",
+                    "androidVersion": "4.4",
+                    "androidVersionText": "4.4 and up",
+                    "developer": "Instagram",
+                    "developerId": "Instagram",
+                    "developerEmail": "android-support@instagram.com",
+                    "developerWebsite": "http://help.instagram.com/",
+                    "developerAddress": None,
+                    "privacyPolicy": "http://instagram.com/legal/privacy/",
+                    "developerInternalID": "4809448487316591555",
+                    "genre": "Social",
+                    "genreId": "SOCIAL",
+                    "familyGenre": None,
+                    "familyGenreId": None,
+                    "icon": "https://lh3.googleusercontent.com/l1wB4ZsDDt4XGAw_EKQxPxLnG3a1qt38G-w5_SBS2XYhWYds5NY3ryzjDticPHd457A",
+                    "headerImage": "https://lh3.googleusercontent.com/FcpbIYOvhElXRSsosRI_5I1eM31sFesHeXLEcFhdrplix2UpNW-7AMPusmK6YCj2vXPp",
+                    "screenshots": [
+                        "https://lh3.googleusercontent.com/lyzX1TuapLM9OdFs4bKlnmD8g8rm9z1xCM71wVsuYG6J9dvEk67OX8GpYxlgzOBUuhg",
+                        "https://lh3.googleusercontent.com/lB9DqSYRkTyjoQNcphoDilu4UMNVbKaOBaIqiehOBlSVqDgS7rxD10I-t9L6JFVmu4E",
+                        "https://lh3.googleusercontent.com/vW7rNCGM5h4sfqLacVuByw3xFNVIoe1j5B3GbywSaWZCAM7_ES3kGZp5eoMAI0Z8nmI",
+                    ],
+                    "video": None,
+                    "videoImage": None,
+                    "contentRating": "Rated for 12+",
+                    "contentRatingDescription": "Parental Guidance Recommended",
+                    "adSupported": None,
+                    "released": "Jun 20, 2018",
+                    "updated": 1574361155,
+                    "version": "120.0.0.29.118",
+                    "recentChanges": "The latest version contains bug fixes and performance improvements",
+                    "recentChangesHTML": "The latest version contains bug fixes and performance improvements",
+                    "comments": [],
+                },
+                result,
+            )
+
+    def test_issue_18(self):
+        """
+        https://github.com/JoMingyu/google-play-scraper/issues/18
+
+        - it crashed when comment is empty
+        - Occurs
+            > "comments": ElementSpec(15, [0], lambda container: [item[4] for item in container]),
+            > TypeError: 'NoneType' object is not iterable
+        """
+
+        # with self._mock_urlopen("mocks/com.instagram.igtv.html"):
+        #     result = app("com.instagram.igtv")

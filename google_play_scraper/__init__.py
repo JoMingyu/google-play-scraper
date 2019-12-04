@@ -13,7 +13,7 @@ from .exceptions import (
 )
 
 
-__version__ = "0.0.1.2"
+__version__ = "0.0.1.3"
 
 
 def _request(url):

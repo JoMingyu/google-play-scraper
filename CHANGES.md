@@ -18,3 +18,8 @@
 - Therefore, no crash occurs even for a DOM that has no contents at all.
 - It makes it possible to produce more realistic crawl results.
 - Special Thanks to [DestroyLee](https://github.com/DestroyLee)
+
+## v0.0.1.3
+> Responded to data structure changes in google play
+- The comment information, which occupied `ds:15`, moved to `ds:16`.
+- The review information, which occupied `ds:7`, moved to `ds:6`.

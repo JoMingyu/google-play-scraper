@@ -53,11 +53,11 @@ class ElementSpecs:
         "minInstalls": ElementSpec(
             5, [0, 12, 9, 0], lambda s: int(Regex.NOT_NUMBER.sub("", s)) if s else 0
         ),
-        "score": ElementSpec(7, [0, 6, 0, 1]),
-        "ratings": ElementSpec(7, [0, 6, 2, 1]),
-        "reviews": ElementSpec(7, [0, 6, 3, 1]),
+        "score": ElementSpec(6, [0, 6, 0, 1]),
+        "ratings": ElementSpec(6, [0, 6, 2, 1]),
+        "reviews": ElementSpec(6, [0, 6, 3, 1]),
         "histogram": ElementSpec(
-            7,
+            6,
             [0, 6, 1],
             lambda container: [
                 container[1][1],
@@ -104,6 +104,6 @@ class ElementSpecs:
         "recentChanges": ElementSpec(5, [0, 12, 6, 1], unescape_text),
         "recentChangesHTML": ElementSpec(5, [0, 12, 6, 1]),
         "comments": ElementSpec(
-            15, [0], lambda container: [item[4] for item in container], []
+            16, [0], lambda container: [item[4] for item in container], []
         ),
     }
