@@ -171,16 +171,8 @@ class TestApp(TestCase):
                 },
                 result,
             )
+            
+    def test_fetch_comments_successfully(self):
+        result = app('com.nianticlabs.pokemongo')
 
-    def test_issue_18(self):
-        """
-        https://github.com/JoMingyu/google-play-scraper/issues/18
-
-        - it crashed when comment is empty
-        - Occurs
-            > "comments": ElementSpec(15, [0], lambda container: [item[4] for item in container]),
-            > TypeError: 'NoneType' object is not iterable
-        """
-
-        # with self._mock_urlopen("mocks/com.instagram.igtv.html"):
-        #     result = app("com.instagram.igtv")
+        self.assertTrue(len(result['comments']) >= 1)

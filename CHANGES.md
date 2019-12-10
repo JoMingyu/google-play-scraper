@@ -23,3 +23,7 @@
 > Responded to data structure changes in google play
 - The comment information, which occupied `ds:15`, moved to `ds:16`.
 - The review information, which occupied `ds:7`, moved to `ds:6`.
+
+## v0.0.1.4
+> Responded to data structure changes in google play
+- The comment information, which occupied `ds:16`, moved to `ds:17`.

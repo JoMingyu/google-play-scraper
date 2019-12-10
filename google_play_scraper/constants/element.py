@@ -104,6 +104,6 @@ class ElementSpecs:
         "recentChanges": ElementSpec(5, [0, 12, 6, 1], unescape_text),
         "recentChangesHTML": ElementSpec(5, [0, 12, 6, 1]),
         "comments": ElementSpec(
-            16, [0], lambda container: [item[4] for item in container], []
+            17, [0], lambda container: [item[4] for item in container], []
         ),
     }
