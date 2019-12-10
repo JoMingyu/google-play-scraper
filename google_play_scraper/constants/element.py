@@ -98,6 +98,7 @@ class ElementSpecs:
         "contentRating": ElementSpec(5, [0, 12, 4, 0]),
         "contentRatingDescription": ElementSpec(5, [0, 12, 4, 2, 1]),
         "adSupported": ElementSpec(5, [0, 12, 14, 0], bool),
+        "containsAds": ElementSpec(5, [0, 12, 14, 0], bool, False),
         "released": ElementSpec(5, [0, 12, 36]),
         "updated": ElementSpec(5, [0, 12, 8, 0]),
         "version": ElementSpec(8, [1]),

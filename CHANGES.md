@@ -27,3 +27,7 @@
 ## v0.0.1.4
 > Responded to data structure changes in google play
 - The comment information, which occupied `ds:16`, moved to `ds:17`.
+
+## v0.0.1.5
+> Added `containsAds`
+- Added `containsAds` field : equals to `adSupported`, but defaults to `False`, not `None`.
