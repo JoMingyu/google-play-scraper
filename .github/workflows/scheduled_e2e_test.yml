@@ -23,4 +23,4 @@ jobs:
       run: pipenv install --dev
 
     - name: Run tests
-      run: pipenv run nosetests tests
+      run: pipenv run nosetests tests/e2e_tests
