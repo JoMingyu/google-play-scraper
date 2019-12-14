@@ -62,8 +62,6 @@ class TestApp(TestCase):
         self.assertEqual("8524055825995721370", result["developerInternalID"])
         self.assertEqual("Simulation", result["genre"])
         self.assertEqual("GAME_SIMULATION", result["genreId"])
-        self.assertIsNone(result["familyGenre"])
-        self.assertIsNone(result["familyGenreId"])
         self.assertEqual(
             "https://lh3.googleusercontent.com/5nPD6fyJaa-EDLHdlBd9UsaAV8KkfrYvLB956eQsvIGNBWUrPeouYw8aa7kbCbY--6E",
             result["icon"],
@@ -97,18 +95,15 @@ class TestApp(TestCase):
 
     def test_e2e_scenario_2(self):
         """
-        Testing for false value of familyGenre, familyGenreId, privacyPolicy, adSupported, containsAds
+        Testing for privacyPolicy, false value of adSupported, containsAds, offersIAP
         that excluded from scenario 1
         """
-        res = app("com.nianticlabs.pokemongo")
+        res = app("com.google.android.calendar")
 
-        self.assertEqual("Action & Adventure", res["familyGenre"])
-        self.assertEqual("FAMILY_ACTION", res["familyGenreId"])
-        self.assertEqual(
-            "https://nianticlabs.com/privacy/pokemongo/en", res["privacyPolicy"]
-        )
+        self.assertEqual("http://www.google.com/policies/privacy", res["privacyPolicy"])
         self.assertIsNone(res["adSupported"])
         self.assertFalse(res["containsAds"])
+        self.assertFalse(res["offersIAP"])
 
     def test_e2e_scenario_3(self):
         """
@@ -123,14 +118,6 @@ class TestApp(TestCase):
         self.assertEqual(
             "https://i.ytimg.com/vi/MaCigh28qQk/hqdefault.jpg", res["videoImage"]
         )
-
-    def test_e2e_scenario_4(self):
-        """
-        Testing for false value of offersIAP that excluded from scenario 1~3
-        """
-        res = app("com.google.android.calendar")
-
-        self.assertFalse(res["offersIAP"])
 
     def test_e2e_scenario_5(self):
         """

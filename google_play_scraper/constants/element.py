@@ -86,8 +86,6 @@ class ElementSpecs:
         "developerInternalID": ElementSpec(5, [0, 12, 5, 0, 0]),
         "genre": ElementSpec(5, [0, 12, 13, 0, 0]),
         "genreId": ElementSpec(5, [0, 12, 13, 0, 2]),
-        "familyGenre": ElementSpec(5, [0, 12, 13, 1, 0]),
-        "familyGenreId": ElementSpec(5, [0, 12, 13, 1, 2]),
         "icon": ElementSpec(5, [0, 12, 1, 3, 2]),
         "headerImage": ElementSpec(5, [0, 12, 2, 3, 2]),
         "screenshots": ElementSpec(

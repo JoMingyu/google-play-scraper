@@ -31,3 +31,7 @@
 ## v0.0.1.5
 > Added `containsAds`
 - Added `containsAds` field : equals to `adSupported`, but defaults to `False`, not `None`.
+
+## v0.0.1.6
+> Removed `familyGenre`, `familyGenreId`
+- Removed `familyGenre`, `familyGenreId` field : these fields are no longer valid from play store.
