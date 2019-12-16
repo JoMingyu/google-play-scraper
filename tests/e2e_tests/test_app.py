@@ -1,7 +1,5 @@
 from unittest import TestCase
 
-import validators
-
 from google_play_scraper import app
 
 
@@ -39,10 +37,10 @@ class TestApp(TestCase):
         self.assertTrue(9900 <= result["ratings"])
         self.assertTrue(2200 <= result["reviews"])
         self.assertTrue(result["reviews"] < result["ratings"])
-        self.assertTrue(1670 <= result["histogram"][0])
-        self.assertTrue(550 <= result["histogram"][1])
-        self.assertTrue(720 <= result["histogram"][2])
-        self.assertTrue(1120 <= result["histogram"][3])
+        self.assertTrue(1600 <= result["histogram"][0])
+        self.assertTrue(500 <= result["histogram"][1])
+        self.assertTrue(700 <= result["histogram"][2])
+        self.assertTrue(1000 <= result["histogram"][3])
         self.assertTrue(5900 <= result["histogram"][4])
         self.assertEqual(0, result["price"])
         self.assertTrue(result["free"])
