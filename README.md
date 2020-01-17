@@ -1,5 +1,9 @@
 # Google-Play-Scraper
-[![PyPI](https://img.shields.io/pypi/v/google-play-scraper.svg)](https://pypi.org/project/google-play-scraper) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+[![PyPI](https://img.shields.io/pypi/v/google-play-scraper.svg)](https://pypi.org/project/google-play-scraper)
+[![downloads](https://img.shields.io/pypi/dm/google-play-scraper.svg)](https://pypistats.org/packages/google-play-scraper)
+[![versions](https://img.shields.io/pypi/pyversions/google-play-scraper.svg)](https://github.com/JoMingyu/google-play-scraper)
 
 Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python *without any external dependencies!*
 
