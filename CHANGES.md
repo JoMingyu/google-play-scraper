@@ -43,3 +43,7 @@
 ## v0.0.1.8
 > Updated Python 2 support
 - Fixed errors when using library in python2.
+
+## v0.0.2.0
+> Added `reviews` feature
+- `reviews` feature released with dirty codes.

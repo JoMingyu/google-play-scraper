@@ -144,6 +144,55 @@ Result of `print(result)`:
 }
 ```
 
+### App Reviews
+> Setting `count` too high can cause problems. Because the maximum number of reviews per page supported by Google Play is 200, it is designed to pagination and recrawl by 200 until the number of results reaches count.
+
+```python
+from google_play_scraper import Sort, reviews
+
+result = reviews(
+    'com.nianticlabs.pokemongo',
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+    sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
+    count=3, # defaults to 100
+)
+```
+
+Result of `print(result)`:
+
+```
+[
+    {
+        "at": datetime.datetime(2020, 2, 9, 5, 5, 1),
+        "content": "I would love to rate this five stars but the game is extremely forceful with the AR which would be fine if it worked. It works for everyone else's phone but mine in my house. The screen is just black i need EXTREME sunlight to see anything at all. Im not sure how to fix this. My buddy just tried to do something special with me. It had paw prints instead of a berry and when it loaded the stupid AR nothing happened. Just a black screen. Its really frustrating. Please help me fix this.",
+        "reviewCreatedVersion": "0.165.1",
+        "score": 3,
+        "thumbsUpCount": 140,
+        "userImage": "https://lh3.googleusercontent.com/a-/AAuE7mA8hPE4SJZA3Wsm6T7-oulwL-82tFmv7IVHj8q1",
+        "userName": "Dusty Silva"
+    },
+    {
+        "at": datetime.datetime(2020, 2, 8, 15, 0, 58),
+        "content": "The new battle system sucks. Every person I've gone against has been able to use their high powered attack very quickly over and over, but it takes forever for just one of my pokemon to be able to do a power attack. Not to mention the fact you only get two shields throughout the whole battle and when you're finally able to do a power attack the opponent just blocks it anyways. No matter what pokemon I use I get the same outcome. It's a completely flawed system.",
+        "reviewCreatedVersion": "0.165.1",
+        "score": 1,
+        "thumbsUpCount": 24,
+        "userImage": "https://lh3.googleusercontent.com/a-/AAuE7mC_xLvfNcIlUBB8pESaVH_zWXGTfEpYO-aMmZi1",
+        "userName": "Krysty"
+    },
+    {
+        "at":datetime.datetime(2020, 2, 9, 4, 42, 56),
+        "content":'I love this game as it keeps my mind off of my severe medical conditions. There is only one issue. With the new update for the game and then the new update for the Galaxy Note 9, the GPS is beyond messed up. The character doesnt move in the correct pattern as you are physically moving. I have checked all settings and they are in the right configuration. Not sure which update caused the bug. Hopefully something will be fixed soon!',
+        "reviewCreatedVersion": "0.165.1",
+        "score": 5,
+        "thumbsUpCount": 12,
+        "userImage": "https://lh3.googleusercontent.com/-FmtbxGqV4iM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcXRs3MDn3Tz1yqUWqd_YTqARM-7Q/photo.jpg",
+        "userName": "Amber Jenrette"
+    }
+]
+```
+
 ## Changes
 Change logs are here : [CHANGES.md](./CHANGES.md)
 
