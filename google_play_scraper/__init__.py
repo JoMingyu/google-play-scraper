@@ -1,6 +1,13 @@
 import json
-from urllib.error import HTTPError
-from urllib.request import urlopen
+try:
+    from urllib.error import HTTPError
+except ImportError:
+    from urllib2 import HTTPError
+
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
 
 from .constants.element import ElementSpecs
 from .constants.regex import Regex
@@ -13,7 +20,7 @@ from .exceptions import (
 )
 
 
-__version__ = "0.0.1.7"
+__version__ = "0.0.1.8"
 
 
 def _request(url):
@@ -29,7 +36,7 @@ def _request(url):
                 "App not found. Status code {} returned.".format(e.code)
             )
 
-    return resp.read().decode()
+    return resp.read().decode('UTF-8')
 
 
 def app(app_id, lang="en", country="us"):

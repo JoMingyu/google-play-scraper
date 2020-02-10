@@ -5,7 +5,7 @@ class URLFormat:
     @abstractmethod
     def build_url(self, qs):
         # type: (dict) -> str
-        ...
+        raise NotImplementedError
 
 
 class URLFormats:

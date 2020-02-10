@@ -1,5 +1,14 @@
-from html import unescape
-from typing import Callable, List, Any
+try:
+    from html import unescape
+except ImportError:
+    import HTMLParser
+
+    unescape = HTMLParser.HTMLParser().unescape
+
+try:
+    from typing import Callable, List, Any
+except ImportError:
+    pass
 
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.utils import nested_lookup

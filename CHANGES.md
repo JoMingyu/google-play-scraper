@@ -39,3 +39,7 @@
 ## v0.0.1.7
 > Fixed `comments`
 - Fixed `comments` data fetch bug of `app` feature.
+
+## v0.0.1.8
+> Updated Python 2 support
+- Fixed errors when using library in python2.
