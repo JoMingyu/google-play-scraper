@@ -35,3 +35,7 @@
 ## v0.0.1.6
 > Removed `familyGenre`, `familyGenreId`
 - Removed `familyGenre`, `familyGenreId` field : these fields are no longer valid from play store.
+
+## v0.0.1.7
+> Fixed `comments`
+- Fixed `comments` data fetch bug of `app` feature.
