@@ -1,4 +1,5 @@
 import json
+
 try:
     from urllib.error import HTTPError
 except ImportError:
@@ -36,7 +37,7 @@ def _request(url):
                 "App not found. Status code {} returned.".format(e.code)
             )
 
-    return resp.read().decode('UTF-8')
+    return resp.read().decode("UTF-8")
 
 
 def app(app_id, lang="en", country="us"):
