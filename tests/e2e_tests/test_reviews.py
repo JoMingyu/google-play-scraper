@@ -39,12 +39,17 @@ class TestApp(TestCase):
         self.assertTrue(well_sorted_review_count > 490)
 
     def test_e2e_scenario_2(self):
-        result = reviews("com.mojang.minecraftpe", sort=Sort.MOST_RELEVANT, count=20)
+        result = reviews("com.mojang.minecraftpe", sort=Sort.MOST_RELEVANT, count=30)
 
-        self.assertEqual(20, len(result))
+        self.assertEqual(30, len(result))
+
+        review_count_has_thumbs_up_count_over_0 = 0
 
         for r in result:
-            self.assertTrue(0 < r["thumbsUpCount"])
+            if 0 < r["thumbsUpCount"]:
+                review_count_has_thumbs_up_count_over_0 += 1
+
+        self.assertTrue(review_count_has_thumbs_up_count_over_0 > 25)
 
     def test_e2e_scenario_3(self):
         result = reviews("com.mojang.minecraftpe", sort=Sort.RATING, count=100)
