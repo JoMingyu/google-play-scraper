@@ -27,13 +27,13 @@ def _urlopen(obj):
     return resp.read().decode("UTF-8")
 
 
-def _post(url, data, headers):
+def post(url, data, headers):
     # type: (str, Union[str, bytes], dict) -> str
 
     return _urlopen(Request(url, data=data, headers=headers))
 
 
-def _get(url):
+def get(url):
     # type: (str) -> str
 
     return _urlopen(url)

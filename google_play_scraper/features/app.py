@@ -2,15 +2,15 @@ import json
 
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
-from google_play_scraper.constants.url import URLFormats
-from google_play_scraper.utils.request import _get
+from google_play_scraper.constants.url import Formats
+from google_play_scraper.utils.request import get
 
 
 def app(app_id, lang="en", country="us"):
     # type: (str, str, str) -> dict
-    url = URLFormats.Detail.build_url(app_id=app_id, lang=lang, country=country)
+    url = Formats.Detail.build(app_id=app_id, lang=lang, country=country)
 
-    dom = _get(url)
+    dom = get(url)
 
     matches = Regex.SCRIPT.findall(dom)
 
