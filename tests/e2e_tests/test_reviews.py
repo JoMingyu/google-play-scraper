@@ -1,7 +1,8 @@
 from datetime import datetime
 from unittest import TestCase
 
-from google_play_scraper import reviews, Sort
+from google_play_scraper import Sort
+from google_play_scraper.features.reviews import reviews
 
 
 class TestApp(TestCase):

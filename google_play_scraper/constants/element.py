@@ -1,3 +1,5 @@
+from datetime import datetime
+
 try:
     from html import unescape
 except ImportError:
@@ -6,7 +8,7 @@ except ImportError:
     unescape = HTMLParser.HTMLParser().unescape
 
 try:
-    from typing import Callable, List, Any
+    from typing import Callable, List, Any, Optional
 except ImportError:
     pass
 
@@ -22,7 +24,7 @@ class ElementSpec:
         post_processor=None,
         post_processor_except_fallback=None,
     ):
-        # type: (int, List[int], Callable, Any) -> None
+        # type: (Optional[int], List[int], Callable, Any) -> None
         self.ds_num = ds_num
         self.extraction_map = extraction_map
         self.post_processor = post_processor
@@ -32,9 +34,12 @@ class ElementSpec:
         # type: (dict) -> Any
 
         try:
-            result = nested_lookup(
-                source["ds:{}".format(self.ds_num)], self.extraction_map
-            )
+            if self.ds_num is None:
+                result = nested_lookup(source, self.extraction_map)
+            else:
+                result = nested_lookup(
+                    source["ds:{}".format(self.ds_num)], self.extraction_map
+                )
         except (KeyError, IndexError, TypeError):
             result = None
 
@@ -114,4 +119,14 @@ class ElementSpecs:
         "comments": ElementSpec(
             18, [0], lambda container: [item[4] for item in container], []
         ),
+    }
+
+    Review = {
+        "userName": ElementSpec(None, [1, 0]),
+        "userImage": ElementSpec(None, [1, 1, 3, 2]),
+        "content": ElementSpec(None, [4]),
+        "score": ElementSpec(None, [2]),
+        "thumbsUpCount": ElementSpec(None, [6]),
+        "reviewCreatedVersion": ElementSpec(None, [10]),
+        "at": ElementSpec(None, [5, 0], lambda v: datetime.fromtimestamp(v)),
     }
