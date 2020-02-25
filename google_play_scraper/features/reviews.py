@@ -26,8 +26,6 @@ def reviews(app_id, lang="en", country="us", sort=Sort.NEWEST, count=100):
     # TODO reply data
     # TODO refactoring
 
-    pagination_token = None
-
     url = Formats.Reviews.build(lang=lang, country=country)
 
     if count < 200:
@@ -36,6 +34,8 @@ def reviews(app_id, lang="en", country="us", sort=Sort.NEWEST, count=100):
         _count = 199
 
     result = []
+
+    pagination_token = None
 
     while True:
         review_items, pagination_token = _fetch_review_items(
@@ -50,10 +50,15 @@ def reviews(app_id, lang="en", country="us", sort=Sort.NEWEST, count=100):
 
             result.append(review_dict)
 
-            if len(result) >= count:
-                break
+        remaining_count_of_reviews_to_fetch = count - len(result)
+
+        if remaining_count_of_reviews_to_fetch == 0:
+            break
+
+        if remaining_count_of_reviews_to_fetch < 200:
+            _count = count - len(result)
+
         else:
             continue
-        break
 
     return result
