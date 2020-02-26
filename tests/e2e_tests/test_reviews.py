@@ -59,3 +59,14 @@ class TestApp(TestCase):
 
         for r in result:
             self.assertEqual(5, r["score"])
+
+    def test_e2e_scenario_4(self):
+        for score in {1, 2, 3, 4, 5}:
+            result = reviews(
+                "com.mojang.minecraftpe",
+                sort=Sort.NEWEST,
+                count=300,
+                filter_score_with=score,
+            )
+
+            self.assertEqual(score * 300, sum([r["score"] for r in result]))

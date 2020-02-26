@@ -47,3 +47,7 @@
 ## v0.0.2.0
 > Added `reviews` feature
 - `reviews` feature released with dirty codes.
+
+## v0.0.2.1
+> Added `filter_score_with` parameter to `reviews` feature
+- New feature `reviews filtering with score` released. 
