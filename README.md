@@ -151,11 +151,12 @@ Result of `print(result)`:
 from google_play_scraper import Sort, reviews
 
 result = reviews(
-    'com.nianticlabs.pokemongo',
+    'com.fantome.penguinisle',
     lang='en', # defaults to 'en'
     country='us', # defaults to 'us'
     sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
     count=3, # defaults to 100
+    filter_score_with=5 # defaults to None(means all score)
 )
 ```
 
@@ -164,32 +165,38 @@ Result of `print(result)`:
 ```
 [
     {
-        "at": datetime.datetime(2020, 2, 9, 5, 5, 1),
-        "content": "I would love to rate this five stars but the game is extremely forceful with the AR which would be fine if it worked. It works for everyone else's phone but mine in my house. The screen is just black i need EXTREME sunlight to see anything at all. Im not sure how to fix this. My buddy just tried to do something special with me. It had paw prints instead of a berry and when it loaded the stupid AR nothing happened. Just a black screen. Its really frustrating. Please help me fix this.",
-        "reviewCreatedVersion": "0.165.1",
-        "score": 3,
-        "thumbsUpCount": 140,
-        "userImage": "https://lh3.googleusercontent.com/a-/AAuE7mA8hPE4SJZA3Wsm6T7-oulwL-82tFmv7IVHj8q1",
-        "userName": "Dusty Silva"
-    },
-    {
-        "at": datetime.datetime(2020, 2, 8, 15, 0, 58),
-        "content": "The new battle system sucks. Every person I've gone against has been able to use their high powered attack very quickly over and over, but it takes forever for just one of my pokemon to be able to do a power attack. Not to mention the fact you only get two shields throughout the whole battle and when you're finally able to do a power attack the opponent just blocks it anyways. No matter what pokemon I use I get the same outcome. It's a completely flawed system.",
-        "reviewCreatedVersion": "0.165.1",
-        "score": 1,
-        "thumbsUpCount": 24,
-        "userImage": "https://lh3.googleusercontent.com/a-/AAuE7mC_xLvfNcIlUBB8pESaVH_zWXGTfEpYO-aMmZi1",
-        "userName": "Krysty"
-    },
-    {
-        "at":datetime.datetime(2020, 2, 9, 4, 42, 56),
-        "content":'I love this game as it keeps my mind off of my severe medical conditions. There is only one issue. With the new update for the game and then the new update for the Galaxy Note 9, the GPS is beyond messed up. The character doesnt move in the correct pattern as you are physically moving. I have checked all settings and they are in the right configuration. Not sure which update caused the bug. Hopefully something will be fixed soon!',
-        "reviewCreatedVersion": "0.165.1",
+        "userName": "Alyssa Williams",
+        "userImage": "https://lh3.googleusercontent.com/-cVEHKr7mzv8/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB2r3GUkji31m0tC4ylFNiVMpmNWA/photo.jpg",
+        "content": "This is literally the best idle game I have ever played. The penguins waddle around and live their best lives in the cutest little outfits. I just unlocked the little penguins and I have been sobbing uncontrollably for ten minutes because they are so adorable. There are only two suggestions I have for this game: more of the penguin info ads. I love them. I have learned so much about all the teeny fellas. Secondly, I would like to be able to name my 'guins so I can tell them apart.",
         "score": 5,
-        "thumbsUpCount": 12,
-        "userImage": "https://lh3.googleusercontent.com/-FmtbxGqV4iM/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcXRs3MDn3Tz1yqUWqd_YTqARM-7Q/photo.jpg",
-        "userName": "Amber Jenrette"
-    }
+        "thumbsUpCount": 54,
+        "reviewCreatedVersion": "1.16",
+        "at": datetime.datetime(2020, 2, 24, 17, 19, 34),
+        "replyContent": "Hello, We will gradually improve the various systems in the game to enhance the player's game experience. We have recorded your suggestions and feedback to the planner. If you have any other suggestions and ideas, please feel free to contact us at penguinisle@habby.com.Thank you for playing!",
+        "repliedAt": datetime.datetime(2020, 2, 24, 18, 30, 42),
+    },
+    {
+        "userName": "EasyJet 123",
+        "userImage": "https://lh3.googleusercontent.com/a-/AOh14GhE3-Fsq5KDs_kmCRGcifbNUQTOtK5DpZkJ2AiqyQ",
+        "content": "Easily my favorite game. Relaxing, with easy controls, no purchase necessary to advance... I love it. 100% recommend. I love how you can get gems continually by completing missions, and the low price of boosts are great. But how about adding new buildings like an airport, an army base, and a train station? Would be great to see these. And the building purchase price might be lowered so it's a bit easier to progress after the Igloo. Maybe...",
+        "score": 5,
+        "thumbsUpCount": 79,
+        "reviewCreatedVersion": "1.14",
+        "at": datetime.datetime(2020, 2, 12, 8, 42, 41),
+        "replyContent": None,
+        "repliedAt": None,
+    },
+    {
+        "userName": "Lillemann",
+        "userImage": "https://lh3.googleusercontent.com/a-/AOh14GjiVSIrx033k9HZ9Tu4BQ1iYZST0IRW8UlDCX3gdw",
+        "content": "Really good looking. And it runs super super smooth. I love the camera options when clicking the camera button. And the penguins looks absolutely awesome and I really love the limited eddition ones. That sometimes the ads are replaced with penguin facts is just awesome. I suggest that you set up some kind of leaderboard it could probobly show the players that are earning the most money per sec or something. But overall this game is a strong 10/10",
+        "score": 5,
+        "thumbsUpCount": 2,
+        "reviewCreatedVersion": "1.14",
+        "at": datetime.datetime(2020, 2, 11, 18, 8, 11),
+        "replyContent": "Thank you very much for your review concerning our game. We will try our best to do better,If you have any other feedback or suggestions, feel free to contact us at penguinisle@habby.com. Have a nice day!",
+        "repliedAt": datetime.datetime(2020, 2, 11, 18, 53, 38),
+    },
 ]
 ```
 
