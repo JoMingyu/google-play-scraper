@@ -19,7 +19,8 @@ class TestApp(TestCase):
             self.assertTrue(r["content"])
             self.assertTrue(r["score"] >= 1)
             self.assertTrue(r["thumbsUpCount"] >= 0)
-            self.assertTrue(datetime(2019, 12, 1) < r["at"] < datetime(2040, 1, 1))
+            self.assertTrue(datetime(2019, 12, 1) < r["at"] < datetime(2021, 1, 1))
+            # TODO change when 2020-12-30
 
             if r["reviewCreatedVersion"]:
                 review_created_version_contained_review_count += 1
@@ -70,3 +71,47 @@ class TestApp(TestCase):
             )
 
             self.assertEqual(score * 300, sum([r["score"] for r in result]))
+
+    def test_e2e_scenario_5(self):
+        """
+        tests reply
+        """
+
+        result = reviews(
+            "com.ekkorr.endlessfrontier",
+            lang="ko",
+            country="kr",
+            sort=Sort.MOST_RELEVANT,
+        )
+
+        review_count_has_reply = 0
+
+        for r in result:
+            reply_content = r["replyContent"]
+            replied_at = r["repliedAt"]
+
+            if reply_content is not None:
+                self.assertIn("안녕하세요", reply_content)
+                self.assertIn("EKKORR", reply_content)
+                self.assertIn("입니다", reply_content)
+                self.assertIn("감사합니다", reply_content)
+
+                self.assertTrue(len(reply_content) > 100)
+                self.assertIsInstance(replied_at, datetime)
+                self.assertTrue(
+                    datetime(2018, 1, 1) < replied_at < datetime(2021, 1, 1)
+                )
+                # TODO change when 2020-12-30
+
+                review_count_has_reply += 1
+
+        self.assertTrue(review_count_has_reply > 50)
+
+    def test_e2e_scenario_6(self):
+        """
+        tests length of results of first request is lower than specified count argument
+        """
+
+        result = reviews("com.ekkorr.endlessfrontier")
+
+        self.assertTrue(len(result) < 100)

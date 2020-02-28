@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 from typing import Optional
 
 from google_play_scraper import Sort
@@ -30,9 +31,6 @@ def reviews(
     app_id, lang="en", country="us", sort=Sort.NEWEST, count=100, filter_score_with=None
 ):
     # type: (str, str, str, Sort, int, Optional[int]) -> list
-    # TODO filtering with device model
-    # TODO reply data
-    # TODO refactoring
 
     url = Formats.Reviews.build(lang=lang, country=country)
 
@@ -63,8 +61,11 @@ def reviews(
         if remaining_count_of_reviews_to_fetch == 0:
             break
 
+        if isinstance(pagination_token, list):
+            break
+
         if remaining_count_of_reviews_to_fetch < 200:
-            _count = count - len(result)
+            _count = remaining_count_of_reviews_to_fetch
 
         else:
             continue

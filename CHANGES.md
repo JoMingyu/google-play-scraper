@@ -51,3 +51,8 @@
 ## v0.0.2.1
 > Added `filter_score_with` parameter to `reviews` feature
 - New feature `reviews filtering with score` released. 
+
+## v0.0.2.2
+> `reivews` feature improvement
+- New property `reviews` Added. 
+- Fix bug of `reivews` feature : Bug that occurs when the total number of reviews is less than the `count` argument.

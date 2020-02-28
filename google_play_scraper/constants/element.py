@@ -129,4 +129,6 @@ class ElementSpecs:
         "thumbsUpCount": ElementSpec(None, [6]),
         "reviewCreatedVersion": ElementSpec(None, [10]),
         "at": ElementSpec(None, [5, 0], lambda v: datetime.fromtimestamp(v)),
+        "replyContent": ElementSpec(None, [7, 1]),
+        "repliedAt": ElementSpec(None, [7, 2, 0], lambda v: datetime.fromtimestamp(v)),
     }
