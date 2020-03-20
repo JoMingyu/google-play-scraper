@@ -91,6 +91,9 @@ class TestApp(TestCase):
             replied_at = r["repliedAt"]
 
             if reply_content is not None:
+                if '답글 수정' in reply_content:
+                    continue
+
                 self.assertIn("안녕하세요", reply_content)
                 self.assertIn("EKKORR", reply_content)
                 self.assertIn("입니다", reply_content)

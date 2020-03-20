@@ -117,7 +117,7 @@ class TestApp(TestCase):
             "https://i.ytimg.com/vi/MaCigh28qQk/hqdefault.jpg", res["videoImage"]
         )
 
-    def test_e2e_scenario_5(self):
+    def test_e2e_scenario_4(self):
         """
         Testing for free, price that excluded from scenario 1~4
         """
