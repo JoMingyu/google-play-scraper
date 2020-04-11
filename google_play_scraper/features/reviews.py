@@ -1,6 +1,6 @@
 import json
 from pprint import pprint
-from typing import Optional
+from typing import Optional, Tuple
 
 from google_play_scraper import Sort
 from google_play_scraper.constants.element import ElementSpecs
@@ -28,9 +28,15 @@ def _fetch_review_items(url, app_id, sort, count, filter_score_with, pagination_
 
 
 def reviews(
-    app_id, lang="en", country="us", sort=Sort.NEWEST, count=100, filter_score_with=None
+    app_id,
+    lang="en",
+    country="us",
+    sort=Sort.NEWEST,
+    count=100,
+    filter_score_with=None,
+    continuation_token=None,
 ):
-    # type: (str, str, str, Sort, int, Optional[int]) -> list
+    # type: (str, str, str, Sort, int, Optional[int], Optional[str]) -> Tuple[list, Optional[str]]
 
     url = Formats.Reviews.build(lang=lang, country=country)
 
@@ -41,11 +47,9 @@ def reviews(
 
     result = []
 
-    pagination_token = None
-
     while True:
-        review_items, pagination_token = _fetch_review_items(
-            url, app_id, sort, _count, filter_score_with, pagination_token
+        review_items, continuation_token = _fetch_review_items(
+            url, app_id, sort, _count, filter_score_with, continuation_token
         )
 
         for review in review_items:
@@ -61,7 +65,7 @@ def reviews(
         if remaining_count_of_reviews_to_fetch == 0:
             break
 
-        if isinstance(pagination_token, list):
+        if isinstance(continuation_token, list):
             break
 
         if remaining_count_of_reviews_to_fetch < 200:
@@ -70,4 +74,4 @@ def reviews(
         else:
             continue
 
-    return result
+    return result, continuation_token

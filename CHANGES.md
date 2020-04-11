@@ -53,6 +53,10 @@
 - New feature `reviews filtering with score` released. 
 
 ## v0.0.2.2
-> `reivews` feature improvement
-- New property `reviews` Added. 
+> `reviews` feature improvement
+- New property `replyContent`, `repliedAt` Added. 
 - Fix bug of `reivews` feature : Bug that occurs when the total number of reviews is less than the `count` argument.
+
+## v0.0.2.3
+> Added `continuation_token` as return value, argument of `reviews` feature
+- New return value, argument `contination_token` added to `reviews` function. It will be helped to lazy pagination patterns.

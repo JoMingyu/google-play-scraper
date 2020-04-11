@@ -269,3 +269,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/macos,python,windows,pycharm+all
+test.py

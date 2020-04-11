@@ -19,6 +19,8 @@ pip install google-play-scraper
 ```
 
 ## Usage
+The country and language codes that can be included in the `lang` and `country` parameters described below depend on the [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) standards, respectively. Therefore, we recommend using an ISO database library such as [pycountry](https://github.com/flyingcircusio/pycountry).
+
 ### App Detail
 ```python
 from google_play_scraper import app
@@ -145,18 +147,31 @@ Result of `print(result)`:
 ```
 
 ### App Reviews
+`reviews` function returns `result` with `continuation token`.
+
+- `result` : Crawling result of reviews. (list)
+- `continuation_token` : Data containing how many items were loaded in the entire review. If you pass this value to the `continuation_token` parameter of the `reviews` function, the next items are crawled. For example, if 1000 reviews are retrieved and the returned token 'eXamplE' is passed to the reviews function, the list of reviews is retrieved from 1000 or later items.
+
 > Setting `count` too high can cause problems. Because the maximum number of reviews per page supported by Google Play is 200, it is designed to pagination and recrawl by 200 until the number of results reaches count.
 
 ```python
 from google_play_scraper import Sort, reviews
 
-result = reviews(
+result, continuation_token = reviews(
     'com.fantome.penguinisle',
     lang='en', # defaults to 'en'
     country='us', # defaults to 'us'
     sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
     count=3, # defaults to 100
     filter_score_with=5 # defaults to None(means all score)
+)
+
+# If you pass `continuation_token` as an argument to the reviews function at this point,
+# it will crawl the items after 3 review items.
+
+result, _ = reviews(
+    'com.fantome.penguinisle',
+    continuation_token=continuation_token # defaults to None(load from the beginning)
 )
 ```
 

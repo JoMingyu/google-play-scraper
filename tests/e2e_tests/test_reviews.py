@@ -7,9 +7,12 @@ from google_play_scraper.features.reviews import reviews
 
 class TestApp(TestCase):
     def test_e2e_scenario_1(self):
-        result = reviews("com.mojang.minecraftpe", sort=Sort.NEWEST, count=500)
+        result, pagination_token = reviews(
+            "com.mojang.minecraftpe", sort=Sort.NEWEST, count=500
+        )
 
         self.assertEqual(500, len(result))
+        self.assertIsNotNone(pagination_token)
 
         review_created_version_contained_review_count = 0
 
@@ -41,7 +44,7 @@ class TestApp(TestCase):
         self.assertTrue(well_sorted_review_count > 490)
 
     def test_e2e_scenario_2(self):
-        result = reviews("com.mojang.minecraftpe", sort=Sort.MOST_RELEVANT, count=30)
+        result, _ = reviews("com.mojang.minecraftpe", sort=Sort.MOST_RELEVANT, count=30)
 
         self.assertEqual(30, len(result))
 
@@ -54,7 +57,7 @@ class TestApp(TestCase):
         self.assertTrue(review_count_has_thumbs_up_count_over_0 > 25)
 
     def test_e2e_scenario_3(self):
-        result = reviews("com.mojang.minecraftpe", sort=Sort.RATING, count=100)
+        result, _ = reviews("com.mojang.minecraftpe", sort=Sort.RATING, count=100)
 
         self.assertEqual(100, len(result))
 
@@ -63,7 +66,7 @@ class TestApp(TestCase):
 
     def test_e2e_scenario_4(self):
         for score in {1, 2, 3, 4, 5}:
-            result = reviews(
+            result, _ = reviews(
                 "com.mojang.minecraftpe",
                 sort=Sort.NEWEST,
                 count=300,
@@ -77,7 +80,7 @@ class TestApp(TestCase):
         tests reply
         """
 
-        result = reviews(
+        result, _ = reviews(
             "com.ekkorr.endlessfrontier",
             lang="ko",
             country="kr",
@@ -91,7 +94,7 @@ class TestApp(TestCase):
             replied_at = r["repliedAt"]
 
             if reply_content is not None:
-                if '답글 수정' in reply_content:
+                if "답글 수정" in reply_content:
                     continue
 
                 self.assertIn("안녕하세요", reply_content)
@@ -115,6 +118,35 @@ class TestApp(TestCase):
         tests length of results of first request is lower than specified count argument
         """
 
-        result = reviews("com.ekkorr.endlessfrontier")
+        result, _ = reviews("com.ekkorr.endlessfrontier")
 
         self.assertTrue(len(result) < 100)
+
+    def test_e2e_scenario_7(self):
+        """
+        tests continuation_token parameter
+        """
+
+        result, continuation_token = reviews(
+            "com.mojang.minecraftpe", sort=Sort.NEWEST, count=100
+        )
+
+        self.assertEqual(100, len(result))
+        self.assertIsNotNone(continuation_token)
+
+        last_review_at = result[0]["at"]
+
+        result, _ = reviews(
+            "com.mojang.minecraftpe",
+            sort=Sort.NEWEST,
+            count=100,
+            continuation_token=continuation_token,
+        )
+
+        well_sorted_review_count = 0
+
+        for r in result:
+            if r["at"] < last_review_at:
+                well_sorted_review_count += 1
+
+        self.assertTrue(well_sorted_review_count > 95)
