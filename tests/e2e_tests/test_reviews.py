@@ -1,8 +1,14 @@
 from datetime import datetime
 from unittest import TestCase
+from unittest.mock import patch
+from urllib.parse import urlparse
 
 from google_play_scraper import Sort
-from google_play_scraper.features.reviews import reviews
+from google_play_scraper.features.reviews import (
+    reviews,
+    _fetch_review_items,
+    ContinuationToken,
+)
 
 
 class TestApp(TestCase):
@@ -127,20 +133,21 @@ class TestApp(TestCase):
         tests continuation_token parameter
         """
 
-        result, continuation_token = reviews(
-            "com.mojang.minecraftpe", sort=Sort.NEWEST, count=100
-        )
+        result, continuation_token = reviews("com.mojang.minecraftpe")
 
         self.assertEqual(100, len(result))
         self.assertIsNotNone(continuation_token)
 
+        self.assertEqual("en", continuation_token.lang)
+        self.assertEqual("us", continuation_token.country)
+        self.assertEqual(Sort.NEWEST, continuation_token.sort)
+        self.assertEqual(100, continuation_token.count)
+        self.assertIsNone(continuation_token.filter_score_with)
+
         last_review_at = result[0]["at"]
 
         result, _ = reviews(
-            "com.mojang.minecraftpe",
-            sort=Sort.NEWEST,
-            count=100,
-            continuation_token=continuation_token,
+            "com.mojang.minecraftpe", continuation_token=continuation_token
         )
 
         well_sorted_review_count = 0
@@ -150,3 +157,65 @@ class TestApp(TestCase):
                 well_sorted_review_count += 1
 
         self.assertTrue(well_sorted_review_count > 95)
+
+    def test_e2e_scenario_8(self):
+        """
+        tests continuation_token saves lang, country, sort, filter data
+        """
+
+        result, continuation_token = reviews(
+            "com.mojang.minecraftpe",
+            lang="ko",
+            country="kr",
+            sort=Sort.RATING,
+            count=10,
+            filter_score_with=5,
+        )
+
+        self.assertEqual(10, len(result))
+        self.assertIsNotNone(continuation_token)
+
+        self.assertEqual("ko", continuation_token.lang)
+        self.assertEqual("kr", continuation_token.country)
+        self.assertEqual(Sort.RATING, continuation_token.sort)
+        self.assertEqual(10, continuation_token.count)
+        self.assertEqual(5, continuation_token.filter_score_with)
+
+        with patch(
+            "google_play_scraper.features.reviews._fetch_review_items",
+            wraps=_fetch_review_items,
+        ) as m:
+            result, _ = reviews(
+                "com.mojang.minecraftpe", continuation_token=continuation_token
+            )
+
+            self.assertEqual("hl=ko&gl=kr", urlparse(m.call_args[0][0]).query)
+            self.assertEqual(Sort.RATING, m.call_args[0][2])
+            self.assertEqual(10, m.call_args[0][3])
+            self.assertEqual(5, m.call_args[0][4])
+
+    def test_e2e_scenario_9(self):
+        """
+        tests continuation token's data overriding
+        """
+
+        with patch(
+            "google_play_scraper.features.reviews._fetch_review_items",
+            wraps=_fetch_review_items,
+        ) as m:
+            result, _ = reviews(
+                "com.mojang.minecraftpe",
+                continuation_token=ContinuationToken(
+                    "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
+                ),
+                lang="jp",
+                country="jp",
+                sort=Sort.RATING,
+                count=11,
+                filter_score_with=4,
+            )
+
+            self.assertEqual("hl=jp&gl=jp", urlparse(m.call_args[0][0]).query)
+            self.assertEqual(Sort.RATING, m.call_args[0][2])
+            self.assertEqual(11, m.call_args[0][3])
+            self.assertEqual(4, m.call_args[0][4])

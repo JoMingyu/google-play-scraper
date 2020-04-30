@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 from typing import Optional, Tuple
 
 from google_play_scraper import Sort
@@ -7,6 +6,34 @@ from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.url import Formats
 from google_play_scraper.utils.request import post
+
+
+LANG_DEFAULT = "en"
+COUNTRY_DEFAULT = "us"
+SORT_DEFAULT = Sort.NEWEST
+COUNT_DEFAULT = 100
+
+
+class ContinuationToken:
+    __slots__ = "token", "lang", "country", "sort", "count", "filter_score_with"
+
+    def __init__(self, token, lang, country, sort, count, filter_score_with):
+        self.token = token
+        self.lang = lang
+        self.country = country
+        self.sort = sort
+        self.count = count
+        self.filter_score_with = filter_score_with
+
+    def unpack(self):
+        return (
+            self.token,
+            self.lang,
+            self.country,
+            self.sort,
+            self.count,
+            self.filter_score_with,
+        )
 
 
 def _fetch_review_items(url, app_id, sort, count, filter_score_with, pagination_token):
@@ -29,27 +56,54 @@ def _fetch_review_items(url, app_id, sort, count, filter_score_with, pagination_
 
 def reviews(
     app_id,
-    lang="en",
-    country="us",
-    sort=Sort.NEWEST,
-    count=100,
+    lang=None,
+    country=None,
+    sort=None,
+    count=None,
     filter_score_with=None,
     continuation_token=None,
 ):
-    # type: (str, str, str, Sort, int, Optional[int], Optional[str]) -> Tuple[list, Optional[str]]
+    # type: (str, str, str, Sort, int, Optional[int], Optional[ContinuationToken]) -> Tuple[list, ContinuationToken]
 
-    url = Formats.Reviews.build(lang=lang, country=country)
+    if continuation_token is not None:
+        token = continuation_token.token
+
+        lang = continuation_token.lang if lang is None else lang
+        country = continuation_token.country if country is None else country
+        sort = continuation_token.sort if sort is None else sort
+        count = continuation_token.count if count is None else count
+        filter_score_with = (
+            continuation_token.filter_score_with
+            if filter_score_with is None
+            else filter_score_with
+        )
+    else:
+        token = None
+
+    if lang is None:
+        lang = LANG_DEFAULT
+
+    if country is None:
+        country = COUNTRY_DEFAULT
+
+    if sort is None:
+        sort = SORT_DEFAULT
+
+    if count is None:
+        count = COUNT_DEFAULT
 
     if count < 200:
         _count = count
     else:
         _count = 199
 
+    url = Formats.Reviews.build(lang=lang, country=country)
+
     result = []
 
     while True:
-        review_items, continuation_token = _fetch_review_items(
-            url, app_id, sort, _count, filter_score_with, continuation_token
+        review_items, token = _fetch_review_items(
+            url, app_id, sort, _count, filter_score_with, token
         )
 
         for review in review_items:
@@ -65,13 +119,13 @@ def reviews(
         if remaining_count_of_reviews_to_fetch == 0:
             break
 
-        if isinstance(continuation_token, list):
+        if isinstance(token, list):
             break
 
         if remaining_count_of_reviews_to_fetch < 200:
             _count = remaining_count_of_reviews_to_fetch
 
-        else:
-            continue
-
-    return result, continuation_token
+    return (
+        result,
+        ContinuationToken(token, lang, country, sort, count, filter_score_with),
+    )
