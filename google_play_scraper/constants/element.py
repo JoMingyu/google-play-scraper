@@ -122,6 +122,7 @@ class ElementSpecs:
     }
 
     Review = {
+        "reviewId": ElementSpec(None, [0]),
         "userName": ElementSpec(None, [1, 0]),
         "userImage": ElementSpec(None, [1, 1, 3, 2]),
         "content": ElementSpec(None, [4]),
