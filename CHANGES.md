@@ -54,9 +54,17 @@
 
 ## v0.0.2.2
 > `reviews` feature improvement
-- New property `replyContent`, `repliedAt` Added. 
+- New property `replyContent`, `repliedAt` added. 
 - Fix bug of `reivews` feature : Bug that occurs when the total number of reviews is less than the `count` argument.
 
 ## v0.0.2.3
 > Added `continuation_token` as return value, argument of `reviews` feature
 - New return value, argument `contination_token` added to `reviews` function. It will be helped to lazy pagination patterns.
+
+## v0.0.2.4
+> Added argument data to `continuation_token` of `reviews` feature
+- Objectify `continuation_token` for saving arguments
+
+## v.0.0.2.5
+> `reviews` feature improvement 
+- New property `reviewId` added to `reviews` function.
