@@ -87,6 +87,12 @@ class ElementSpecs:
         ),
         "free": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
         "currency": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 1]),
+        "sale":ElementSpec(3, [0,2,0,0,0,14,0,0],bool),     
+        "saletime": ElementSpec(3, [0,2,0,0,0,14,0,0]),
+        "originalprice": ElementSpec(
+            3, [0, 2, 0, 0, 0, 1, 1, 0], lambda price: (price / 1000000) or 0
+        ),
+        "saletext": ElementSpec(3, [0,2,0,0,0,14,1]),
         "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool),
         "size": ElementSpec(8, [0]),
         "androidVersion": ElementSpec(8, [2], lambda s: s.split()[0]),
