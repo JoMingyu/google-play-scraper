@@ -48,6 +48,10 @@ Result of `print(result)`:
     "score": 4.126332,
     "ratings": 12001843,
     "reviews": 4772986,
+    "originalPrice": None,
+    "sale": False,
+    "saleText": None,
+    "saleTime": None,
     "histogram": [
         1535599,
         406833,

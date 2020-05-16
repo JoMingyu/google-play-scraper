@@ -23,12 +23,14 @@ class ElementSpec:
         extraction_map,
         post_processor=None,
         post_processor_except_fallback=None,
+        extraction_map_except_fallback=None,
     ):
         # type: (Optional[int], List[int], Callable, Any) -> None
         self.ds_num = ds_num
         self.extraction_map = extraction_map
         self.post_processor = post_processor
         self.post_processor_except_fallback = post_processor_except_fallback
+        self.extraction_map_except_fallback = extraction_map_except_fallback
 
     def extract_content(self, source):
         # type: (dict) -> Any
@@ -41,7 +43,7 @@ class ElementSpec:
                     source["ds:{}".format(self.ds_num)], self.extraction_map
                 )
         except (KeyError, IndexError, TypeError):
-            result = None
+            result = self.extraction_map_except_fallback
 
         if result is not None and self.post_processor is not None:
             try:
@@ -87,12 +89,12 @@ class ElementSpecs:
         ),
         "free": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
         "currency": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 1]),
-        "sale":ElementSpec(3, [0,2,0,0,0,14,0,0],bool),     
-        "saletime": ElementSpec(3, [0,2,0,0,0,14,0,0]),
-        "originalprice": ElementSpec(
+        "sale": ElementSpec(3, [0, 2, 0, 0, 0, 14, 0, 0], bool, False, False),
+        "saleTime": ElementSpec(3, [0, 2, 0, 0, 0, 14, 0, 0]),
+        "originalPrice": ElementSpec(
             3, [0, 2, 0, 0, 0, 1, 1, 0], lambda price: (price / 1000000) or 0
         ),
-        "saletext": ElementSpec(3, [0,2,0,0,0,14,1]),
+        "saleText": ElementSpec(3, [0, 2, 0, 0, 0, 14, 1]),
         "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool),
         "size": ElementSpec(8, [0]),
         "androidVersion": ElementSpec(8, [2], lambda s: s.split()[0]),
@@ -123,7 +125,7 @@ class ElementSpecs:
         "recentChanges": ElementSpec(5, [0, 12, 6, 1], unescape_text),
         "recentChangesHTML": ElementSpec(5, [0, 12, 6, 1]),
         "comments": ElementSpec(
-            18, [0], lambda container: [item[4] for item in container], []
+            19, [0], lambda container: [item[4] for item in container], []
         ),
     }
 

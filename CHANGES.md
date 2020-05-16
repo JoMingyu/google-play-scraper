@@ -68,3 +68,7 @@
 ## v.0.0.2.5
 > `reviews` feature improvement 
 - New property `reviewId` added to `reviews` function.
+
+## v.0.0.2.6
+> `detail` feature improvement
+- New property `sale`, `saleText`, `saleTime`, `originalPrice` added to return of `detail` function
