@@ -72,3 +72,6 @@
 ## v.0.0.2.6
 > `detail` feature improvement
 - New property `sale`, `saleText`, `saleTime`, `originalPrice` added to return of `detail` function
+
+## v.0.0.2.7
+> HotFix for data structure update of Google Play
