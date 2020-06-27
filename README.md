@@ -156,7 +156,7 @@ Result of `print(result)`:
 - `result` : Crawling result of reviews. (list)
 - `continuation_token` : Data containing how many items were loaded, what arguments used in the current result. If you pass this value to the `continuation_token` parameter of the `reviews` function, the next items are crawled. For example, if 1000 reviews are retrieved and the returned token 'eXamplE' is passed to the reviews function, the list of reviews is retrieved from 1000 or later items.
 
-> Setting `count` too high can cause problems. Because the maximum number of reviews per page supported by Google Play is 200, it is designed to pagination and recrawl by 200 until the number of results reaches count.
+> :bulb: Setting `count` too high can cause problems. Because the maximum number of reviews per page supported by Google Play is 200, it is designed to pagination and recrawl by 200 until the number of results reaches count.
 
 ```python
 from google_play_scraper import Sort, reviews
@@ -220,6 +220,24 @@ Result of `print(result)`:
         "reviewId": "gp:AOqpTOEGUPB6HA0DIPNp3K2yAHRK-GN96dVJ-zkhPgKpclevgt8q9nR6Pv4N_F4TIPCpMeaoTutNGOZ2CSs65Ws"
     },
 ]
+```
+
+### App All Reviews
+`reviews_all` function returns all of reviews from app. If you want to set the count to infinity while using the `reviews` function, you can use the `reviews_all` function.
+
+> :bulb: Because of the Google Play Store limit (up to 200 reviews can be fetched at a time), http requests are generated as long as the number of app reviews is divided by 200. For example, targeting an app like Pokémon GO makes tens of thousands of http requests.
+
+```python
+from google_play_scraper import Sort, reviews_all
+
+result = reviews_all(
+    'com.fantome.penguinisle',
+    sleep_milliseconds=0, # defaults to 0
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+    sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
+    filter_score_with=5 # defaults to None(means all score)
+)
 ```
 
 ## Changes

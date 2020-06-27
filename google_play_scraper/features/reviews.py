@@ -1,4 +1,5 @@
 import json
+from time import sleep
 from typing import Optional, Tuple
 
 from google_play_scraper import Sort
@@ -102,9 +103,13 @@ def reviews(
     result = []
 
     while True:
-        review_items, token = _fetch_review_items(
-            url, app_id, sort, _count, filter_score_with, token
-        )
+        try:
+            review_items, token = _fetch_review_items(
+                url, app_id, sort, _count, filter_score_with, token
+            )
+        except TypeError:
+            token = None
+            break
 
         for review in review_items:
             review_dict = {}
@@ -120,6 +125,7 @@ def reviews(
             break
 
         if isinstance(token, list):
+            token = None
             break
 
         if remaining_count_of_reviews_to_fetch < 200:
@@ -129,3 +135,27 @@ def reviews(
         result,
         ContinuationToken(token, lang, country, sort, count, filter_score_with),
     )
+
+
+def reviews_all(app_id, sleep_milliseconds=0, **kwargs):
+    kwargs.pop("count", None)
+    kwargs.pop("continuation_token", None)
+
+    _count = 199
+    _continuation_token = None
+    result = []
+
+    while True:
+        result_, _continuation_token = reviews(
+            app_id, count=_count, continuation_token=_continuation_token, **kwargs
+        )
+
+        result += result_
+
+        if _continuation_token.token is None:
+            break
+
+        if sleep_milliseconds:
+            sleep(sleep_milliseconds / 1000)
+
+    return result

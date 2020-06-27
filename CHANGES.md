@@ -75,3 +75,6 @@
 
 ## v.0.0.2.7
 > HotFix for data structure update of Google Play
+
+## v.0.0.3.0
+> Implement `reviews_all` feature

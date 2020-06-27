@@ -11,8 +11,8 @@ from google_play_scraper.features.reviews import (
 )
 
 
-class TestApp(TestCase):
-    def test_e2e_scenario_1(self):
+class TestReviews(TestCase):
+    def test_sort_by_newest(self):
         result, pagination_token = reviews(
             "com.mojang.minecraftpe", sort=Sort.NEWEST, count=500
         )
@@ -51,7 +51,7 @@ class TestApp(TestCase):
 
         self.assertTrue(well_sorted_review_count > 490)
 
-    def test_e2e_scenario_2(self):
+    def test_sort_by_most_relevant(self):
         result, _ = reviews("com.mojang.minecraftpe", sort=Sort.MOST_RELEVANT, count=30)
 
         self.assertEqual(30, len(result))
@@ -64,7 +64,7 @@ class TestApp(TestCase):
 
         self.assertTrue(review_count_has_thumbs_up_count_over_0 > 25)
 
-    def test_e2e_scenario_3(self):
+    def test_sort_by_rating(self):
         result, _ = reviews("com.mojang.minecraftpe", sort=Sort.RATING, count=100)
 
         self.assertEqual(100, len(result))
@@ -72,7 +72,7 @@ class TestApp(TestCase):
         for r in result:
             self.assertEqual(5, r["score"])
 
-    def test_e2e_scenario_4(self):
+    def test_score_filter(self):
         for score in {1, 2, 3, 4, 5}:
             result, _ = reviews(
                 "com.mojang.minecraftpe",
@@ -83,7 +83,7 @@ class TestApp(TestCase):
 
             self.assertEqual(score * 300, sum([r["score"] for r in result]))
 
-    def test_e2e_scenario_5(self):
+    def test_reply_data(self):
         """
         tests reply
         """
@@ -121,16 +121,18 @@ class TestApp(TestCase):
 
         self.assertTrue(review_count_has_reply > 50)
 
-    def test_e2e_scenario_6(self):
+    def test_review_count_is_under_count_of_first_request(self):
         """
         tests length of results of first request is lower than specified count argument
         """
 
-        result, _ = reviews("com.ekkorr.endlessfrontier")
+        result, ct = reviews("com.ekkorr.endlessfrontier")
 
         self.assertTrue(len(result) < 100)
 
-    def test_e2e_scenario_7(self):
+        self.assertIsNone(ct.token)
+
+    def test_continuation_token(self):
         """
         tests continuation_token parameter
         """
@@ -160,7 +162,7 @@ class TestApp(TestCase):
 
         self.assertTrue(well_sorted_review_count > 95)
 
-    def test_e2e_scenario_8(self):
+    def test_continuation_token_preserves_argument_info(self):
         """
         tests continuation_token saves lang, country, sort, filter data
         """
@@ -187,16 +189,16 @@ class TestApp(TestCase):
             "google_play_scraper.features.reviews._fetch_review_items",
             wraps=_fetch_review_items,
         ) as m:
-            result, _ = reviews(
-                "com.mojang.minecraftpe", continuation_token=continuation_token
-            )
+            _ = reviews("com.mojang.minecraftpe", continuation_token=continuation_token)
 
             self.assertEqual("hl=ko&gl=kr", urlparse(m.call_args[0][0]).query)
             self.assertEqual(Sort.RATING, m.call_args[0][2])
             self.assertEqual(10, m.call_args[0][3])
             self.assertEqual(5, m.call_args[0][4])
 
-    def test_e2e_scenario_9(self):
+    def test_priority_between_preserved_argument_of_continuation_token_and_specified_argument(
+        self,
+    ):
         """
         tests continuation token's data overriding
         """
@@ -205,7 +207,7 @@ class TestApp(TestCase):
             "google_play_scraper.features.reviews._fetch_review_items",
             wraps=_fetch_review_items,
         ) as m:
-            result, _ = reviews(
+            _ = reviews(
                 "com.mojang.minecraftpe",
                 continuation_token=ContinuationToken(
                     "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
@@ -221,3 +223,20 @@ class TestApp(TestCase):
             self.assertEqual(Sort.RATING, m.call_args[0][2])
             self.assertEqual(11, m.call_args[0][3])
             self.assertEqual(4, m.call_args[0][4])
+
+    def test_invalid_continuation_token(self):
+        result, ct = reviews(
+            "com.mojang.minecraftpe",
+            continuation_token=ContinuationToken(
+                "foo", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
+            ),
+        )
+
+        self.assertListEqual([], result)
+
+        self.assertIsNone(ct.token)
+        self.assertEqual("ko", ct.lang)
+        self.assertEqual("kr", ct.country)
+        self.assertEqual(Sort.MOST_RELEVANT, ct.sort)
+        self.assertEqual(10, ct.count)
+        self.assertEqual(5, ct.filter_score_with)
