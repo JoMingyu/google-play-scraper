@@ -240,3 +240,15 @@ class TestReviews(TestCase):
         self.assertEqual(Sort.MOST_RELEVANT, ct.sort)
         self.assertEqual(10, ct.count)
         self.assertEqual(5, ct.filter_score_with)
+
+    def test_no_reviews(self):
+        result, ct = reviews("com.spotify.music", lang="sw", country="it")
+
+        self.assertListEqual([], result)
+
+        self.assertIsNone(ct.token)
+        self.assertEqual("sw", ct.lang)
+        self.assertEqual("it", ct.country)
+        self.assertEqual(Sort.NEWEST, ct.sort)
+        self.assertEqual(100, ct.count)
+        self.assertIsNone(ct.filter_score_with)

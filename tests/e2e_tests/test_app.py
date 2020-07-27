@@ -46,7 +46,7 @@ class TestApp(TestCase):
         self.assertTrue(result["free"])
         self.assertEqual("USD", result["currency"])
         self.assertTrue(result["offersIAP"])
-        self.assertEqual("19M", result["size"])
+        self.assertEqual("Varies with device", result["size"])
         self.assertEqual("4.1", result["androidVersion"])
         self.assertEqual("4.1 and up", result["androidVersionText"])
         self.assertEqual("Tatsuki", result["developer"])

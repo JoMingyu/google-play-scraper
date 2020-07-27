@@ -30,3 +30,8 @@ class TestReviewsAll(TestCase):
 
         self.assertTrue(300 < len(result) < 500)
         self.assertEqual(len(result), len(result_of_reviews))
+
+    def test_no_reviews(self):
+        result = reviews_all("com.spotify.music", lang="sw", country="it")
+
+        self.assertListEqual([], result)

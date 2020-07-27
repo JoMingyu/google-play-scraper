@@ -107,7 +107,7 @@ def reviews(
             review_items, token = _fetch_review_items(
                 url, app_id, sort, _count, filter_score_with, token
             )
-        except TypeError:
+        except (TypeError, IndexError):
             token = None
             break
 

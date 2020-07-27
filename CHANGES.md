@@ -78,3 +78,7 @@
 
 ## v.0.0.3.0
 > Implement `reviews_all` feature
+
+## v.0.0.3.1
+> `reviews`, `reviews_all` feature improvement
+- Resolve cases where errors occur when there are no reviews in the app.
