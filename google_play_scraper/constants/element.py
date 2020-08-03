@@ -70,7 +70,9 @@ class ElementSpecs:
             5, [0, 12, 9, 0], lambda s: int(Regex.NOT_NUMBER.sub("", s)) if s else 0
         ),
         "score": ElementSpec(6, [0, 6, 0, 1]),
-        "ratings": ElementSpec(6, [0, 6, 2, 1]),
+        "ratings": ElementSpec(
+            6, [0, 6, 1], lambda container: sum([item[1] for item in container[1:]])
+        ),
         "reviews": ElementSpec(6, [0, 6, 3, 1]),
         "histogram": ElementSpec(
             6,
@@ -95,7 +97,8 @@ class ElementSpecs:
             3, [0, 2, 0, 0, 0, 1, 1, 0], lambda price: (price / 1000000) or 0
         ),
         "saleText": ElementSpec(3, [0, 2, 0, 0, 0, 14, 1]),
-        "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool),
+        "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool, False, False),
+        "inAppProductPrice": ElementSpec(5, [0, 12, 12, 0]),
         "size": ElementSpec(8, [0]),
         "androidVersion": ElementSpec(8, [2], lambda s: s.split()[0]),
         "androidVersionText": ElementSpec(8, [2]),

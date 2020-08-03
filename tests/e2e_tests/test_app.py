@@ -1,3 +1,4 @@
+from pprint import pprint
 from unittest import TestCase
 
 from google_play_scraper.features.app import app
@@ -42,10 +43,12 @@ class TestApp(TestCase):
         self.assertTrue(600 <= result["histogram"][2])
         self.assertTrue(1000 <= result["histogram"][3])
         self.assertTrue(5000 <= result["histogram"][4])
+        self.assertEqual(sum(result["histogram"]), result["ratings"])
         self.assertEqual(0, result["price"])
         self.assertTrue(result["free"])
         self.assertEqual("USD", result["currency"])
         self.assertTrue(result["offersIAP"])
+        self.assertEqual("$0.99 - $2.99 per item", result["inAppProductPrice"])
         self.assertEqual("Varies with device", result["size"])
         self.assertEqual("4.1", result["androidVersion"])
         self.assertEqual("4.1 and up", result["androidVersionText"])
@@ -81,13 +84,19 @@ class TestApp(TestCase):
         self.assertTrue(result["adSupported"])
         self.assertTrue(result["containsAds"])
         self.assertEqual("Jan 7, 2014", result["released"])
-        self.assertEqual(1547546892, result["updated"])
-        self.assertEqual("1.8.2", result["version"])
+        self.assertEqual(1595294538, result["updated"])
+        self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
-            "- Other small revisions and improvements", result["recentChanges"]
+            (
+                "- Supports the newest devices.\r\n"
+                "- Improvement in performance\r\n"
+                "- Other small revisions and improvements"
+            ),
+            result["recentChanges"],
         )
         self.assertEqual(
-            "- Other small revisions and improvements", result["recentChangesHTML"]
+            "- Supports the newest devices.<br>- Improvement in performance<br>- Other small revisions and improvements",
+            result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])
 
@@ -125,3 +134,14 @@ class TestApp(TestCase):
 
         self.assertFalse(res["free"])
         self.assertEqual(1.49, res["price"])
+
+    def test_e2e_scenario_5(self):
+        """
+        Testing for free, offersIAP, inAppProductPrice of free app
+        """
+
+        res = app("com.nhn.android.search")
+
+        self.assertTrue(res["free"])
+        self.assertFalse(res["offersIAP"])
+        self.assertFalse(res["inAppProductPrice"])

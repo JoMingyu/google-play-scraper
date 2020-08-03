@@ -82,3 +82,8 @@
 ## v.0.0.3.1
 > `reviews`, `reviews_all` feature improvement
 - Resolve cases where errors occur when there are no reviews in the app.
+
+## v.0.0.3.2
+> `app` feature improvement
+- Some calibration logic added to `app` function
+- Added `inAppProductPrice` element to `app` function
