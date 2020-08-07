@@ -68,7 +68,7 @@ def reviews(
     filter_score_with=None,
     continuation_token=None,
 ):
-    # type: (str, str, str, Sort, int, Optional[int], Optional[ContinuationToken]) -> Tuple[list, ContinuationToken]
+    # type: (str, str, str, int, int, Optional[int], Optional[ContinuationToken]) -> Tuple[list, ContinuationToken]
 
     if continuation_token is not None:
         token = continuation_token.token
