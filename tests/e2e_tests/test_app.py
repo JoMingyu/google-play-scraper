@@ -119,11 +119,11 @@ class TestApp(TestCase):
         res = app("com.sgn.pandapop.gp")
 
         self.assertEqual(
-            "https://www.youtube.com/embed/MaCigh28qQk?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
+            "https://www.youtube.com/embed/pU698vDIHiw?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
             res["video"],
         )
         self.assertEqual(
-            "https://i.ytimg.com/vi/MaCigh28qQk/hqdefault.jpg", res["videoImage"]
+            "https://i.ytimg.com/vi/pU698vDIHiw/hqdefault.jpg", res["videoImage"]
         )
 
     def test_e2e_scenario_4(self):

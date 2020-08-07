@@ -13,11 +13,11 @@ Write result of `google_play_scraper.VERSION`
 **Describe the bug**
 A description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1.
-2.
-3.
+**Code**
+Copy and paste the code that have issue.
+
+```
+```
 
 **Expected behavior**
 A description of what you expected to happen.

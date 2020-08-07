@@ -241,7 +241,4 @@ result = reviews_all(
 ```
 
 ## Changes
-Change logs are here : [CHANGES.md](./CHANGES.md)
-
-## Contributing
-Contributing guides can be found in [CONTRIBUTING.md](./CONTRIBUTING.md).
+Change logs are here : [CHANGELOG.md](CHANGELOG.md)

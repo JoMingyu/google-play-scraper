@@ -4,6 +4,7 @@ from google_play_scraper import __version__
 
 setup(
     name="google-play-scraper",
+    python_requires=">=3.4",
     version=__version__,
     url="https://github.com/JoMingyu/google-play-scraper",
     license="MIT",
@@ -14,11 +15,10 @@ setup(
     classifiers=[
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Utilities",
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Operating System :: MacOS",
         "Operating System :: Microsoft",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
         "Typing :: Typed",
     ],

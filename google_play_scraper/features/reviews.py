@@ -1,6 +1,10 @@
 import json
 from time import sleep
-from typing import Optional, Tuple
+
+try:
+    from typing import Optional, Tuple
+except ImportError:
+    pass
 
 from google_play_scraper import Sort
 from google_play_scraper.constants.element import ElementSpecs

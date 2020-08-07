@@ -6,8 +6,8 @@ verify_ssl = true
 [dev-packages]
 black = "*"
 twine = "*"
-validators = "*"
 nose = "*"
+tox = "*"
 
 [packages]
 

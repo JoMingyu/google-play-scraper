@@ -1,4 +1,7 @@
-from typing import Union
+try:
+    from typing import Union
+except ImportError:
+    pass
 
 from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
 
