@@ -2,4 +2,4 @@ from .constants.google_play import Sort
 from .features.app import app
 from .features.reviews import reviews, reviews_all
 
-VERSION = __version__ = "0.1.0.0"
+VERSION = __version__ = "0.1"

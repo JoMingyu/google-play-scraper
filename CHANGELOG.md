@@ -88,6 +88,6 @@
 - Some calibration logic added to `app` function
 - Added `inAppProductPrice` element to `app` function
 
-## v.0.1.0.0
+## v.0.1
 > Remove Python 2 support
 - Python 2 is no longer supported since this version.
