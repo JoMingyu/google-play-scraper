@@ -18,10 +18,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install tox
-      run: |
-        pip install --upgrade pip
-        pip install tox tox-gh-actions
+    - name: Install nose
+      run: pip install nose
 
     - name: Run tests
-      run: tox
+      run: nosetests tests
