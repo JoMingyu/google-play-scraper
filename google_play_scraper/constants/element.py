@@ -3,9 +3,9 @@ from datetime import datetime
 try:
     from html import unescape
 except ImportError:
-    import HTMLParser
+    from html.parser import HTMLParser
 
-    unescape = HTMLParser.HTMLParser().unescape
+    unescape = HTMLParser().unescape
 
 try:
     from typing import Callable, List, Any, Optional
