@@ -3,7 +3,7 @@ from pprint import pprint
 
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
-from google_play_scraper.constants.url import Formats
+from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import get
 
 

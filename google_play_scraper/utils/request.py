@@ -5,15 +5,8 @@ except ImportError:
 
 from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
 
-try:
-    from urllib.error import HTTPError
-except ImportError:
-    from urllib2 import HTTPError
-
-try:
-    from urllib.request import urlopen, Request
-except ImportError:
-    from urllib2 import urlopen, Request
+from urllib.error import HTTPError
+from urllib.request import urlopen, Request
 
 
 def _urlopen(obj):

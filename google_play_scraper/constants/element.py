@@ -1,11 +1,6 @@
 from datetime import datetime
 
-try:
-    from html import unescape
-except ImportError:
-    from html.parser import HTMLParser
-
-    unescape = HTMLParser().unescape
+from google_play_scraper.utils.data_processors import unescape_text
 
 try:
     from typing import Callable, List, Any, Optional
@@ -18,44 +13,31 @@ from google_play_scraper.utils import nested_lookup
 
 class ElementSpec:
     def __init__(
-        self,
-        ds_num,
-        extraction_map,
-        post_processor=None,
-        post_processor_except_fallback=None,
-        extraction_map_except_fallback=None,
+        self, ds_num, data_map, post_processor=None, fallback_value=None,
     ):
         # type: (Optional[int], List[int], Callable, Any) -> None
         self.ds_num = ds_num
-        self.extraction_map = extraction_map
+        self.data_map = data_map
         self.post_processor = post_processor
-        self.post_processor_except_fallback = post_processor_except_fallback
-        self.extraction_map_except_fallback = extraction_map_except_fallback
+        self.fallback_value = fallback_value
 
     def extract_content(self, source):
         # type: (dict) -> Any
 
         try:
             if self.ds_num is None:
-                result = nested_lookup(source, self.extraction_map)
+                result = nested_lookup(source, self.data_map)
             else:
                 result = nested_lookup(
-                    source["ds:{}".format(self.ds_num)], self.extraction_map
+                    source["ds:{}".format(self.ds_num)], self.data_map
                 )
-        except (KeyError, IndexError, TypeError):
-            result = self.extraction_map_except_fallback
 
-        if result is not None and self.post_processor is not None:
-            try:
+            if self.post_processor is not None:
                 result = self.post_processor(result)
-            except:
-                result = self.post_processor_except_fallback
+        except:
+            result = self.fallback_value
 
         return result
-
-
-def unescape_text(s):
-    return unescape(s.replace("<br>", "\r\n"))
 
 
 class ElementSpecs:
@@ -91,13 +73,13 @@ class ElementSpecs:
         ),
         "free": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
         "currency": ElementSpec(3, [0, 2, 0, 0, 0, 1, 0, 1]),
-        "sale": ElementSpec(3, [0, 2, 0, 0, 0, 14, 0, 0], bool, False, False),
+        "sale": ElementSpec(3, [0, 2, 0, 0, 0, 14, 0, 0], bool, False),
         "saleTime": ElementSpec(3, [0, 2, 0, 0, 0, 14, 0, 0]),
         "originalPrice": ElementSpec(
             3, [0, 2, 0, 0, 0, 1, 1, 0], lambda price: (price / 1000000) or 0
         ),
         "saleText": ElementSpec(3, [0, 2, 0, 0, 0, 14, 1]),
-        "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool, False, False),
+        "offersIAP": ElementSpec(5, [0, 12, 12, 0], bool, False),
         "inAppProductPrice": ElementSpec(5, [0, 12, 12, 0]),
         "size": ElementSpec(8, [0]),
         "androidVersion": ElementSpec(8, [2], lambda s: s.split()[0]),

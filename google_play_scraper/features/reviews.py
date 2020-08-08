@@ -9,7 +9,7 @@ except ImportError:
 from google_play_scraper import Sort
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
-from google_play_scraper.constants.url import Formats
+from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
 
 
@@ -44,7 +44,7 @@ class ContinuationToken:
 def _fetch_review_items(url, app_id, sort, count, filter_score_with, pagination_token):
     dom = post(
         url,
-        Formats.ReviewPayload.build(
+        Formats.ReviewsBodyData.build(
             app_id,
             sort,
             count,
