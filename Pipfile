@@ -7,7 +7,6 @@ verify_ssl = true
 black = "*"
 twine = "*"
 nose = "*"
-tox = "*"
 
 [packages]
 
