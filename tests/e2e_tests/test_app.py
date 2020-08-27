@@ -64,17 +64,17 @@ class TestApp(TestCase):
         self.assertEqual("Simulation", result["genre"])
         self.assertEqual("GAME_SIMULATION", result["genreId"])
         self.assertEqual(
-            "https://lh3.googleusercontent.com/5nPD6fyJaa-EDLHdlBd9UsaAV8KkfrYvLB956eQsvIGNBWUrPeouYw8aa7kbCbY--6E",
+            "https://play-lh.googleusercontent.com/5nPD6fyJaa-EDLHdlBd9UsaAV8KkfrYvLB956eQsvIGNBWUrPeouYw8aa7kbCbY--6E",
             result["icon"],
         )
         self.assertEqual(
-            "https://lh3.googleusercontent.com/HVaR15hCrhTFeouDgocBaxJViXHA7TQ_sQfAHmb_zPs54CZQqo3Xgn78NgdrgnrnwTE",
+            "https://play-lh.googleusercontent.com/HVaR15hCrhTFeouDgocBaxJViXHA7TQ_sQfAHmb_zPs54CZQqo3Xgn78NgdrgnrnwTE",
             result["headerImage"],
         )
         self.assertTrue(result["screenshots"])
         for screenshot_url in result["screenshots"]:
             self.assertTrue(
-                screenshot_url.startswith("https://lh3.googleusercontent.com/")
+                screenshot_url.startswith("https://play-lh.googleusercontent.com/")
             )
 
         self.assertIsNone(result["video"])
@@ -119,11 +119,11 @@ class TestApp(TestCase):
         res = app("com.sgn.pandapop.gp")
 
         self.assertEqual(
-            "https://www.youtube.com/embed/pU698vDIHiw?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
+            "https://www.youtube.com/embed/OffmuMbj8-I?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
             res["video"],
         )
         self.assertEqual(
-            "https://i.ytimg.com/vi/pU698vDIHiw/hqdefault.jpg", res["videoImage"]
+            "https://i.ytimg.com/vi/OffmuMbj8-I/hqdefault.jpg", res["videoImage"]
         )
 
     def test_e2e_scenario_4(self):

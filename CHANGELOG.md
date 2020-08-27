@@ -91,3 +91,6 @@
 ## v.0.1
 > Remove Python 2 support
 - Python 2 is no longer supported since this version.
+
+## v.0.1.1
+> Sync Google Play data structure

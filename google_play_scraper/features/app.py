@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
