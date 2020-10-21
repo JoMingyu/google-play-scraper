@@ -22,7 +22,7 @@ class TestReviewsAll(TestCase):
             "google_play_scraper.features.reviews.reviews", wraps=reviews
         ) as mock_reviews:
             result = reviews_all("co.kr.uaram.userdeliver_", lang="ko", country="kr")
-            self.assertEqual(2, mock_reviews.call_count)
+            self.assertEqual(3, mock_reviews.call_count)
 
         result_of_reviews, _ = reviews(
             "co.kr.uaram.userdeliver_", lang="ko", country="kr", count=10000
