@@ -12,9 +12,7 @@ from google_play_scraper.utils import nested_lookup
 
 
 class ElementSpec:
-    def __init__(
-        self, ds_num, data_map, post_processor=None, fallback_value=None,
-    ):
+    def __init__(self, ds_num, data_map, post_processor=None, fallback_value=None):
         # type: (Optional[int], List[int], Callable, Any) -> None
         self.ds_num = ds_num
         self.data_map = data_map
@@ -112,6 +110,7 @@ class ElementSpecs:
         "comments": ElementSpec(
             19, [0], lambda container: [item[4] for item in container], []
         ),
+        "editorsChoice": ElementSpec(5, [0, 12, 15, 0], bool, False),
     }
 
     Review = {

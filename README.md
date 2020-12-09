@@ -63,6 +63,7 @@ Result of `print(result)`:
     "free": True,
     "currency": "USD",
     "offersIAP": True,
+    "editorsChoice": False,
     "size": "94M",
     "androidVersion": "5.0",
     "androidVersionText": "5.0 and up",

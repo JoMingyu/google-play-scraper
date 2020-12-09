@@ -119,11 +119,11 @@ class TestApp(TestCase):
         res = app("com.sgn.pandapop.gp")
 
         self.assertEqual(
-            "https://www.youtube.com/embed/MaCigh28qQk?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
+            "https://www.youtube.com/embed/lQNLs-3P9as?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
             res["video"],
         )
         self.assertEqual(
-            "https://i.ytimg.com/vi/MaCigh28qQk/hqdefault.jpg", res["videoImage"]
+            "https://i.ytimg.com/vi/lQNLs-3P9as/hqdefault.jpg", res["videoImage"]
         )
 
     def test_e2e_scenario_4(self):
@@ -145,3 +145,12 @@ class TestApp(TestCase):
         self.assertTrue(res["free"])
         self.assertFalse(res["offersIAP"])
         self.assertFalse(res["inAppProductPrice"])
+
+    def test_e2e_scenario_6(self):
+        """
+        Testing for editorsChoice property
+        """
+
+        res = app("product.dp.io.ab180blog")
+
+        self.assertFalse(res["editorsChoice"])

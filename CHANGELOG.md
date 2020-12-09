@@ -94,3 +94,7 @@
 
 ## v.0.1.1
 > Sync Google Play data structure
+
+## v.0.1.2
+> Add `editorsChoice` property to `app` feature
+- Added `editorsChoice` property to `app` feature.
