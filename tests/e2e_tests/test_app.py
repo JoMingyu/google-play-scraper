@@ -1,4 +1,3 @@
-from pprint import pprint
 from unittest import TestCase
 
 from google_play_scraper.features.app import app
@@ -130,10 +129,12 @@ class TestApp(TestCase):
         """
         Testing for free, price that excluded from scenario 1~4
         """
-        res = app("com.choco.silentmode")
+        res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(1.49, res["price"])
+        self.assertEqual(1.09, res["price"])
+
+        # TODO free app / non free app 구분
 
     def test_e2e_scenario_5(self):
         """
@@ -145,6 +146,8 @@ class TestApp(TestCase):
         self.assertTrue(res["free"])
         self.assertFalse(res["offersIAP"])
         self.assertFalse(res["inAppProductPrice"])
+
+        # TODO IAP, inAppProductPrice가 유효한 값인 경우에 대한 테스트
 
     def test_e2e_scenario_6(self):
         """

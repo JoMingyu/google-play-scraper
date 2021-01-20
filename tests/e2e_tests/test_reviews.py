@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import TestCase
 from unittest.mock import patch
 from urllib.parse import urlparse
@@ -30,8 +30,8 @@ class TestReviews(TestCase):
             self.assertTrue(r["content"])
             self.assertTrue(r["score"] >= 1)
             self.assertTrue(r["thumbsUpCount"] >= 0)
-            self.assertTrue(datetime(2019, 12, 1) < r["at"] < datetime(2021, 1, 1))
-            # TODO change when 2020-12-30
+
+            self.assertTrue(datetime.now() - timedelta(days=7) < r['at'] < datetime.now())
 
             if r["reviewCreatedVersion"]:
                 review_created_version_contained_review_count += 1
@@ -113,9 +113,8 @@ class TestReviews(TestCase):
                 self.assertTrue(len(reply_content) > 100)
                 self.assertIsInstance(replied_at, datetime)
                 self.assertTrue(
-                    datetime(2018, 1, 1) < replied_at < datetime(2021, 1, 1)
+                    datetime(2018, 6, 1) < replied_at < datetime(2022, 1, 1)
                 )
-                # TODO change when 2020-12-30
 
                 review_count_has_reply += 1
 
