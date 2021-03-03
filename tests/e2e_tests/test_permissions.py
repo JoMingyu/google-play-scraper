@@ -49,7 +49,3 @@ class TestPermission(TestCase):
         self.assertIn(('Other', 'run at startup'), result)
         self.assertIn(('Other', 'control vibration'), result)
         self.assertIn(('Other', 'view network connections'), result)
-        
-        self.assertEqual(len(result), 4)
-
-    def test_reply_data_for_other_language(self):
