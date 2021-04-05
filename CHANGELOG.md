@@ -98,3 +98,7 @@
 ## v.0.1.2
 > Add `editorsChoice` property to `app` feature
 - Added `editorsChoice` property to `app` feature.
+
+## v.0.2
+> Python 3.3, 3.4, 3.5 support stopped
+- after this version, Python 3.6+ supports only.
