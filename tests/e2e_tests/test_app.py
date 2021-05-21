@@ -58,7 +58,7 @@ class TestApp(TestCase):
         self.assertEqual(
             "Osaka-shi Chuo-ku Minamisenba 4-10-5", result["developerAddress"]
         )
-        self.assertIsNone(result["privacyPolicy"])
+        self.assertEqual("http://sskttk-app.com/?page_id=223", result["privacyPolicy"])
         self.assertEqual("8524055825995721370", result["developerInternalID"])
         self.assertEqual("Simulation", result["genre"])
         self.assertEqual("GAME_SIMULATION", result["genreId"])
@@ -83,7 +83,7 @@ class TestApp(TestCase):
         self.assertTrue(result["adSupported"])
         self.assertTrue(result["containsAds"])
         self.assertEqual("Jan 7, 2014", result["released"])
-        self.assertEqual(1595294538, result["updated"])
+        self.assertEqual(1617488490, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
             (

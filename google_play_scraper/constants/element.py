@@ -125,3 +125,12 @@ class ElementSpecs:
         "replyContent": ElementSpec(None, [7, 1]),
         "repliedAt": ElementSpec(None, [7, 2, 0], lambda v: datetime.fromtimestamp(v)),
     }
+
+    PermissionGroup = {
+        "type": ElementSpec(None, [0]),
+        "permissions": ElementSpec(
+            None, [2], lambda container: [item[1] for item in container]
+        ),
+    }
+
+
