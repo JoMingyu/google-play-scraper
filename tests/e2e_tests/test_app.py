@@ -49,8 +49,8 @@ class TestApp(TestCase):
         self.assertTrue(result["offersIAP"])
         self.assertEqual("$0.99 - $2.99 per item", result["inAppProductPrice"])
         self.assertEqual("Varies with device", result["size"])
-        self.assertEqual("4.1", result["androidVersion"])
-        self.assertEqual("4.1 and up", result["androidVersionText"])
+        self.assertEqual("Varies", result["androidVersion"])
+        self.assertEqual("Varies with device", result["androidVersionText"])
         self.assertEqual("Tatsuki", result["developer"])
         self.assertEqual("Tatsuki", result["developerId"])
         self.assertEqual("sskttk.android@gmail.com", result["developerEmail"])
@@ -87,14 +87,12 @@ class TestApp(TestCase):
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
             (
-                "- Supports the newest devices.\r\n"
-                "- Improvement in performance\r\n"
-                "- Other small revisions and improvements"
+                "- Supports the newest devices."
             ),
             result["recentChanges"],
         )
         self.assertEqual(
-            "- Supports the newest devices.<br>- Improvement in performance<br>- Other small revisions and improvements",
+            "- Supports the newest devices.",
             result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])

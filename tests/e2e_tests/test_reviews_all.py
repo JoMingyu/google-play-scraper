@@ -32,6 +32,6 @@ class TestReviewsAll(TestCase):
         self.assertEqual(len(result), len(result_of_reviews))
 
     def test_no_reviews(self):
-        result = reviews_all("com.spotify.music", lang="sw", country="it")
+        result = reviews_all("product.dp.io.ab180blog", lang="sw", country="it")
 
         self.assertListEqual([], result)

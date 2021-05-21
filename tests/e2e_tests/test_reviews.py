@@ -23,7 +23,7 @@ class TestReviews(TestCase):
         review_created_version_contained_review_count = 0
 
         for r in result:
-            self.assertTrue(r["reviewId"].startswith("gp:AOqp"))
+            self.assertTrue(r["reviewId"].startswith("gp:AOqp") or r["reviewId"].startswith("lg:AOqp"))
             self.assertTrue(len(r["reviewId"]) == 90)
             self.assertTrue(r["userName"])
             self.assertTrue(r["userImage"])
@@ -243,7 +243,7 @@ class TestReviews(TestCase):
         self.assertEqual(5, ct.filter_score_with)
 
     def test_no_reviews(self):
-        result, ct = reviews("com.spotify.music", lang="sw", country="it")
+        result, ct = reviews("product.dp.io.ab180blog", lang="sw", country="it")
 
         self.assertListEqual([], result)
 
