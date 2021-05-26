@@ -241,5 +241,75 @@ result = reviews_all(
 )
 ```
 
+
+### App Permissions
+`permissions` function returns permissions of app.
+
+```python
+from google_play_scraper import permissions
+
+result = permissions(
+    'com.spotify.music',
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+)
+```
+
+Result of `print(result)`:
+
+```
+{
+    "Microphone": [
+        "record audio"
+    ],
+    "Wi-Fi connection information": [
+        "view Wi-Fi connections"
+    ],
+    "Camera": [
+        "take pictures and videos"
+    ],
+    "Photos/Media/Files": [
+        "modify or delete the contents of your USB storage",
+        "read the contents of your USB storage"
+    ],
+    "Storage": [
+        "modify or delete the contents of your USB storage",
+        "read the contents of your USB storage"
+    ],
+    "Device ID & call information": [
+        "read phone status and identity"
+    ],
+    "Contacts": [
+        "find accounts on the device"
+    ],
+    "Phone": [
+        "read phone status and identity"
+    ],
+    "Identity": [
+        "add or remove accounts",
+        "find accounts on the device"
+    ],
+    "Other": [
+        "access Bluetooth settings",
+        "allow Wi-Fi Multicast reception",
+        "change network connectivity",
+        "change your audio settings",
+        "control Near Field Communication",
+        "control vibration",
+        "full network access",
+        "install shortcuts",
+        "pair with Bluetooth devices",
+        "prevent device from sleeping",
+        "run at startup",
+        "send sticky broadcast",
+        "use accounts on the device",
+        "view network connections"
+    ],
+    "Uncategorized": [
+        "receive data from Internet"
+    ]
+}
+```
+
 ## Changes
 Change logs are here : [CHANGELOG.md](CHANGELOG.md)

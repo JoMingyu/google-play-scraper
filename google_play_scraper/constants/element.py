@@ -2,26 +2,20 @@ from datetime import datetime
 
 from google_play_scraper.utils.data_processors import unescape_text
 
-try:
-    from typing import Callable, List, Any, Optional
-except ImportError:
-    pass
+from typing import Callable, List, Any, Optional
 
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.utils import nested_lookup
 
 
 class ElementSpec:
-    def __init__(self, ds_num, data_map, post_processor=None, fallback_value=None):
-        # type: (Optional[int], List[int], Callable, Any) -> None
+    def __init__(self, ds_num: Optional[int], data_map: List[int], post_processor: Callable=None, fallback_value: Any=None):
         self.ds_num = ds_num
         self.data_map = data_map
         self.post_processor = post_processor
         self.fallback_value = fallback_value
 
-    def extract_content(self, source):
-        # type: (dict) -> Any
-
+    def extract_content(self, source: dict) -> Any:
         try:
             if self.ds_num is None:
                 result = nested_lookup(source, self.data_map)
@@ -126,11 +120,7 @@ class ElementSpecs:
         "repliedAt": ElementSpec(None, [7, 2, 0], lambda v: datetime.fromtimestamp(v)),
     }
 
-    PermissionGroup = {
-        "type": ElementSpec(None, [0]),
-        "permissions": ElementSpec(
-            None, [2], lambda container: [item[1] for item in container]
-        ),
-    }
-
-
+    Permission_Type = ElementSpec(None, [0])
+    Permission_List = ElementSpec(
+        None, [2], lambda container: sorted([item[1] for item in container])
+    )

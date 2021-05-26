@@ -1,9 +1,4 @@
-try:
-    from html import unescape
-except ImportError:
-    from html.parser import HTMLParser
-
-    unescape = HTMLParser().unescape
+from html import unescape
 
 
 def unescape_text(s):

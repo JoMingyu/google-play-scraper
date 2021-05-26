@@ -1,4 +1,5 @@
 import json
+from typing import Any
 
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
@@ -6,8 +7,7 @@ from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import get
 
 
-def app(app_id, lang="en", country="us"):
-    # type: (str, str, str) -> dict
+def app(app_id: str, lang: str = "en", country: str = "us") -> dict[str, Any]:
     url = Formats.Detail.build(app_id=app_id, lang=lang, country=country)
 
     dom = get(url)

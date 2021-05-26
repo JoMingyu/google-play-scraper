@@ -1,7 +1,4 @@
-try:
-    from typing import Union
-except ImportError:
-    pass
+from typing import Union
 
 from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
 
@@ -23,13 +20,9 @@ def _urlopen(obj):
     return resp.read().decode("UTF-8")
 
 
-def post(url, data, headers):
-    # type: (str, Union[str, bytes], dict) -> str
-
+def post(url: str, data: Union[str, bytes], headers: dict) -> str:
     return _urlopen(Request(url, data=data, headers=headers))
 
 
-def get(url):
-    # type: (str) -> str
-
+def get(url: str) -> str:
     return _urlopen(url)

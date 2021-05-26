@@ -23,7 +23,10 @@ class TestReviews(TestCase):
         review_created_version_contained_review_count = 0
 
         for r in result:
-            self.assertTrue(r["reviewId"].startswith("gp:AOqp") or r["reviewId"].startswith("lg:AOqp"))
+            self.assertTrue(
+                r["reviewId"].startswith("gp:AOqp")
+                or r["reviewId"].startswith("lg:AOqp")
+            )
             self.assertTrue(len(r["reviewId"]) == 90)
             self.assertTrue(r["userName"])
             self.assertTrue(r["userImage"])

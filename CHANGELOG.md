@@ -102,3 +102,5 @@
 ## v.0.2
 > Python 3.3, 3.4, 3.5 support stopped
 - after this version, Python 3.6+ supports only.
+
+## v.1.0.0
