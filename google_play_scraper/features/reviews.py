@@ -124,7 +124,10 @@ def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
 
     while True:
         _result, continuation_token = reviews(
-            app_id, count=MAX_COUNT_EACH_FETCH, continuation_token=continuation_token, **kwargs
+            app_id,
+            count=MAX_COUNT_EACH_FETCH,
+            continuation_token=continuation_token,
+            **kwargs
         )
 
         result += _result
