@@ -9,7 +9,13 @@ from google_play_scraper.utils import nested_lookup
 
 
 class ElementSpec:
-    def __init__(self, ds_num: Optional[int], data_map: List[int], post_processor: Callable=None, fallback_value: Any=None):
+    def __init__(
+        self,
+        ds_num: Optional[int],
+        data_map: List[int],
+        post_processor: Callable = None,
+        fallback_value: Any = None,
+    ):
         self.ds_num = ds_num
         self.data_map = data_map
         self.post_processor = post_processor

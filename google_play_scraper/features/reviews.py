@@ -10,7 +10,10 @@ from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
 
 
-class ContinuationToken:
+MAX_COUNT_EACH_FETCH = 199
+
+
+class _ContinuationToken:
     __slots__ = "token", "lang", "country", "sort", "count", "filter_score_with"
 
     def __init__(self, token, lang, country, sort, count, filter_score_with):
@@ -22,7 +25,14 @@ class ContinuationToken:
         self.filter_score_with = filter_score_with
 
 
-def _fetch_review_items(url: str, app_id: str, sort: int, count: int, filter_score_with: Optional[int], pagination_token: Optional[str]):
+def _fetch_review_items(
+    url: str,
+    app_id: str,
+    sort: int,
+    count: int,
+    filter_score_with: Optional[int],
+    pagination_token: Optional[str],
+):
     dom = post(
         url,
         Formats.Reviews.build_body(
@@ -42,13 +52,13 @@ def _fetch_review_items(url: str, app_id: str, sort: int, count: int, filter_sco
 
 def reviews(
     app_id: str,
-    lang: str='en',
-    country: str='us',
-    sort: int=Sort.NEWEST,
-    count: int=100,
-    filter_score_with: int=None,
-    continuation_token: ContinuationToken=None,
-) -> Tuple[List[dict], ContinuationToken]:
+    lang: str = "en",
+    country: str = "us",
+    sort: Sort = Sort.NEWEST,
+    count: int = 100,
+    filter_score_with: int = None,
+    continuation_token: _ContinuationToken = None,
+) -> Tuple[List[dict], _ContinuationToken]:
     if continuation_token is not None:
         token = continuation_token.token
 
@@ -56,18 +66,16 @@ def reviews(
         country = continuation_token.country
         sort = continuation_token.sort
         count = continuation_token.count
-        filter_score_with = (
-            continuation_token.filter_score_with
-        )
+        filter_score_with = continuation_token.filter_score_with
     else:
         token = None
 
     url = Formats.Reviews.build(lang=lang, country=country)
 
-    if count < 200:
-        _count = count
+    if count > MAX_COUNT_EACH_FETCH:
+        _count = MAX_COUNT_EACH_FETCH
     else:
-        _count = 199
+        _count = count
 
     result = []
 
@@ -81,7 +89,12 @@ def reviews(
             break
 
         for review in review_items:
-            result.append({k: spec.extract_content(review) for k, spec in ElementSpecs.Review.items()})
+            result.append(
+                {
+                    k: spec.extract_content(review)
+                    for k, spec in ElementSpecs.Review.items()
+                }
+            )
 
         remaining_count = count - len(result)
 
@@ -97,30 +110,29 @@ def reviews(
 
     return (
         result,
-        ContinuationToken(token, lang, country, sort, count, filter_score_with),
+        _ContinuationToken(token, lang, country, sort, count, filter_score_with),
     )
 
 
-def reviews_all(app_id: str, sleep_seconds: int=0, **kwargs) -> list:
+def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
     kwargs.pop("count", None)
     kwargs.pop("continuation_token", None)
 
-    _count = 199
-    _continuation_token = None
+    continuation_token = None
 
     result = []
 
     while True:
-        _result, _continuation_token = reviews(
-            app_id, count=_count, continuation_token=_continuation_token, **kwargs
+        _result, continuation_token = reviews(
+            app_id, count=MAX_COUNT_EACH_FETCH, continuation_token=continuation_token, **kwargs
         )
 
         result += _result
 
-        if _continuation_token.token is None:
+        if continuation_token.token is None:
             break
 
-        if sleep_seconds:
-            sleep(sleep_seconds)
+        if sleep_milliseconds:
+            sleep(sleep_milliseconds / 1000)
 
     return result

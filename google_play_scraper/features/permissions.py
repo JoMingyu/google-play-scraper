@@ -8,7 +8,11 @@ from google_play_scraper.constants.element import ElementSpecs
 
 
 def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, list]:
-    dom = post(Formats.Permissions.build(lang=lang, country=country), Formats.Permissions.build_body(app_id), {"content-type": "application/x-www-form-urlencoded"})
+    dom = post(
+        Formats.Permissions.build(lang=lang, country=country),
+        Formats.Permissions.build_body(app_id),
+        {"content-type": "application/x-www-form-urlencoded"},
+    )
 
     matches = json.loads(Regex.PERMISSIONS.findall(dom)[0])
     container = json.loads(matches[0][2])

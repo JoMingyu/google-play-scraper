@@ -7,7 +7,7 @@ from google_play_scraper import Sort
 from google_play_scraper.features.reviews import (
     reviews,
     _fetch_review_items,
-    ContinuationToken,
+    _ContinuationToken,
 )
 
 
@@ -213,7 +213,7 @@ class TestReviews(TestCase):
         ) as m:
             _ = reviews(
                 "com.mojang.minecraftpe",
-                continuation_token=ContinuationToken(
+                continuation_token=_ContinuationToken(
                     "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
                 ),
                 lang="jp",
@@ -223,15 +223,15 @@ class TestReviews(TestCase):
                 filter_score_with=4,
             )
 
-            self.assertEqual("hl=jp&gl=jp", urlparse(m.call_args[0][0]).query)
-            self.assertEqual(Sort.RATING, m.call_args[0][2])
-            self.assertEqual(11, m.call_args[0][3])
-            self.assertEqual(4, m.call_args[0][4])
+            self.assertEqual("hl=ko&gl=kr", urlparse(m.call_args[0][0]).query)
+            self.assertEqual(Sort.MOST_RELEVANT, m.call_args[0][2])
+            self.assertEqual(10, m.call_args[0][3])
+            self.assertEqual(5, m.call_args[0][4])
 
     def test_invalid_continuation_token(self):
         result, ct = reviews(
             "com.mojang.minecraftpe",
-            continuation_token=ContinuationToken(
+            continuation_token=_ContinuationToken(
                 "foo", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
             ),
         )

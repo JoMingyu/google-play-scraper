@@ -104,3 +104,7 @@
 - after this version, Python 3.6+ supports only.
 
 ## v.1.0.0
+> Add `permissons` feature, some features improvement
+- Added `permissions` feature for fetch permission info of specified app.
+- `reviews` : the information of the `continuation_token` takes precedence over the specified arguments.
+- Type hinting based on PEP 484 is supported.
