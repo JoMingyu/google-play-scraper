@@ -62,6 +62,12 @@ def reviews(
     if continuation_token is not None:
         token = continuation_token.token
 
+        if token is None:
+            return (
+                [],
+                continuation_token,
+            )
+
         lang = continuation_token.lang
         country = continuation_token.country
         sort = continuation_token.sort
