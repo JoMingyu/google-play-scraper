@@ -33,7 +33,10 @@ class ElementSpec:
             if self.post_processor is not None:
                 result = self.post_processor(result)
         except:
-            result = self.fallback_value
+            if isinstance(self.fallback_value, ElementSpec):
+                result = self.fallback_value.extract_content(source)
+            else:
+                result = self.fallback_value
 
         return result
 
@@ -108,7 +111,9 @@ class ElementSpecs:
         "recentChanges": ElementSpec(5, [0, 12, 6, 1], unescape_text),
         "recentChangesHTML": ElementSpec(5, [0, 12, 6, 1]),
         "comments": ElementSpec(
-            19, [0], lambda container: [item[4] for item in container], []
+            18, [0], lambda container: [item[4] for item in container], ElementSpec(
+                17, [0], lambda container: [item[4] for item in container], []
+            )
         ),
         "editorsChoice": ElementSpec(5, [0, 12, 15, 0], bool, False),
     }

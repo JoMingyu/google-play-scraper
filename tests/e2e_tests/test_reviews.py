@@ -115,7 +115,7 @@ class TestReviews(TestCase):
                 self.assertIn("입니다", reply_content)
                 self.assertIn("감사합니다", reply_content)
 
-                self.assertTrue(len(reply_content) > 100)
+                self.assertTrue(len(reply_content) > 90)
                 self.assertIsInstance(replied_at, datetime)
                 self.assertTrue(
                     datetime(2018, 6, 1) < replied_at < datetime(2022, 1, 1)

@@ -108,3 +108,8 @@
 - Added `permissions` feature for fetch permission info of specified app.
 - `reviews` : the information of the `continuation_token` takes precedence over the specified arguments.
 - Type hinting based on PEP 484 is supported.
+
+## v.1.0.1
+> features improvement - `app`, `reviews` feature
+- Optimize `reviews` function : returns false value when `continuation_token.token` is `None`
+- Fix `app` function : `comments` always `[]`

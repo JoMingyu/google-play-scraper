@@ -78,17 +78,20 @@ def reviews(
 
     url = Formats.Reviews.build(lang=lang, country=country)
 
-    if count > MAX_COUNT_EACH_FETCH:
-        _count = MAX_COUNT_EACH_FETCH
-    else:
-        _count = count
+    _fetch_count = count
 
     result = []
 
     while True:
+        if _fetch_count == 0:
+            break
+
+        if _fetch_count > MAX_COUNT_EACH_FETCH:
+            _fetch_count = MAX_COUNT_EACH_FETCH
+
         try:
             review_items, token = _fetch_review_items(
-                url, app_id, sort, _count, filter_score_with, token
+                url, app_id, sort, _fetch_count, filter_score_with, token
             )
         except (TypeError, IndexError):
             token = None
@@ -102,17 +105,11 @@ def reviews(
                 }
             )
 
-        remaining_count = count - len(result)
-
-        if remaining_count == 0:
-            break
+        _fetch_count = count - len(result)
 
         if isinstance(token, list):
             token = None
             break
-
-        if remaining_count < 200:
-            _count = remaining_count
 
     return (
         result,

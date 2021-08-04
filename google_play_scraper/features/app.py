@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 from typing import Any, Dict
 
 from google_play_scraper.constants.element import ElementSpecs
@@ -14,7 +15,7 @@ def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
 
     matches = Regex.SCRIPT.findall(dom)
 
-    res = {}
+    dataset = {}
 
     for match in matches:
         key_match = Regex.KEY.findall(match)
@@ -24,12 +25,12 @@ def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
             key = key_match[0]
             value = json.loads(value_match[0])
 
-            res[key] = value
+            dataset[key] = value
 
     result = {}
 
     for k, spec in ElementSpecs.Detail.items():
-        content = spec.extract_content(res)
+        content = spec.extract_content(dataset)
 
         result[k] = content
 
