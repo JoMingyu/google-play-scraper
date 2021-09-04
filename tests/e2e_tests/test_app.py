@@ -92,6 +92,8 @@ class TestApp(TestCase):
             "- Supports the newest devices.", result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])
+        self.assertTrue(result["similarApps"])
+        self.assertTrue(result["moreByDeveloper"])
 
     def test_e2e_scenario_2(self):
         """
