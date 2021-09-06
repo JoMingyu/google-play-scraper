@@ -117,6 +117,12 @@ class ElementSpecs:
             ElementSpec(17, [0], lambda container: [item[4] for item in container], []),
         ),
         "editorsChoice": ElementSpec(5, [0, 12, 15, 0], bool, False),
+        "similarApps": ElementSpec(7, [1, 1, 0, 0, 0], lambda container: [
+            container[i][12][0] for i in range(0, len(container))
+        ]),
+        "moreByDeveloper": ElementSpec(9, [0, 1, 0, 0, 0], lambda container: [
+            container[i][12][0] for i in range(0, len(container))
+        ]),
     }
 
     Review = {
