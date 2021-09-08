@@ -26,8 +26,9 @@ def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str,
                 permission_items = [["Uncategorized", None, permission_items, None]]
 
             for permission in permission_items:
-                result[
-                    ElementSpecs.Permission_Type.extract_content(permission)
-                ] = ElementSpecs.Permission_List.extract_content(permission)
+                if permission:
+                    result[
+                        ElementSpecs.Permission_Type.extract_content(permission)
+                    ] = ElementSpecs.Permission_List.extract_content(permission)
 
     return result
