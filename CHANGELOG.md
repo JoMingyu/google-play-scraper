@@ -113,3 +113,8 @@
 > features improvement - `app`, `reviews` feature
 - Optimize `reviews` function : returns false value when `continuation_token.token` is `None`
 - Fix `app` function : `comments` always `[]`
+
+## v.1.0.2
+> Patch element specs for a deal with play store data structure changes. features improvement - `app` feature
+- Fix `app` function : all data always `None`
+- Added `similarApps`, `moreByDeveloper` property to `app` feature

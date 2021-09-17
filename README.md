@@ -149,7 +149,18 @@ Result of `print(result)`:
         "I've been playing this game for so long, I can't believe I haven't rated it yet. This is the very same game that blew up in 2016, but it's grown and refined a lot since then. The basic idea is to capture Pokémon while you're out, but you can also battle them in gyms and with other players. They also hold special events regularly for capturing special Pokémon. The game is best played with friends, but it's a fine \"fitness\" app, too. I give it a \"good enough to play for 3+ years\" out of 10.",
         "Kinda lame tbh. I downloaded it for a Pokemon experience, which I do get, but time a degree. MAKE SURE you find out which teams typically operate in your area (which is extremely hard unless you know someone who uses the app), because you can end up on a bad team and never be able to experience the full fun of the game.",
         "great game, but I'm really sad because when the game first came out, I had a dragonite and other good pokemon, and when I updated the game, they were ALL deleted. I was super sad to find all my good pokemon missing. plz fix that so it doesn't happen to others :(. it's still a great game though and I would reccomend getting it."
-    ]
+    ],
+    "similarApps": [
+        "com.dhxmedia.slugitout2",
+        "com.hasbro.beybladesenterprise",
+        "jp.pokemon.pokemonquest",
+        "com.turborocketgames.wildcraft",
+        "com.hyperbeard.axolochi"
+    ],
+    "moreByDeveloper": [
+        "com.nianticlabs.hpwu.prod",
+        "com.nianticproject.ingress"
+    ],
 }
 ```
 
