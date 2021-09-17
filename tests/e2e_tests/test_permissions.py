@@ -50,12 +50,21 @@ class TestPermission(TestCase):
 
         self.assertDictEqual(
             {
+                "Wi-Fi connection information": ["view Wi-Fi connections"],
+                "Photos/Media/Files": [
+                    "modify or delete the contents of your USB storage",
+                    "read the contents of your USB storage",
+                ],
+                "Storage": [
+                    "modify or delete the contents of your USB storage",
+                    "read the contents of your USB storage",
+                ],
                 "Other": [
                     "control vibration",
                     "full network access",
                     "run at startup",
                     "view network connections",
-                ]
+                ],
             },
             result,
         )

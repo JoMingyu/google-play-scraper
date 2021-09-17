@@ -64,6 +64,7 @@ Result of `print(result)`:
     "free": True,
     "currency": "USD",
     "offersIAP": True,
+    "inAppProductPrice": "$0.99 - $99.99 per item",
     "editorsChoice": False,
     "size": "94M",
     "androidVersion": "5.0",

@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 from typing import Any, Dict
 
 from google_play_scraper.constants.element import ElementSpecs

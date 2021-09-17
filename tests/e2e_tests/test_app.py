@@ -116,7 +116,8 @@ class TestApp(TestCase):
             res["video"],
         )
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/JnWXymfd4lGdonuTxsY4CKu8k2UzKptu7YamAdtGWIDl2ioYKHZkk_Vbkr__k0hGYCth", res["videoImage"]
+            "https://play-lh.googleusercontent.com/JnWXymfd4lGdonuTxsY4CKu8k2UzKptu7YamAdtGWIDl2ioYKHZkk_Vbkr__k0hGYCth",
+            res["videoImage"],
         )
 
     def test_e2e_scenario_4(self):
