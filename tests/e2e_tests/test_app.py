@@ -33,14 +33,14 @@ class TestApp(TestCase):
         )
         self.assertEqual("100,000+", result["installs"])
         self.assertEqual(100000, result["minInstalls"])
-        self.assertTrue(3.8 < result["score"] < 4.0)
+        self.assertTrue(3.7 < result["score"] < 4.0)
         self.assertTrue(9500 <= result["ratings"])
-        self.assertTrue(2000 <= result["reviews"])
+        self.assertTrue(200 <= result["reviews"])
         self.assertTrue(result["reviews"] < result["ratings"])
         self.assertTrue(1500 <= result["histogram"][0])
         self.assertTrue(500 <= result["histogram"][1])
-        self.assertTrue(600 <= result["histogram"][2])
-        self.assertTrue(1000 <= result["histogram"][3])
+        self.assertTrue(400 <= result["histogram"][2])
+        self.assertTrue(900 <= result["histogram"][3])
         self.assertTrue(5000 <= result["histogram"][4])
         self.assertEqual(sum(result["histogram"]), result["ratings"])
         self.assertEqual(0, result["price"])
@@ -54,11 +54,11 @@ class TestApp(TestCase):
         self.assertEqual("Tatsuki", result["developer"])
         self.assertEqual("Tatsuki", result["developerId"])
         self.assertEqual("sskttk.android@gmail.com", result["developerEmail"])
-        self.assertEqual("http://sskttk-app.com/", result["developerWebsite"])
+        self.assertEqual("https://sskttk-app.com/", result["developerWebsite"])
         self.assertEqual(
             "Osaka-shi Chuo-ku Minamisenba 4-10-5", result["developerAddress"]
         )
-        self.assertEqual("http://sskttk-app.com/?page_id=223", result["privacyPolicy"])
+        self.assertEqual("https://sskttk-app.com/?page_id=223", result["privacyPolicy"])
         self.assertEqual("8524055825995721370", result["developerInternalID"])
         self.assertEqual("Simulation", result["genre"])
         self.assertEqual("GAME_SIMULATION", result["genreId"])
@@ -83,7 +83,7 @@ class TestApp(TestCase):
         self.assertTrue(result["adSupported"])
         self.assertTrue(result["containsAds"])
         self.assertEqual("Jan 7, 2014", result["released"])
-        self.assertEqual(1617488490, result["updated"])
+        self.assertEqual(1636693903, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
             ("- Supports the newest devices."), result["recentChanges"],
@@ -118,7 +118,7 @@ class TestApp(TestCase):
             res["video"],
         )
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/JnWXymfd4lGdonuTxsY4CKu8k2UzKptu7YamAdtGWIDl2ioYKHZkk_Vbkr__k0hGYCth",
+            "https://play-lh.googleusercontent.com/ac-jc2mmtv90JWZmdnhIj4cGTBYQAeW7pERrAghQEC70E4ABVpGiTxriMUN4C6px4V6T",
             res["videoImage"],
         )
 
@@ -129,7 +129,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(1.09, res["price"])
+        self.assertEqual(1.29, res["price"])
 
         # TODO free app / non free app 구분
 
