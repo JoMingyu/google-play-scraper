@@ -118,3 +118,6 @@
 > Patch element specs for a deal with play store data structure changes. features improvement - `app` feature
 - Fix `app` function : all data always `None`
 - Added `similarApps`, `moreByDeveloper` property to `app` feature
+
+## v.1.0.3
+> HotFix for data structure update of Google Play
