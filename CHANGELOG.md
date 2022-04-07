@@ -121,3 +121,7 @@
 
 ## v.1.0.3
 > HotFix for data structure update of Google Play
+
+## v.1.0.4
+> Removes `Sort.RATING` from `reviews` feature
+- Sort by rating is no longer supported from Google Play.

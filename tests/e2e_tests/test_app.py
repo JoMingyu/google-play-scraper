@@ -118,7 +118,7 @@ class TestApp(TestCase):
             res["video"],
         )
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/ac-jc2mmtv90JWZmdnhIj4cGTBYQAeW7pERrAghQEC70E4ABVpGiTxriMUN4C6px4V6T",
+            "https://play-lh.googleusercontent.com/WtRP_tfCVpA8zA4tZCICmWo_AjX59VL67JdACwlXa_f_6YAw8gwafjLmgDhCZ95gtqXa",
             res["videoImage"],
         )
 
@@ -129,7 +129,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(1.29, res["price"])
+        self.assertEqual(0.99, res["price"])
 
         # TODO free app / non free app 구분
 

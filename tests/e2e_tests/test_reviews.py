@@ -69,14 +69,6 @@ class TestReviews(TestCase):
 
         self.assertTrue(review_count_has_thumbs_up_count_over_0 > 25)
 
-    def test_sort_by_rating(self):
-        result, _ = reviews("com.mojang.minecraftpe", sort=Sort.RATING, count=100)
-
-        self.assertEqual(100, len(result))
-
-        for r in result:
-            self.assertEqual(5, r["score"])
-
     def test_score_filter(self):
         for score in {1, 2, 3, 4, 5}:
             result, _ = reviews(
@@ -175,9 +167,9 @@ class TestReviews(TestCase):
             "com.mojang.minecraftpe",
             lang="ko",
             country="kr",
-            sort=Sort.RATING,
+            sort=Sort.MOST_RELEVANT,
             count=10,
-            filter_score_with=5,
+            filter_score_with=3,
         )
 
         self.assertEqual(10, len(result))
@@ -185,9 +177,9 @@ class TestReviews(TestCase):
 
         self.assertEqual("ko", continuation_token.lang)
         self.assertEqual("kr", continuation_token.country)
-        self.assertEqual(Sort.RATING, continuation_token.sort)
+        self.assertEqual(Sort.MOST_RELEVANT, continuation_token.sort)
         self.assertEqual(10, continuation_token.count)
-        self.assertEqual(5, continuation_token.filter_score_with)
+        self.assertEqual(3, continuation_token.filter_score_with)
 
         with patch(
             "google_play_scraper.features.reviews._fetch_review_items",
@@ -196,9 +188,9 @@ class TestReviews(TestCase):
             _ = reviews("com.mojang.minecraftpe", continuation_token=continuation_token)
 
             self.assertEqual("hl=ko&gl=kr", urlparse(m.call_args[0][0]).query)
-            self.assertEqual(Sort.RATING, m.call_args[0][2])
+            self.assertEqual(Sort.MOST_RELEVANT, m.call_args[0][2])
             self.assertEqual(10, m.call_args[0][3])
-            self.assertEqual(5, m.call_args[0][4])
+            self.assertEqual(3, m.call_args[0][4])
 
     def test_priority_between_preserved_argument_of_continuation_token_and_specified_argument(
         self,
@@ -218,7 +210,7 @@ class TestReviews(TestCase):
                 ),
                 lang="jp",
                 country="jp",
-                sort=Sort.RATING,
+                sort=Sort.NEWEST,
                 count=11,
                 filter_score_with=4,
             )
