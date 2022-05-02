@@ -125,3 +125,7 @@
 ## v.1.0.4
 > Removes `Sort.RATING` from `reviews` feature
 - Sort by rating is no longer supported from Google Play.
+
+## v.1.0.5
+> Fixes `moreByDeveloper` data differences for some apps
+- Fix `moreByDeveloper` data differences for some apps from `app` feature

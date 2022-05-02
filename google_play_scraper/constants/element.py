@@ -119,11 +119,22 @@ class ElementSpecs:
             [1, 1, 0, 0, 0],
             lambda container: [container[i][12][0] for i in range(0, len(container))],
         ),
-        "moreByDeveloper": ElementSpec(
-            9,
-            [0, 1, 0, 0, 0],
-            lambda container: [container[i][12][0] for i in range(0, len(container))],
-        ),
+        "moreByDeveloper": [
+            ElementSpec(
+                9,
+                [0, 1, 0, 0, 0],
+                lambda container: [
+                    container[i][12][0] for i in range(0, len(container))
+                ],
+            ),
+            ElementSpec(
+                9,
+                [0, 1, 0, 6, 0],
+                lambda container: [
+                    container[i][12][0] for i in range(0, len(container))
+                ],
+            ),
+        ],
     }
 
     Review = {

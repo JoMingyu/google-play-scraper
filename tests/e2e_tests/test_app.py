@@ -86,10 +86,12 @@ class TestApp(TestCase):
         self.assertEqual(1636693903, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
-            ("- Supports the newest devices."), result["recentChanges"],
+            ("- Supports the newest devices."),
+            result["recentChanges"],
         )
         self.assertEqual(
-            "- Supports the newest devices.", result["recentChangesHTML"],
+            "- Supports the newest devices.",
+            result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])
         self.assertTrue(result["similarApps"])
@@ -154,3 +156,12 @@ class TestApp(TestCase):
         res = app("product.dp.io.ab180blog")
 
         self.assertFalse(res["editorsChoice"])
+
+    def test_e2e_scenario_7(self):
+        """
+        Testing for moreByDeveloper data structure different from scenario 1~6
+        """
+
+        res = app("in.krosbits.musicolet")
+
+        self.assertListEqual(["in.krosbits.castplugin"], res["moreByDeveloper"])
