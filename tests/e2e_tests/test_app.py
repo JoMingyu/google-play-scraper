@@ -86,12 +86,10 @@ class TestApp(TestCase):
         self.assertEqual(1636693903, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
-            ("- Supports the newest devices."),
-            result["recentChanges"],
+            ("- Supports the newest devices."), result["recentChanges"],
         )
         self.assertEqual(
-            "- Supports the newest devices.",
-            result["recentChangesHTML"],
+            "- Supports the newest devices.", result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])
         self.assertTrue(result["similarApps"])

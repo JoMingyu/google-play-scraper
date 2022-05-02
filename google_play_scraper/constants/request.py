@@ -15,10 +15,8 @@ class Format(ABC):
 
 class Formats:
     class _Detail(Format):
-        URL_FORMAT = (
-            "{}/store/apps/details?id={{app_id}}&hl={{lang}}&gl={{country}}".format(
-                PLAY_STORE_BASE_URL
-            )
+        URL_FORMAT = "{}/store/apps/details?id={{app_id}}&hl={{lang}}&gl={{country}}".format(
+            PLAY_STORE_BASE_URL
         )
 
         def build(self, app_id: str, lang: str, country: str) -> str:
@@ -28,10 +26,8 @@ class Formats:
             return None
 
     class _Reviews(Format):
-        URL_FORMAT = (
-            "{}/_/PlayStoreUi/data/batchexecute?hl={{lang}}&gl={{country}}".format(
-                PLAY_STORE_BASE_URL
-            )
+        URL_FORMAT = "{}/_/PlayStoreUi/data/batchexecute?hl={{lang}}&gl={{country}}".format(
+            PLAY_STORE_BASE_URL
         )
 
         def build(self, lang: str, country: str) -> str:
@@ -64,10 +60,8 @@ class Formats:
             return result.encode()
 
     class _Permissions(Format):
-        URL_FORMAT = (
-            "{}/_/PlayStoreUi/data/batchexecute?hl={{lang}}&gl={{country}}".format(
-                PLAY_STORE_BASE_URL
-            )
+        URL_FORMAT = "{}/_/PlayStoreUi/data/batchexecute?hl={{lang}}&gl={{country}}".format(
+            PLAY_STORE_BASE_URL
         )
 
         def build(self, lang: str, country: str) -> str:
