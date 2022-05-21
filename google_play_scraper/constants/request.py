@@ -20,9 +20,15 @@ class Formats:
                 PLAY_STORE_BASE_URL
             )
         )
+        FALLBACK_URL_FORMAT = "{}/store/apps/details?id={{app_id}}&hl={{lang}}".format(
+            PLAY_STORE_BASE_URL
+        )
 
         def build(self, app_id: str, lang: str, country: str) -> str:
             return self.URL_FORMAT.format(app_id=app_id, lang=lang, country=country)
+        
+        def fallback_build(self, app_id: str, lang: str) -> str:
+            return self.FALLBACK_URL_FORMAT.format(app_id=app_id, lang=lang)
 
         def build_body(self, *args):
             return None
