@@ -129,3 +129,8 @@
 ## v.1.0.5
 > Fixes `moreByDeveloper` data differences for some apps
 - Fix `moreByDeveloper` data differences for some apps from `app` feature
+
+## v.1.1.0
+> Fixes data map from `app` feature
+- Fix data map caused by data structure change of Google Play.
+  - removed `summaryHTML`, `size`, `androidVersion`, `androidVersionText`, `developerInternalID`, `editorsChoice`, `similarApps`, `moreByDeveloper` field.
