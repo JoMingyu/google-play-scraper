@@ -49,13 +49,9 @@ class ElementSpecs:
         "descriptionHTML": ElementSpec(4, [1, 2, 72, 0, 1]),
         "summary": ElementSpec(4, [1, 2, 73, 0, 1], unescape_text),
         "installs": ElementSpec(4, [1, 2, 13, 0]),
-        "minInstalls": ElementSpec(
-            4, [1, 2, 13, 1]
-        ),
+        "minInstalls": ElementSpec(4, [1, 2, 13, 1]),
         "score": ElementSpec(4, [1, 2, 51, 0, 1]),
-        "ratings": ElementSpec(
-            4, [1, 2, 51, 2, 1]
-        ),
+        "ratings": ElementSpec(4, [1, 2, 51, 2, 1]),
         "reviews": ElementSpec(4, [1, 2, 51, 3, 1]),
         "histogram": ElementSpec(
             4,
@@ -88,7 +84,7 @@ class ElementSpecs:
         "developer": ElementSpec(4, [1, 2, 68, 0]),
         "developerId": ElementSpec(4, [1, 2, 68, 1, 4, 2], lambda s: s.split("id=")[1]),
         "developerEmail": ElementSpec(4, [1, 2, 69, 1, 0]),
-        "developerWebsite": ElementSpec(4, [1, 2, 69, 0 ,5, 2]),
+        "developerWebsite": ElementSpec(4, [1, 2, 69, 0, 5, 2]),
         "developerAddress": ElementSpec(4, [1, 2, 69, 2, 0]),
         "privacyPolicy": ElementSpec(4, [1, 2, 99, 0, 5, 2]),
         # "developerInternalID": ElementSpec(5, [0, 12, 5, 0, 0]),
@@ -107,7 +103,9 @@ class ElementSpecs:
         "containsAds": ElementSpec(4, [1, 2, 48], bool, False),
         "released": ElementSpec(4, [1, 2, 10, 0]),
         "updated": ElementSpec(4, [1, 2, 145, 0, 1, 0]),
-        "version": ElementSpec(4, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"),
+        "version": ElementSpec(
+            4, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"
+        ),
         "recentChanges": ElementSpec(4, [1, 2, 144, 1, 1], unescape_text),
         "recentChangesHTML": ElementSpec(4, [1, 2, 144, 1, 1]),
         "comments": ElementSpec(
