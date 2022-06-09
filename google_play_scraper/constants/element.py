@@ -50,6 +50,7 @@ class ElementSpecs:
         "summary": ElementSpec(4, [1, 2, 73, 0, 1], unescape_text),
         "installs": ElementSpec(4, [1, 2, 13, 0]),
         "minInstalls": ElementSpec(4, [1, 2, 13, 1]),
+        "realInstalls": ElementSpec(4, [1, 2, 13, 2]),
         "score": ElementSpec(4, [1, 2, 51, 0, 1]),
         "ratings": ElementSpec(4, [1, 2, 51, 2, 1]),
         "reviews": ElementSpec(4, [1, 2, 51, 3, 1]),
@@ -66,7 +67,8 @@ class ElementSpecs:
             [0, 0, 0, 0, 0],
         ),
         "price": ElementSpec(
-            4, [1, 2, 57, 0, 0, 0, 0, 1, 0, 0], lambda price: (price / 1000000) or 0
+            4, [1, 2, 57, 0, 0, 0, 0, 1, 0, 0], lambda price: (
+                price / 1000000) or 0
         ),
         "free": ElementSpec(4, [1, 2, 57, 0, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
         "currency": ElementSpec(4, [1, 2, 57, 0, 0, 0, 0, 1, 0, 1]),
@@ -93,7 +95,8 @@ class ElementSpecs:
         "icon": ElementSpec(4, [1, 2, 95, 0, 3, 2]),
         "headerImage": ElementSpec(4, [1, 2, 96, 0, 3, 2]),
         "screenshots": ElementSpec(
-            4, [1, 2, 78, 0], lambda container: [item[3][2] for item in container], []
+            4, [1, 2, 78, 0], lambda container: [item[3][2]
+                                                 for item in container], []
         ),
         "video": ElementSpec(4, [1, 2, 100, 0, 0, 3, 2]),
         "videoImage": ElementSpec(4, [1, 2, 100, 1, 0, 3, 2]),
