@@ -124,6 +124,12 @@ class ElementSpecs:
             6,
             [1, 1, 1, 21, 0], 
             lambda container: [container[i][0][0] for i in range(0, len(container))]),
+        "dataSafetyShort": ElementSpec(5, [1, 2, 136, 1],
+            lambda container: [
+                (
+                    ElementSpec(None, [1]).extract_content(container[i]),
+                    ElementSpec(None, [2,1], None, None).extract_content(container[i])
+                ) for i in range(0, len(container))]),
     }
     Review = {
         "reviewId": ElementSpec(None, [0]),
