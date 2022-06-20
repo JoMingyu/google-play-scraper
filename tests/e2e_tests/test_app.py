@@ -89,6 +89,7 @@ class TestApp(TestCase):
         self.assertTrue(result["comments"])
         self.assertTrue(result["similarApps"])
         self.assertTrue(result["moreByDeveloper"])
+        self.assertTrue(result["dataSafety"])
 
     def test_e2e_scenario_2(self):
         """
