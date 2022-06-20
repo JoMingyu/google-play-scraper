@@ -1,3 +1,5 @@
+import re
+
 from datetime import datetime, timedelta
 from unittest import TestCase
 from unittest.mock import patch
@@ -26,8 +28,9 @@ class TestReviews(TestCase):
             self.assertTrue(
                 r["reviewId"].startswith("gp:AOqp")
                 or r["reviewId"].startswith("lg:AOqp")
+                or re.fullmatch("[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}", r["reviewId"])
             )
-            self.assertTrue(len(r["reviewId"]) == 90)
+            self.assertTrue(len(r["reviewId"]) == 90 or 36)
             self.assertTrue(r["userName"])
             self.assertTrue(r["userImage"])
             self.assertTrue(r["content"])
