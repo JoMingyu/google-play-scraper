@@ -9,20 +9,25 @@
 Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python *without any external dependencies!*
 
 ## Related Projects
+
 ### [google-play-scraper](https://github.com/facundoolano/google-play-scraper)
+
 > Node.js scraper to get data from Google Play
 
 I have referred a lot to the API design of this library.
 
 ## Installation
-```
+
+```console
 pip install google-play-scraper
 ```
 
 ## Usage
+
 The country and language codes that can be included in the `lang` and `country` parameters described below depend on the [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) standards, respectively. Therefore, we recommend using an ISO database library such as [pycountry](https://github.com/flyingcircusio/pycountry).
 
 ### App Detail
+
 ```python
 from google_play_scraper import app
 
@@ -153,6 +158,7 @@ Result of `print(result)`:
 ```
 
 ### App Reviews
+
 `reviews` function returns `result` with `continuation token`.
 
 - `result` : Crawling result of reviews. (list)
@@ -225,6 +231,7 @@ Result of `print(result)`:
 ```
 
 ### App All Reviews
+
 `reviews_all` function returns all of reviews from app. If you want to set the count to infinity while using the `reviews` function, you can use the `reviews_all` function.
 
 > :bulb: Because of the Google Play Store limit (up to 200 reviews can be fetched at a time), http requests are generated as long as the number of app reviews is divided by 200. For example, targeting an app like Pokémon GO makes tens of thousands of http requests.
@@ -242,8 +249,8 @@ result = reviews_all(
 )
 ```
 
-
 ### App Permissions
+
 `permissions` function returns permissions of app.
 
 ```python
@@ -410,5 +417,109 @@ Result of `print(result)`:
   'installs': '10,000,000+'}]
 ```
 
+### App Data Safety
+
+`data_safety` function returns all data safety options for an app.
+
+```python
+from google_play_scraper import data_safety
+
+result = data_safety(
+    'com.microsoft.launcher.enterprise',
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+)
+```
+
+Result of `print(result)`:
+
+```
+{
+   'data_collected':{
+      'Location':[
+         {
+            'name':'Approximate location',
+            'optional':false,
+            'usage':'App functionality'
+         },
+         {
+            'name':'Precise location',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'Personal info':[
+         {
+            'name':'Email address',
+            'optional':false,
+            'usage':'App functionality'
+         },
+         {
+            'name':'User IDs',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App activity':[
+         {
+            'name':'Installed apps',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App info and performance':[
+         {
+            'name':'Diagnostics',
+            'optional':true,
+            'usage':'Analytics'
+         }
+      ],
+      'Device or other IDs':[
+         {
+            'name':'Device or other IDs',
+            'optional':false,
+            'usage':'App functionality, Analytics'
+         }
+      ]
+   },
+   'data_shared':{
+      'Personal info':[
+         {
+            'name':'Email address',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App info and performance':[
+         {
+            'name':'Diagnostics',
+            'optional':false,
+            'usage':'Analytics'
+         }
+      ],
+      'Device or other IDs':[
+         {
+            'name':'Device or other IDs',
+            'optional':false,
+            'usage':'App functionality, Analytics'
+         }
+      ]
+   },
+   'security_practices':[
+      {
+         'name':'Data is encrypted in transit',
+         'description':'Your data is transferred over a secure connection'
+      },
+      {
+         'name':'Data can’t be deleted',
+         'description':'The developer doesn’t provide a way for you to request that your data be deleted'
+      }
+   ],
+   'appId':'com.microsoft.launcher.enterprise',
+   'url':'https://play.google.com/store/apps/datasafety?id=com.microsoft.launcher.enterprise&hl=en&gl=us'
+}
+```
+
 ## Changes
+
 Change logs are here : [CHANGELOG.md](CHANGELOG.md)

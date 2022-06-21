@@ -131,6 +131,7 @@ class ElementSpecs:
                     'summary': ElementSpec(None, [2,1], None, None).extract_content(container[i])
                 } for i in range(0, len(container))]),
     }
+
     Review = {
         "reviewId": ElementSpec(None, [0]),
         "userName": ElementSpec(None, [1, 0]),
@@ -145,6 +146,7 @@ class ElementSpecs:
     }
 
     Permission_Type = ElementSpec(None, [0])
+
     Permission_List = ElementSpec(
         None, [2], lambda container: sorted([item[1] for item in container])
     )
@@ -152,12 +154,12 @@ class ElementSpecs:
         "appId": ElementSpec(None, [0,0,0]),
         "icon": ElementSpec(None, [0,1,3,2]),
         "screenshots": ElementSpec(None, [0,2], lambda container: [item[3][2]
-                                                                    for item in container], []),
+            for item in container], []),
         "title": ElementSpec(None, [0,3]),
         "score": ElementSpec(None, [0,4,1]),
         "genre": ElementSpec(None, [0,5]),
         "price": ElementSpec(None, [0,8,1,0,0], lambda price: (
-                price / 1000000) or 0
+            price / 1000000) or 0
         ),
         "free": ElementSpec(None, [0,8,1,0,0], lambda s: s == 0),
         "currency": ElementSpec(None, [0,8,1,0,1]),
@@ -167,4 +169,34 @@ class ElementSpecs:
         "descriptionHTML": ElementSpec(None, [0,13,1]),
         "developer": ElementSpec(None, [0,14]),
         "installs": ElementSpec(None, [0,15])
+    }
+
+    DataSafety = {
+        "data_collected": ElementSpec(3, [1, 2, 137, 4, 1, 0],
+            lambda collection: {ElementSpec(None, [0, 1]).extract_content(collection[i]): ElementSpec(None, [4],
+                lambda entrys: [
+                    {
+                        'name': ElementSpec(None, [0]).extract_content(entrys[j]),
+                        'optional': ElementSpec(None, [1]).extract_content(entrys[j]),
+                        'usage': ElementSpec(None, [2], None, None).extract_content(entrys[j])
+                    } for j in range(0, len(entrys))] 
+                ).extract_content(collection[i]) for i in range(0, len(collection))},
+            ),
+        "data_shared": ElementSpec(3, [1, 2, 137, 4, 0, 0],
+            lambda collection: {ElementSpec(None, [0, 1]).extract_content(collection[i]): ElementSpec(None, [4],
+                lambda entrys: [
+                    {
+                        'name': ElementSpec(None, [0]).extract_content(entrys[j]),
+                        'optional': ElementSpec(None, [1]).extract_content(entrys[j]),
+                        'usage': ElementSpec(None, [2], None, None).extract_content(entrys[j])
+                    } for j in range(0, len(entrys))] 
+                ).extract_content(collection[i]) for i in range(0, len(collection))},
+            ),
+        "security_practices": ElementSpec(3, [1, 2, 137, 9, 2],
+            lambda container: [
+                {
+                    'name': ElementSpec(None, [i, 1]).extract_content(container),
+                    'description': ElementSpec(None, [i, 2, 1]).extract_content(container)
+                } for i in range(0, len(container))
+            ])
     }
