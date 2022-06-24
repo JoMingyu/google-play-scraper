@@ -8,13 +8,13 @@ from google_play_scraper.utils.request import get
 from google_play_scraper.exceptions import NotFoundError
 
 
-def data_safety(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
-    url = Formats.DataSafety.build(app_id=app_id, lang=lang, country=country)
+def collection(collection_token: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
+    url = Formats.Collection.build(collection_token, lang=lang, country=country)
 
     try:
         dom = get(url)
     except NotFoundError:
-        url = Formats.DataSafety.fallback_build(app_id=app_id, lang=lang)
+        url = Formats.Collection.fallback_build(collection_token, lang=lang)
         dom = get(url)
 
     matches = Regex.SCRIPT.findall(dom)
@@ -33,7 +33,7 @@ def data_safety(app_id: str, lang: str = "en", country: str = "us") -> Dict[str,
 
     result = {}
 
-    for k, spec in ElementSpecs.DataSafety.items():
+    for k, spec in ElementSpecs.Collection.items():
         if isinstance(spec, list):
             for sub_spec in spec:
                 content = sub_spec.extract_content(dataset)
@@ -46,7 +46,6 @@ def data_safety(app_id: str, lang: str = "en", country: str = "us") -> Dict[str,
 
             result[k] = content
 
-    result["appId"] = app_id
     result["url"] = url
 
     return result

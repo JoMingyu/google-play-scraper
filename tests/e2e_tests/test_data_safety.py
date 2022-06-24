@@ -1,11 +1,11 @@
 from unittest import TestCase
 
-from google_play_scraper.features.data_safety import data_safty
+from google_play_scraper.features.data_safety import data_safety
 
 
-class TestPermission(TestCase):
+class TestDataSafety(TestCase):
     def test_data_safety_complex(self):
-        result = data_safty("com.spotify.music", lang="en", country="us")
+        result = data_safety("com.spotify.music", lang="en", country="us")
 
         self.assertDictEqual(
             {
@@ -164,7 +164,7 @@ class TestPermission(TestCase):
         )
 
     def test_data_safety_simple(self):
-        result = data_safty("com.mattermost.rn", lang="en", country="us")
+        result = data_safety("com.mattermost.rn", lang="en", country="us")
 
         self.assertDictEqual(
             {
@@ -192,7 +192,7 @@ class TestPermission(TestCase):
         )
 
     def test_data_safety_not_avalible(self):
-        result = data_safty("com.disney.disneyplus", lang="en", country="us")
+        result = data_safety("com.disney.disneyplus", lang="en", country="us")
 
         self.assertDictEqual(
             {

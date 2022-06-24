@@ -4,7 +4,7 @@ from google_play_scraper.utils.data_processors import unescape_text
 
 from typing import Callable, List, Any, Optional
 
-from google_play_scraper.constants.regex import Regex
+from google_play_scraper.constants.google_play import PageType
 from google_play_scraper.utils import nested_lookup
 
 
@@ -115,15 +115,26 @@ class ElementSpecs:
             9, [0], lambda container: [item[4] for item in container], []
         ),
         # "editorsChoice": ElementSpec(4, [0, 12, 15, 0], bool, False),
-        "similarApps": ElementSpec(
+        "otherApps": ElementSpec(
             6,
-            [1, 1, 0, 21,0], 
-            lambda container: [container[i][0][0] for i in range(0, len(container))],
+            [1, 1], 
+            lambda collections: [{
+                    'title': ElementSpec(None, [21, 1, 0]).extract_content(collection),
+                    'app_ids': [ElementSpec(None, [21, 0, i, 0, 0]).extract_content(collection) for i in range(0, len(collection[21][0]))],
+                } for collection in collections],
+        ),        
+        "otherAppsPages": ElementSpec(
+            6,
+            [1, 1], 
+            lambda collections: [{
+                    'token': ElementSpec(None, [21, 1, 2, 4, 2],
+                        lambda path: path[35:] if path.startswith('/store/apps/collection/cluster') else path[19:] if path.startswith('/store/apps/dev') else path
+                    ).extract_content(collection),
+                    'type': ElementSpec(None,[21, 1, 2, 4, 2],
+                        lambda path: PageType.COLLECTION if path.startswith('/store/apps/collection/cluster') else PageType.DEVELOPER if path.startswith('/store/apps/dev') else None
+                    ).extract_content(collection),
+                } for collection in collections],
         ),
-        "moreByDeveloper": ElementSpec(
-            6,
-            [1, 1, 1, 21, 0], 
-            lambda container: [container[i][0][0] for i in range(0, len(container))]),
         "dataSafety": ElementSpec(5, [1, 2, 136, 1],
             lambda container: [
                 {
@@ -179,7 +190,7 @@ class ElementSpecs:
                         'name': ElementSpec(None, [0]).extract_content(entrys[j]),
                         'optional': ElementSpec(None, [1]).extract_content(entrys[j]),
                         'usage': ElementSpec(None, [2], None, None).extract_content(entrys[j])
-                    } for j in range(0, len(entrys))] 
+                    } for j in range(0, len(entrys))]
                 ).extract_content(collection[i]) for i in range(0, len(collection))},
             ),
         "data_shared": ElementSpec(3, [1, 2, 137, 4, 0, 0],
@@ -189,7 +200,7 @@ class ElementSpecs:
                         'name': ElementSpec(None, [0]).extract_content(entrys[j]),
                         'optional': ElementSpec(None, [1]).extract_content(entrys[j]),
                         'usage': ElementSpec(None, [2], None, None).extract_content(entrys[j])
-                    } for j in range(0, len(entrys))] 
+                    } for j in range(0, len(entrys))]
                 ).extract_content(collection[i]) for i in range(0, len(collection))},
             ),
         "security_practices": ElementSpec(3, [1, 2, 137, 9, 2],
@@ -199,4 +210,14 @@ class ElementSpecs:
                     'description': ElementSpec(None, [i, 2, 1]).extract_content(container)
                 } for i in range(0, len(container))
             ])
+    }
+
+    Collection = {
+        "apps": ElementSpec(3, [0,1,0, 21,0], 
+            lambda collection: [ElementSpec(None, [0, 0]).extract_content(entry) for entry in collection])
+    }
+    
+    Developer = {
+        "apps": ElementSpec(3, [0,1,0, 21,0], 
+            lambda collection: [ElementSpec(None, [0, 0]).extract_content(entry) for entry in collection])
     }

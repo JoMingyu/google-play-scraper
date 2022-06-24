@@ -133,18 +133,36 @@ Result of `print(result)`:
         "Overall experience with the game personally has been much better recently compared to a few years ago. Definitely noticing more crashes with this update though. One crash cost me a raid and remote raid pass that I paid for. Obviously it's not the biggest issue, but if I'm willing to put money into a mobile game and I lose what I paid for in-game because of YOUR update, then I feel like the game should be able to replace what's lost during the crash. Just something to consider for your customers.",
         "Why half the interaction distance with health concerns still high? Doubling the distance was a great idea. It helped with several misplaced pokestops in my area that are an accessible due to misplacement or closed access. People do silly things sometimes to get to some of these stops. I did not see that happening in the last year. This decision should be reversed with a rise in the d variant. The interactive distance is too small.",
     ],
-    similarApps': [
-        'jp.pokemon.pokemonquest',
-        'jp.pokemon.poketoru',
-        'com.turborocketgames.wildcraft',
-        'com.lpg.aom',
-        'com.waybefore.fastlikeafox',
-        'jp.pokemon.koiking'
-    ], 
-    'moreByDeveloper': [
-        'com.nianticlabs.pikmin',
-        'com.nianticproject.ingress',
-        'com.nianticlabs.ar.voyage'
+    'otherApps': [
+        {
+            'title': 'Similar games'
+            'app_ids': 
+                [
+                    'jp.pokemon.pokemonquest',
+                    'jp.pokemon.poketoru',
+                    'com.turborocketgames.wildcraft',
+                    'com.lpg.aom',
+                    'com.waybefore.fastlikeafox',
+                    'jp.pokemon.koiking'
+                ],
+        },{
+            'title': 'More by Niantic, Inc.'
+            'app_ids': 
+                [
+                    'com.nianticlabs.pikmin',
+                    'com.nianticproject.ingress',
+                    'com.nianticlabs.ar.voyage'
+                ],
+        }
+    ],
+    'otherAppsPages': [
+        {
+            'type': <PageType.COLLECTION: 2>
+            'token': 'Sj5qGFA5NHlTRjJUTjdxTGpMUVZaSXY0TUE9PcICIQodChljb20ubmlhbnRpY2xhYnMucG9rZW1vbmdvEAcYCA%3D%3D:S:ANO1ljIj4UE',
+        },{
+            'type': <PageType.COLLECTION: 2>
+            'token': 'SjxqGFpudU5PSW53WEord3J0a3BHMVNTbXc9PbICHwodChljb20ubmlhbnRpY2xhYnMucG9rZW1vbmdvEAc%3D:S:ANO1ljIAEeY',
+            }
     ],
     'dataSafety': [
         {
@@ -517,6 +535,140 @@ Result of `print(result)`:
    ],
    'appId':'com.microsoft.launcher.enterprise',
    'url':'https://play.google.com/store/apps/datasafety?id=com.microsoft.launcher.enterprise&hl=en&gl=us'
+}
+```
+
+### Collection
+
+The function `collection` returns all apps of a given collection. The most common collections are collections of 'similar' apps but also sometimes apps from a specific developer. The collection_id needed for the request can be taken from the otherAppsPages field of an `app` result. However, only if the type is specified as `<PageType.COLLECTION: 2>`.
+
+```
+...
+otherAppsPages': [
+        {
+            'type': <PageType.DEVELOPER: 1> # --> use developer()
+            'token': 'developer_id',
+        },{
+            'type': <PageType.COLLECTION: 2> # --> use collection()
+            'token': 'collection_id',
+            }
+]
+...
+```
+
+```python
+from google_play_scraper import app, developer
+from google_play_scraper.constants.google_play import PageType
+
+app_result = app('com.deezer.audiobooks', lang='en', country='us')
+
+for page in app_result['appotherAppsPages']:
+    if page['type'] == PageType.COLLECTION:
+        result = developer(
+            page['token'],
+            lang='en', # defaults to 'en'
+            country='us', # defaults to 'us'
+        )
+```
+
+Result of `print(result)`:
+
+```
+{
+    'apps': [
+        'com.idagio.app',
+        'com.univision.uforia',
+        'com.appgeneration.mytuner_podcasts_android',
+        'com.qobuz.music',
+        'co.audius.app',
+        'com.rhapsody',
+        'com.itunestoppodcastplayer.app',
+        'com.earthflare.android.radioparadisewidget.gpv2',
+        'ua.hitfm.app',
+        'com.roon.mobile',
+        'zaycev.fm',
+        'com.ncaferra.podcast',
+        'com.madebyappolis.spinrilla',
+        'pl.k2.droidoaudioteka',
+        'com.apple.android.music',
+        'mobi.skyrock.SkyrockFM',
+        'com.audioaddict.cr',
+        'com.collectorz.javamobile.android.music',
+        'io.fortunes.fortunes',
+        'com.reallybadapps.podcastguru',
+        'media.luminary.phone.luminary',
+        'traxsource.com.traxsource',
+        'com.podurama.podcast',
+        'net.nugs.multiband',
+        'ru.ideast.nrj',
+        'deezer.android.app',
+        'am.imusic.mobile',
+        'mediau.player',
+        'com.frontier_silicon.fsirc.dok2',
+        'com.clearchannel.iheartradio.tv',
+        'mobi.jukestar.jukestarguest',
+        'com.sprewellpodcast.app',
+        'com.goodsearch.goodpods',
+        'com.dgmltn.radiomg.somafm',
+        'ru.narod.fdik82.clubmusic',
+        'com.wondery',
+        'com.livemixtapes',
+        'com.aydemir.radioapp.classical',
+        'com.MyIndieApp.FreeOldiesRadio',
+        'com.radiofrance.radio.fip.android',
+        'com.MyIndieApp.FreeCountryRadio'
+    ],
+    'url': 'https://play.google.com/store/apps/collection/cluster?gsr=SjpqGGN2a2RBTmlLbDBZT2QyeVFDeEUxcnc9PcICHQoZChVjb20uZGVlemVyLmF1ZGlvYm9va3MQBxgI:S:ANO1ljLWIuw&hl=en&gl=us'
+}
+```
+
+
+### Developer
+
+The function `developer` returns all apps of a given developer. The developer_id required for the query can be taken from the otherAppsPages field of an `app` result. However, only if the type is specified as `<PageType.DEVELOPER: 1>`.
+
+:bulb: This function does not work with all developer_ids! Use the parameters and functions as specified ‘otherAppsPages'!:bulb!
+
+```
+...
+otherAppsPages': [
+        {
+            'type': <PageType.DEVELOPER: 1> # --> use developer()
+            'token': 'developer_id',
+        },{
+            'type': <PageType.COLLECTION: 2> # --> use collection()
+            'token': 'collection_id',
+            }
+]
+...
+```
+
+```python
+from google_play_scraper import app, developer
+from google_play_scraper.constants.google_play import PageType
+
+app_result = app('com.deezer.audiobooks', lang='en', country='us')
+
+for page in app_result['appotherAppsPages']:
+    if page['type'] == PageType.DEVELOPER:
+        result = developer(
+            page['token'],
+            lang='en', # defaults to 'en'
+            country='us', # defaults to 'us'
+        )
+```
+
+Result of `print(result)`:
+
+```
+{
+    'apps': [
+        'deezer.android.app',
+        'com.deezer.deezer360',
+        'deezer.android.tv',
+        'com.deezer.analytics'
+    ],
+    'url': 'https://play.google.com/store/apps/dev?id=8280508308326756579&hl=en&gl=us'
 }
 ```
 
