@@ -9,156 +9,152 @@ class TestDataSafety(TestCase):
 
         self.assertDictEqual(
             {
-                "data_collected":{
-                    "Location":[
+                "dataCollected": {
+                    "Location": [
                         {
-                            "name":"Approximate location",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
+                            "name": "Approximate location",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization",
                         }
                     ],
-                    "Personal info":[
+                    "Personal info": [
                         {
-                            "name":"Email address",
-                            "optional":False,
-                            "usage":"App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management"
+                            "name": "Email address",
+                            "optional": False,
+                            "usage": "App functionality, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Account management",
                         },
                         {
-                            "name":"User IDs",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Developer communications, Fraud prevention, security, and compliance, Account management"
+                            "name": "User IDs",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Developer communications, Fraud prevention, security, and compliance, Account management",
                         },
                         {
-                            "name":"Address",
-                            "optional":True,
-                            "usage":"App functionality, Fraud prevention, security, and compliance, Account management"
+                            "name": "Address",
+                            "optional": True,
+                            "usage": "App functionality, Fraud prevention, security, and compliance, Account management",
                         },
                         {
-                            "name":"Phone number",
-                            "optional":True,
-                            "usage":"App functionality, Developer communications, Fraud prevention, security, and compliance, Account management"
+                            "name": "Phone number",
+                            "optional": True,
+                            "usage": "App functionality, Developer communications, Fraud prevention, security, and compliance, Account management",
                         },
                         {
-                            "name":"Other info",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Advertising or marketing, Personalization, Account management"
+                            "name": "Other info",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Advertising or marketing, Personalization, Account management",
+                        },
+                    ],
+                    "Financial info": [
+                        {
+                            "name": "Purchase history",
+                            "optional": True,
+                            "usage": "App functionality, Analytics, Fraud prevention, security, and compliance",
                         }
                     ],
-                    "Financial info":[
+                    "Photos and videos": [
                         {
-                            "name":"Purchase history",
-                            "optional":True,
-                            "usage":"App functionality, Analytics, Fraud prevention, security, and compliance"
+                            "name": "Photos",
+                            "optional": True,
+                            "usage": "App functionality, Fraud prevention, security, and compliance",
                         }
                     ],
-                    "Photos and videos":[
+                    "Audio": [
                         {
-                            "name":"Photos",
-                            "optional":True,
-                            "usage":"App functionality, Fraud prevention, security, and compliance"
+                            "name": "Voice or sound recordings",
+                            "optional": True,
+                            "usage": "App functionality, Fraud prevention, security, and compliance",
                         }
                     ],
-                    "Audio":[
+                    "Contacts": [
                         {
-                            "name":"Voice or sound recordings",
-                            "optional":True,
-                            "usage":"App functionality, Fraud prevention, security, and compliance"
+                            "name": "Contacts",
+                            "optional": True,
+                            "usage": "App functionality, Fraud prevention, security, and compliance, Personalization",
                         }
                     ],
-                    "Contacts":[
+                    "App activity": [
                         {
-                            "name":"Contacts",
-                            "optional":True,
-                            "usage":"App functionality, Fraud prevention, security, and compliance, Personalization"
+                            "name": "App interactions",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization",
+                        },
+                        {
+                            "name": "In-app search history",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Fraud prevention, security, and compliance, Personalization",
+                        },
+                        {
+                            "name": "Installed apps",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Fraud prevention, security, and compliance, Personalization, Account management",
+                        },
+                        {
+                            "name": "Other user-generated content",
+                            "optional": True,
+                            "usage": "App functionality, Fraud prevention, security, and compliance, Personalization",
+                        },
+                        {
+                            "name": "Other actions",
+                            "optional": True,
+                            "usage": "App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization",
+                        },
+                    ],
+                    "App info and performance": [
+                        {
+                            "name": "Crash logs",
+                            "optional": False,
+                            "usage": "Analytics, Fraud prevention, security, and compliance",
+                        },
+                        {
+                            "name": "Diagnostics",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Fraud prevention, security, and compliance",
+                        },
+                        {
+                            "name": "Other app performance data",
+                            "optional": False,
+                            "usage": "Analytics, Fraud prevention, security, and compliance",
+                        },
+                    ],
+                    "Device or other IDs": [
+                        {
+                            "name": "Device or other IDs",
+                            "optional": False,
+                            "usage": "App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization",
                         }
                     ],
-                    "App activity":[
-                        {
-                            "name":"App interactions",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
-                        },
-                        {
-                            "name":"In-app search history",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Fraud prevention, security, and compliance, Personalization"
-                        },
-                        {
-                            "name":"Installed apps",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Fraud prevention, security, and compliance, Personalization, Account management"
-                        },
-                        {
-                            "name":"Other user-generated content",
-                            "optional":True,
-                            "usage":"App functionality, Fraud prevention, security, and compliance, Personalization"
-                        },
-                        {
-                            "name":"Other actions",
-                            "optional":True,
-                            "usage":"App functionality, Analytics, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
-                        }
-                    ],
-                    "App info and performance":[
-                        {
-                            "name":"Crash logs",
-                            "optional":False,
-                            "usage":"Analytics, Fraud prevention, security, and compliance"
-                        },
-                        {
-                            "name":"Diagnostics",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Fraud prevention, security, and compliance"
-                        },
-                        {
-                            "name":"Other app performance data",
-                            "optional":False,
-                            "usage":"Analytics, Fraud prevention, security, and compliance"
-                        }
-                    ],
-                    "Device or other IDs":[
-                        {
-                            "name":"Device or other IDs",
-                            "optional":False,
-                            "usage":"App functionality, Analytics, Developer communications, Advertising or marketing, Fraud prevention, security, and compliance, Personalization"
-                        }
-                    ]
                 },
-                "data_shared":{
-                    "Location":[
+                "dataShared": {
+                    "Location": [
                         {
-                            "name":"Approximate location",
-                            "optional":False,
-                            "usage":"Analytics, Advertising or marketing"
+                            "name": "Approximate location",
+                            "optional": False,
+                            "usage": "Analytics, Advertising or marketing",
                         }
                     ],
-                    "Personal info":[
+                    "Personal info": [
+                        {"name": "Other info", "optional": False, "usage": "Analytics"}
+                    ],
+                    "Device or other IDs": [
                         {
-                            "name":"Other info",
-                            "optional":False,
-                            "usage":"Analytics"
+                            "name": "Device or other IDs",
+                            "optional": False,
+                            "usage": "Advertising or marketing",
                         }
                     ],
-                    "Device or other IDs":[
-                        {
-                            "name":"Device or other IDs",
-                            "optional":False,
-                            "usage":"Advertising or marketing"
-                        }
-                    ]
                 },
-                "security_practices":[
+                "securityPractices": [
                     {
-                        "name":"Data is encrypted in transit",
-                        "description":"Your data is transferred over a secure connection"
+                        "name": "Data is encrypted in transit",
+                        "description": "Your data is transferred over a secure connection",
                     },
                     {
-                        "name":"You can request that data be deleted",
-                        "description":"The developer provides a way for you to request that your data be deleted"
-                    }
+                        "name": "You can request that data be deleted",
+                        "description": "The developer provides a way for you to request that your data be deleted",
+                    },
                 ],
-                "appId":"com.spotify.music",
-                "url":"https://play.google.com/store/apps/datasafety?id=com.spotify.music&hl=en&gl=us"
+                "appId": "com.spotify.music",
+                "url": "https://play.google.com/store/apps/datasafety?id=com.spotify.music&hl=en&gl=us",
             },
             result,
         )
@@ -168,25 +164,24 @@ class TestDataSafety(TestCase):
 
         self.assertDictEqual(
             {
-                'data_collected': {
-                    'Personal info':
-                        [{
-                            'name': 'User IDs', 
-                            'optional': True, 
-                            'usage': 'Analytics'
-                        }]
-                    },
-                'data_shared': {},
-                'security_practices': [
+                "dataCollected": {
+                    "Personal info": [
+                        {"name": "User IDs", "optional": True, "usage": "Analytics"}
+                    ]
+                },
+                "dataShared": {},
+                "securityPractices": [
                     {
-                        'name': 'Data is encrypted in transit',
-                        'description': 'Your data is transferred over a secure connection'
-                    },{
-                        'name': 'Data can’t be deleted',
-                        'description': 'The developer doesn’t provide a way for you to request that your data be deleted'
-                    }],
-                'appId': 'com.mattermost.rn',
-                'url': 'https://play.google.com/store/apps/datasafety?id=com.mattermost.rn&hl=en&gl=us'
+                        "name": "Data is encrypted in transit",
+                        "description": "Your data is transferred over a secure connection",
+                    },
+                    {
+                        "name": "Data can’t be deleted",
+                        "description": "The developer doesn’t provide a way for you to request that your data be deleted",
+                    },
+                ],
+                "appId": "com.mattermost.rn",
+                "url": "https://play.google.com/store/apps/datasafety?id=com.mattermost.rn&hl=en&gl=us",
             },
             result,
         )
@@ -196,13 +191,11 @@ class TestDataSafety(TestCase):
 
         self.assertDictEqual(
             {
-                'data_collected': None,
-                'data_shared': None,
-                'security_practices': None, 
-                'appId': 'com.disney.disneyplus',
-                'url': 'https://play.google.com/store/apps/datasafety?id=com.disney.disneyplus&hl=en&gl=us'
+                "dataCollected": None,
+                "dataShared": None,
+                "securityPractices": None,
+                "appId": "com.disney.disneyplus",
+                "url": "https://play.google.com/store/apps/datasafety?id=com.disney.disneyplus&hl=en&gl=us",
             },
             result,
         )
-
-

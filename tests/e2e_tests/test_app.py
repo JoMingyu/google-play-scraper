@@ -1,4 +1,5 @@
 from unittest import TestCase
+from google_play_scraper.constants.google_play import PageType
 
 from google_play_scraper.features.app import app
 
@@ -81,16 +82,21 @@ class TestApp(TestCase):
         self.assertEqual(1636693903, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
-            ("- Supports the newest devices."), result["recentChanges"],
+            ("- Supports the newest devices."),
+            result["recentChanges"],
         )
         self.assertEqual(
-            "- Supports the newest devices.", result["recentChangesHTML"],
+            "- Supports the newest devices.",
+            result["recentChangesHTML"],
         )
         self.assertTrue(result["comments"])
-        self.assertEqual(len(result["otherApps"]), 2)
-        self.assertEqual(len(result["otherApps"][0]["app_ids"]), 6)
-        self.assertEqual(len(result["otherApps"][1]["app_ids"]), 4)
+        self.assertEqual(len(result["similarApps"]), 6)
+        self.assertEqual(len(result["moreByDeveloper"]), 4)
         self.assertTrue(result["dataSafety"])
+        self.assertEqual(len(result["similarAppsPage"]["token"]), 108)
+        self.assertEqual(result["similarAppsPage"]["type"], PageType.COLLECTION)
+        self.assertEqual(len(result["similarAppsPage"]["token"]), 108)
+        self.assertEqual(result["similarAppsPage"]["type"], PageType.COLLECTION)
 
     def test_e2e_scenario_2(self):
         """

@@ -8,7 +8,9 @@ from google_play_scraper.utils.request import get
 from google_play_scraper.exceptions import NotFoundError
 
 
-def collection(collection_token: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
+def collection(
+    collection_token: str, lang: str = "en", country: str = "us"
+) -> Dict[str, Any]:
     url = Formats.Collection.build(collection_token, lang=lang, country=country)
 
     try:
