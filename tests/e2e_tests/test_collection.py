@@ -4,18 +4,18 @@ from google_play_scraper import collection
 from google_play_scraper.exceptions import NotFoundError
 
 
-class TestDeveloper(TestCase):
-    def test_Developer(self):
+class TestCollection(TestCase):
+    def test_collection(self):
         result = collection(
-            "SjpqGFhBMmIrNHYwRm90S1pKTFpXTzRINkE9PcICHQoZChVjb20uZGVlemVyLmF1ZGlvYm9va3MQBxgI:S:ANO1ljKeuFQ",
+            "SkRqGGlQZGZtdlRLclM2Qkh0NEFDcDFyZ0E9PbICJwolCiFjb20uTXlJbmRpZUFwcC5GcmVlQ2xhc3NpY2FsUmFkaW8QBw%3D%3D:S:ANO1ljKtgcA",
             lang="en",
             country="us",
         )
 
-        self.assertGreaterEqual(len(result["apps"]), 44)
+        self.assertGreaterEqual(len(result["apps"]), 27)
         self.assertIn(
             result["url"],
-            "https://play.google.com/store/apps/collection/cluster?gsr=SjpqGFhBMmIrNHYwRm90S1pKTFpXTzRINkE9PcICHQoZChVjb20uZGVlemVyLmF1ZGlvYm9va3MQBxgI:S:ANO1ljKeuFQ&hl=en&gl=us",
+            "https://play.google.com/store/apps/collection/cluster?gsr=SkRqGGlQZGZtdlRLclM2Qkh0NEFDcDFyZ0E9PbICJwolCiFjb20uTXlJbmRpZUFwcC5GcmVlQ2xhc3NpY2FsUmFkaW8QBw%3D%3D:S:ANO1ljKtgcA&hl=en&gl=us",
         )
 
     def test_DeveloperNotFound(self):

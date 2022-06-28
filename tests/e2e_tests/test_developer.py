@@ -5,18 +5,18 @@ from google_play_scraper.exceptions import NotFoundError
 
 
 class TestDeveloper(TestCase):
-    def test_Developer(self):
+    def test_developer(self):
         result = developer("8280508308326756579", lang="en", country="us")
 
         self.assertDictEqual(
             {
-                'apps': [
-                    'deezer.android.app',
-                    'com.deezer.deezer360',
-                    'deezer.android.tv',
-                    'com.deezer.analytics'
+                "apps": [
+                    "deezer.android.app",
+                    "com.deezer.deezer360",
+                    "deezer.android.tv",
+                    "com.deezer.analytics",
                 ],
-                'url': 'https://play.google.com/store/apps/dev?id=8280508308326756579&hl=en&gl=us'
+                "url": "https://play.google.com/store/apps/dev?id=8280508308326756579&hl=en&gl=us",
             },
             result,
         )
