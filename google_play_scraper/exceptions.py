@@ -6,5 +6,9 @@ class NotFoundError(GooglePlayScraperException):
     pass
 
 
+class TooManyRequestsError(GooglePlayScraperException):
+    pass
+
+
 class ExtraHTTPError(GooglePlayScraperException):
     pass
