@@ -80,6 +80,25 @@ class Formats:
 
             return result.encode()
 
+    class _Searchresults(Format):
+        URL_FORMAT = "{}/store/search?q={{query}}&c=apps&hl={{lang}}&gl={{country}}".format(
+            PLAY_STORE_BASE_URL
+        )
+        FALLBACK_URL_FORMAT = "{}/store/search?q={{query}}&c=apps&hl={{lang}}".format(
+            PLAY_STORE_BASE_URL
+        )
+
+        def build(self, query: str, lang: str, country: str) -> str:
+            return self.URL_FORMAT.format(query=query, lang=lang, country=country)
+
+        def fallback_build(self, query: str, lang: str) -> str:
+            return self.FALLBACK_URL_FORMAT.format(query=query, lang=lang)
+
+        def build_body(self, *args):
+            return None
+
+
     Detail = _Detail()
     Reviews = _Reviews()
     Permissions = _Permissions()
+    Searchresults = _Searchresults()
