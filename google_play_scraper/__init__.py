@@ -1,7 +1,5 @@
-from .constants.google_play import Sort
-from .features.app import app
-from .features.reviews import reviews, reviews_all
-from .features.permissions import permissions
-from .features.search import search
-
-VERSION = __version__ = "1.1.0"
+from .constants.google_play import Sort  # noqa: F401
+from .features.app import app  # noqa: F401
+from .features.permissions import permissions  # noqa: F401
+from .features.reviews import reviews, reviews_all  # noqa: F401
+from .features.search import search  # noqa: F401
