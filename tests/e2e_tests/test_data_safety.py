@@ -185,17 +185,3 @@ class TestDataSafety(TestCase):
             },
             result,
         )
-
-    def test_data_safety_not_avalible(self):
-        result = data_safety("com.disney.disneyplus", lang="en", country="us")
-
-        self.assertDictEqual(
-            {
-                "dataCollected": None,
-                "dataShared": None,
-                "securityPractices": None,
-                "appId": "com.disney.disneyplus",
-                "url": "https://play.google.com/store/apps/datasafety?id=com.disney.disneyplus&hl=en&gl=us",
-            },
-            result,
-        )

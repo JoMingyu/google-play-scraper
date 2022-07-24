@@ -36,7 +36,7 @@ def parse_dom(dom: str, app_id: str, url: str) -> Dict[str, Any]:
             dataset[key] = value
 
     result = {}
-
+    
     for k, spec in ElementSpecs.Detail.items():
         if isinstance(spec, list):
             for sub_spec in spec:

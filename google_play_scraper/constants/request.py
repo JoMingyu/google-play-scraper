@@ -124,7 +124,28 @@ class Formats:
             return self.URL_FORMAT.format(collection_token=collection_token, lang=lang, country=country)
 
         def fallback_build(self, collection_token: str, lang: str) -> str:
-            return self.FALLBACK_URL_FORMAT.format(collection_token=collection_token, lang=lang)
+            return self.FALLBACK_URL_FORMAT.format(
+                collection_token=collection_token, lang=lang
+            )
+
+        def build_body(self, *args):
+            return None
+
+    class _Searchresults(Format):
+        URL_FORMAT = (
+            "{}/store/search?q={{query}}&c=apps&hl={{lang}}&gl={{country}}".format(
+                PLAY_STORE_BASE_URL
+            )
+        )
+        FALLBACK_URL_FORMAT = "{}/store/search?q={{query}}&c=apps&hl={{lang}}".format(
+            PLAY_STORE_BASE_URL
+        )
+
+        def build(self, query: str, lang: str, country: str) -> str:
+            return self.URL_FORMAT.format(query=query, lang=lang, country=country)
+
+        def fallback_build(self, query: str, lang: str) -> str:
+            return self.FALLBACK_URL_FORMAT.format(query=query, lang=lang)
 
         def build_body(self, *args):
             return None
