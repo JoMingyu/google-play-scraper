@@ -131,11 +131,7 @@ class ElementSpecs:
             3,
             [0, 3],
             lambda container: [
-                {
-                    "hreflang": container[i][0],
-                    "href": container[i][1]
-                }
-                for i in range(0, len(container))
+                container[i][0] for i in range(0, len(container))
             ],
         ),
     }
