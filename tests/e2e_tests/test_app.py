@@ -113,7 +113,7 @@ class TestApp(TestCase):
             res["video"],
         )
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/WtRP_tfCVpA8zA4tZCICmWo_AjX59VL67JdACwlXa_f_6YAw8gwafjLmgDhCZ95gtqXa",
+            "https://play-lh.googleusercontent.com/spi_c6YT_E2yC4QwPC8oQpBGLyu2gTGj1BAvVhLDQJtRzGkR30kzmdKkajcCDDXrXsvS",
             res["videoImage"],
         )
 
