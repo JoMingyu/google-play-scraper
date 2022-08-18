@@ -16,7 +16,10 @@ def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
     except NotFoundError:
         url = Formats.Detail.fallback_build(app_id=app_id, lang=lang)
         dom = get(url)
+    return parse_dom(dom=dom, app_id=app_id, url=url)
 
+
+def parse_dom(dom: str, app_id: str, url: str) -> Dict[str, Any]:
     matches = Regex.SCRIPT.findall(dom)
 
     dataset = {}

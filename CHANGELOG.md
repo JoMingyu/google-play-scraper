@@ -134,3 +134,6 @@
 > Fixes data map from `app` feature
 - Fix data map caused by data structure change of Google Play.
   - removed `summaryHTML`, `size`, `androidVersion`, `androidVersionText`, `developerInternalID`, `editorsChoice`, `similarApps`, `moreByDeveloper` field.
+
+## v.1.2.0
+> Added `search` feature
