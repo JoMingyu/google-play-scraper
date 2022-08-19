@@ -107,7 +107,7 @@ class ElementSpecs:
         "released": ElementSpec(5, [1, 2, 10, 0]),
         "updated": ElementSpec(5, [1, 2, 145, 0, 1, 0]),
         "version": ElementSpec(
-            4, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"
+            5, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"
         ),
         "recentChanges": ElementSpec(5, [1, 2, 144, 1, 1], unescape_text),
         "recentChangesHTML": ElementSpec(5, [1, 2, 144, 1, 1]),
