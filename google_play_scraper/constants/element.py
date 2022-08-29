@@ -138,7 +138,7 @@ class ElementSpecs:
 
     DetailHelper = {
         "appCollections": ElementSpec(
-            5,
+            7,
             [1, 1],
             lambda collections: [
                 {
@@ -152,7 +152,7 @@ class ElementSpecs:
             ],
         ),
         "appCollectionPages": ElementSpec(
-            5,
+            7,
             [1, 1],
             lambda collections: [
                 {
