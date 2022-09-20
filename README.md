@@ -43,6 +43,7 @@ Result of `print(result)`:
     "summary": "Discover Pokémon worldwide",
     "installs": "100,000,000+",
     "minInstalls": 100000000,
+    "realInstalls": 449897250,
     "score": 4.28594,
     "ratings": 15214804,
     "reviews": 970851,
