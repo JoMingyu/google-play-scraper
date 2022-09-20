@@ -296,12 +296,12 @@ Result of `print(result)`:
 ```python
 from google_play_scraper import search
 
-result = search("best Pikachu game",
-                lang="en",  # defaults to 'en'
-                country="us",  # defaults to 'us'
-                n_hits=3  # defaults to 30 (= Google's maximum)
+result = search(
+    "best Pikachu game",
+    lang="en",  # defaults to 'en'
+    country="us",  # defaults to 'us'
+    n_hits=3  # defaults to 30 (= Google's maximum)
 )
-result
 ```
 
 Result of `print(result)`:
