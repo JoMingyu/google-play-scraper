@@ -14,21 +14,18 @@ classifiers = [
     "Operating System :: MacOS",
     "Operating System :: Microsoft",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Typing :: Typed",
 ]
 readme = "README.md"
 repository = "https://github.com/JoMingyu/google-play-scraper"
 
 [tool.poetry.dependencies]
-python = ">= 3.7,< 4.0"
+python = ">= 2.7,<3.0"
+aenum = "^3.1.11"
 
 [tool.poetry.dev-dependencies]
-black = "^22.6.0"
-isort = "^5.10.1"
+#black = "^22.6.0"
+isort = "4.3.21"
 autoflake = "^1.4"
 
 [build-system]
