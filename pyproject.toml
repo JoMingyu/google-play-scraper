@@ -21,7 +21,7 @@ repository = "https://github.com/JoMingyu/google-play-scraper"
 
 [tool.poetry.dependencies]
 python = ">= 2.7,<3.0"
-aenum = "^3.1.11"
+aenum = "3.1.11"
 
 [tool.poetry.dev-dependencies]
 #black = "^22.6.0"
