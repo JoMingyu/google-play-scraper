@@ -1,9 +1,8 @@
-from typing import Union
 
 from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
 
-from urllib.error import HTTPError
-from urllib.request import urlopen, Request
+from urllib2 import HTTPError
+from urllib2 import urlopen, Request
 
 
 def _urlopen(obj):
@@ -20,9 +19,9 @@ def _urlopen(obj):
     return resp.read().decode("UTF-8")
 
 
-def post(url: str, data: Union[str, bytes], headers: dict) -> str:
+def post(url, data, headers):
     return _urlopen(Request(url, data=data, headers=headers))
 
 
-def get(url: str) -> str:
+def get(url):
     return _urlopen(url)

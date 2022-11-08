@@ -1,4 +1,4 @@
-from enum import Enum
+from aenum import Enum
 
 
 class Sort(int, Enum):
