@@ -1,4 +1,5 @@
 from unittest import TestCase
+from google_play_scraper.constants.google_play import PageType
 
 from google_play_scraper.features.app import app
 
@@ -81,14 +82,20 @@ class TestApp(TestCase):
         self.assertEqual(1636693903, result["updated"])
         self.assertEqual("Varies with device", result["version"])
         self.assertEqual(
-            ("- Supports the newest devices."), result["recentChanges"],
+            ("- Supports the newest devices."),
+            result["recentChanges"],
         )
         self.assertEqual(
-            "- Supports the newest devices.", result["recentChangesHTML"],
+            "- Supports the newest devices.",
+            result["recentChangesHTML"],
         )
-        self.assertTrue(result["comments"])
-        # self.assertTrue(result["similarApps"])
-        # self.assertTrue(result["moreByDeveloper"])
+        self.assertEqual(len(result["similarApps"]), 6)
+        self.assertEqual(len(result["moreByDeveloper"]), 4)
+        self.assertTrue(result["dataSafety"])
+        self.assertEqual(len(result["similarAppsPage"]["token"]), 108)
+        self.assertEqual(result["similarAppsPage"]["type"], PageType.COLLECTION)
+        self.assertEqual(len(result["similarAppsPage"]["token"]), 108)
+        self.assertEqual(result["similarAppsPage"]["type"], PageType.COLLECTION)
 
     def test_e2e_scenario_2(self):
         """
@@ -124,7 +131,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(0.99, res["price"])
+        self.assertEqual(1.39, res["price"])
 
         # TODO free app / non free app 구분
 

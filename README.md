@@ -9,20 +9,25 @@
 Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python *without any external dependencies!*
 
 ## Related Projects
+
 ### [google-play-scraper](https://github.com/facundoolano/google-play-scraper)
+
 > Node.js scraper to get data from Google Play
 
 I have referred a lot to the API design of this library.
 
 ## Installation
-```
+
+```console
 pip install google-play-scraper
 ```
 
 ## Usage
+
 The country and language codes that can be included in the `lang` and `country` parameters described below depend on the [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) and [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) standards, respectively. Therefore, we recommend using an ISO database library such as [pycountry](https://github.com/flyingcircusio/pycountry).
 
 ### App Detail
+
 ```python
 from google_play_scraper import app
 
@@ -129,12 +134,40 @@ Result of `print(result)`:
         "Overall experience with the game personally has been much better recently compared to a few years ago. Definitely noticing more crashes with this update though. One crash cost me a raid and remote raid pass that I paid for. Obviously it's not the biggest issue, but if I'm willing to put money into a mobile game and I lose what I paid for in-game because of YOUR update, then I feel like the game should be able to replace what's lost during the crash. Just something to consider for your customers.",
         "Why half the interaction distance with health concerns still high? Doubling the distance was a great idea. It helped with several misplaced pokestops in my area that are an accessible due to misplacement or closed access. People do silly things sometimes to get to some of these stops. I did not see that happening in the last year. This decision should be reversed with a rise in the d variant. The interactive distance is too small.",
     ],
+    'moreByDeveloper': [
+        'com.nianticlabs.pikmin',
+        'com.nianticproject.ingress',
+        'com.nianticlabs.ar.voyage'
+    ],
+    'moreByDeveloperPage': {
+        'token': 'SjxqGEs5eS9JNTVyaWp4VTN6M0tmWFBkTHc9PbICHwodChljb20ubmlhbnRpY2xhYnMucG9rZW1vbmdvEAc%3D:S:ANO1ljKIWv8',
+        'type': <PageType.COLLECTION: 2>
+    },
+    'similarApps': [
+        'jp.pokemon.pokemonquest',
+        'jp.pokemon.poketoru',
+        'com.turborocketgames.wildcraft',
+        'com.lpg.aom',
+        'com.waybefore.fastlikeafox',
+        'jp.pokemon.koiking'
+    ],
+    'similarAppsPage': {
+        'type': <PageType.COLLECTION: 2>
+        'token': 'Sj5qGFA5NHlTRjJUTjdxTGpMUVZaSXY0TUE9PcICIQodChljb20ubmlhbnRpY2xhYnMucG9rZW1vbmdvEAcYCA%3D%3D:S:ANO1ljIj4UE'
+    },
+    'dataSafety': [
+        {
+            'section': 'No information available', 
+            'summary': None
+        }
+    ],
     "appId": "com.nianticlabs.pokemongo",
     "url": "https://play.google.com/store/apps/details?id=com.nianticlabs.pokemongo&hl=en&gl=us",
 }
 ```
 
 ### App Reviews
+
 `reviews` function returns `result` with `continuation token`.
 
 - `result` : Crawling result of reviews. (list)
@@ -207,6 +240,7 @@ Result of `print(result)`:
 ```
 
 ### App All Reviews
+
 `reviews_all` function returns all of reviews from app. If you want to set the count to infinity while using the `reviews` function, you can use the `reviews_all` function.
 
 > :bulb: Because of the Google Play Store limit (up to 200 reviews can be fetched at a time), http requests are generated as long as the number of app reviews is divided by 200. For example, targeting an app like Pokémon GO makes tens of thousands of http requests.
@@ -224,8 +258,8 @@ result = reviews_all(
 )
 ```
 
-
 ### App Permissions
+
 `permissions` function returns permissions of app.
 
 ```python
@@ -392,5 +426,241 @@ Result of `print(result)`:
   'installs': '10,000,000+'}]
 ```
 
+### App Data Safety
+
+`data_safety` function returns all data safety options for an app.
+
+```python
+from google_play_scraper import data_safety
+
+result = data_safety(
+    'com.microsoft.launcher.enterprise',
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+)
+```
+
+Result of `print(result)`:
+
+```
+{
+   'data_collected':{
+      'Location':[
+         {
+            'name':'Approximate location',
+            'optional':false,
+            'usage':'App functionality'
+         },
+         {
+            'name':'Precise location',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'Personal info':[
+         {
+            'name':'Email address',
+            'optional':false,
+            'usage':'App functionality'
+         },
+         {
+            'name':'User IDs',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App activity':[
+         {
+            'name':'Installed apps',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App info and performance':[
+         {
+            'name':'Diagnostics',
+            'optional':true,
+            'usage':'Analytics'
+         }
+      ],
+      'Device or other IDs':[
+         {
+            'name':'Device or other IDs',
+            'optional':false,
+            'usage':'App functionality, Analytics'
+         }
+      ]
+   },
+   'data_shared':{
+      'Personal info':[
+         {
+            'name':'Email address',
+            'optional':false,
+            'usage':'App functionality'
+         }
+      ],
+      'App info and performance':[
+         {
+            'name':'Diagnostics',
+            'optional':false,
+            'usage':'Analytics'
+         }
+      ],
+      'Device or other IDs':[
+         {
+            'name':'Device or other IDs',
+            'optional':false,
+            'usage':'App functionality, Analytics'
+         }
+      ]
+   },
+   'security_practices':[
+      {
+         'name':'Data is encrypted in transit',
+         'description':'Your data is transferred over a secure connection'
+      },
+      {
+         'name':'Data can’t be deleted',
+         'description':'The developer doesn’t provide a way for you to request that your data be deleted'
+      }
+   ],
+   'appId':'com.microsoft.launcher.enterprise',
+   'url':'https://play.google.com/store/apps/datasafety?id=com.microsoft.launcher.enterprise&hl=en&gl=us'
+}
+```
+
+### Collection
+
+The function `collection` returns all apps of a given collection. The most common collections are collections of 'similar' apps but also sometimes apps from a specific developer. The collection_id needed for the request can be taken from the moreByDeveloperPage or similarAppsPage field of an `app` result. However, only if the type is specified as `<PageType.COLLECTION: 2>`.
+
+```
+...
+'moreByDeveloperPage':{
+    'type': <PageType.DEVELOPER: 1> # --> use developer()
+    'token': 'developer_id',
+}
+...
+'moreByDeveloperPage':{
+    'type': <PageType.COLLECTION: 2> # --> use collection()
+    'token': 'collection_id',
+}
+...
+```
+
+```python
+from google_play_scraper import app, developer
+from google_play_scraper.constants.google_play import PageType
+
+app_result = app('com.deezer.audiobooks', lang='en', country='us')
+
+    if app_result['moreByDeveloperPage']['type'] == PageType.COLLECTION:
+        result = collection(
+            app_result['moreByDeveloperPage']['token'],
+            lang='en', # defaults to 'en'
+            country='us', # defaults to 'us'
+        )
+```
+
+Result of `print(result)`:
+
+```
+{
+    'apps': [
+        'com.idagio.app',
+        'com.univision.uforia',
+        'com.appgeneration.mytuner_podcasts_android',
+        'com.qobuz.music',
+        'co.audius.app',
+        'com.rhapsody',
+        'com.itunestoppodcastplayer.app',
+        'com.earthflare.android.radioparadisewidget.gpv2',
+        'ua.hitfm.app',
+        'com.roon.mobile',
+        'zaycev.fm',
+        'com.ncaferra.podcast',
+        'com.madebyappolis.spinrilla',
+        'pl.k2.droidoaudioteka',
+        'com.apple.android.music',
+        'mobi.skyrock.SkyrockFM',
+        'com.audioaddict.cr',
+        'com.collectorz.javamobile.android.music',
+        'io.fortunes.fortunes',
+        'com.reallybadapps.podcastguru',
+        'media.luminary.phone.luminary',
+        'traxsource.com.traxsource',
+        'com.podurama.podcast',
+        'net.nugs.multiband',
+        'ru.ideast.nrj',
+        'deezer.android.app',
+        'am.imusic.mobile',
+        'mediau.player',
+        'com.frontier_silicon.fsirc.dok2',
+        'com.clearchannel.iheartradio.tv',
+        'mobi.jukestar.jukestarguest',
+        'com.sprewellpodcast.app',
+        'com.goodsearch.goodpods',
+        'com.dgmltn.radiomg.somafm',
+        'ru.narod.fdik82.clubmusic',
+        'com.wondery',
+        'com.livemixtapes',
+        'com.aydemir.radioapp.classical',
+        'com.MyIndieApp.FreeOldiesRadio',
+        'com.radiofrance.radio.fip.android',
+        'com.MyIndieApp.FreeCountryRadio'
+    ],
+    'url': 'https://play.google.com/store/apps/collection/cluster?gsr=SjpqGGN2a2RBTmlLbDBZT2QyeVFDeEUxcnc9PcICHQoZChVjb20uZGVlemVyLmF1ZGlvYm9va3MQBxgI:S:ANO1ljLWIuw&hl=en&gl=us'
+}
+```
+
+
+### Developer
+
+The function `developer` returns all apps of a given developer. The developer_id required for the query can be taken from the moreByDeveloperPage field of an `app` result. However, only if the type is specified as `<PageType.DEVELOPER: 1>`.
+
+:bulb: This function does not work with all developer_ids! Use the parameters and functions as specified ‘otherAppsPages'!:bulb!
+
+```
+...
+'moreByDeveloperPage':{
+    'type': <PageType.DEVELOPER: 1> # --> use developer()
+    'token': 'developer_id',
+}
+...
+'moreByDeveloperPage':{
+    'type': <PageType.COLLECTION: 2> # --> use collection()
+    'token': 'collection_id',
+}
+...
+```
+
+```python
+from google_play_scraper import app, developer
+from google_play_scraper.constants.google_play import PageType
+
+app_result = app('com.deezer.audiobooks', lang='en', country='us')
+
+if app_result['moreByDeveloperPage']['type'] == PageType.DEVELOPER:
+    result = developer(
+        app_result['moreByDeveloperPage']['token'],
+        lang='en', # defaults to 'en'
+        country='us', # defaults to 'us'
+    )
+```
+
+Result of `print(result)`:
+
+```
+{
+    'apps': [
+        'deezer.android.app',
+        'com.deezer.deezer360',
+        'deezer.android.tv',
+        'com.deezer.analytics'
+    ],
+    'url': 'https://play.google.com/store/apps/dev?id=8280508308326756579&hl=en&gl=us'
+}
+```
+
 ## Changes
+
 Change logs are here : [CHANGELOG.md](CHANGELOG.md)

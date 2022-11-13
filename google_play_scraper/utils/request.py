@@ -1,6 +1,10 @@
 from typing import Union
 
-from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
+from google_play_scraper.exceptions import (
+    NotFoundError,
+    ExtraHTTPError,
+    TooManyRequestsError,
+)
 
 from urllib.error import HTTPError
 from urllib.request import urlopen, Request
@@ -11,10 +15,12 @@ def _urlopen(obj):
         resp = urlopen(obj)
     except HTTPError as e:
         if e.code == 404:
-            raise NotFoundError("App not found(404).")
+            raise NotFoundError("Page not found(404).")
+        elif e.code == 429:
+            raise TooManyRequestsError("Too many requests(429).")
         else:
             raise ExtraHTTPError(
-                "App not found. Status code {} returned.".format(e.code)
+                "Page not found. Status code {} returned.".format(e.code)
             )
 
     return resp.read().decode("UTF-8")

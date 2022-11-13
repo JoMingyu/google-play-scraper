@@ -10,7 +10,7 @@ class TestPermission(TestCase):
         self.assertDictEqual(
             {
                 "Device ID & call information": ["read phone status and identity"],
-                "Identity": ["add or remove accounts", "find accounts on the device"],
+                "Identity": ["find accounts on the device"],
                 "Storage": [
                     "modify or delete the contents of your USB storage",
                     "read the contents of your USB storage",
