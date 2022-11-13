@@ -28,7 +28,7 @@ class TestSearch(TestCase):
         self.assertEqual("Niantic, Inc.", result["developer"])
         self.assertEqual("Adventure", result["genre"])
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/SVQIX_fYcu5mc4Pq-D7dgxXZdRMpNTAbRKeBJygAsIXKITHEcKckyhzLsIXMQLSRZw",
+            "https://play-lh.googleusercontent.com/Y_TFr8xFCc_529AJMdpHuxD8zYMzQwXValEXeESS2pmlCNBaMsh1HPU3ZIATD5ljG2w",
             result["icon"],
         )
         self.assertTrue(result["screenshots"])
@@ -44,7 +44,7 @@ class TestSearch(TestCase):
         Test for different language and country.
         """
         results = search("Bestes Pikachu Spiel", lang="de", country="de")
-        
+
         self.assertGreater(len(results), 0)
 
     def test_e2e_scenario_3(self):

@@ -89,7 +89,6 @@ class TestApp(TestCase):
             "- Supports the newest devices.",
             result["recentChangesHTML"],
         )
-        self.assertTrue(result["comments"])
         self.assertEqual(len(result["similarApps"]), 6)
         self.assertEqual(len(result["moreByDeveloper"]), 4)
         self.assertTrue(result["dataSafety"])
@@ -132,7 +131,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(0.99, res["price"])
+        self.assertEqual(1.39, res["price"])
 
         # TODO free app / non free app 구분
 

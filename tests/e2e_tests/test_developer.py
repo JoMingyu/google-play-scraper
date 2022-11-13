@@ -12,7 +12,6 @@ class TestDeveloper(TestCase):
             {
                 "apps": [
                     "deezer.android.app",
-                    "com.deezer.deezer360",
                     "deezer.android.tv",
                     "com.deezer.analytics",
                 ],
