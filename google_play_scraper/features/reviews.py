@@ -1,6 +1,7 @@
 import json
 from time import sleep
 
+from typing import Optional, Tuple, List
 
 from google_play_scraper import Sort
 from google_play_scraper.constants.element import ElementSpecs
@@ -25,12 +26,12 @@ class _ContinuationToken:
 
 
 def _fetch_review_items(
-    url,
-    app_id,
-    sort,
-    count,
-    filter_score_with,
-    pagination_token,
+    url: str,
+    app_id: str,
+    sort: int,
+    count: int,
+    filter_score_with: Optional[int],
+    pagination_token: Optional[str],
 ):
     dom = post(
         url,
@@ -50,14 +51,14 @@ def _fetch_review_items(
 
 
 def reviews(
-    app_id,
-    lang="en",
-    country = "us",
-    sort= Sort.NEWEST,
-    count = 100,
-    filter_score_with= None,
-    continuation_token = None,
-):
+    app_id: str,
+    lang: str = "en",
+    country: str = "us",
+    sort: Sort = Sort.NEWEST,
+    count: int = 100,
+    filter_score_with: int = None,
+    continuation_token: _ContinuationToken = None,
+) -> Tuple[List[dict], _ContinuationToken]:
     if continuation_token is not None:
         token = continuation_token.token
 
@@ -116,7 +117,7 @@ def reviews(
     )
 
 
-def reviews_all(app_id, sleep_milliseconds = 0, **kwargs):
+def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
     kwargs.pop("count", None)
     kwargs.pop("continuation_token", None)
 
