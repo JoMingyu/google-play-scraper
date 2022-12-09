@@ -1,6 +1,8 @@
 from datetime import datetime
 
-from google_play_scraper.utils.data_processors import unescape_text, prepend_playstore_base_url
+from google_play_scraper.utils.data_processors import unescape_text
+
+from typing import Callable, List, Any, Optional
 
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.utils import nested_lookup
@@ -9,17 +11,17 @@ from google_play_scraper.utils import nested_lookup
 class ElementSpec:
     def __init__(
         self,
-        ds_num,
-        data_map,
-        post_processor = None,
-        fallback_value = None,
+        ds_num: Optional[int],
+        data_map: List[int],
+        post_processor: Callable = None,
+        fallback_value: Any = None,
     ):
         self.ds_num = ds_num
         self.data_map = data_map
         self.post_processor = post_processor
         self.fallback_value = fallback_value
 
-    def extract_content(self, source):
+    def extract_content(self, source: dict) -> Any:
         try:
             if self.ds_num is None:
                 result = nested_lookup(source, self.data_map)
@@ -86,7 +88,6 @@ class ElementSpecs:
         "developerEmail": ElementSpec(5, [1, 2, 69, 1, 0]),
         "developerWebsite": ElementSpec(5, [1, 2, 69, 0, 5, 2]),
         "developerAddress": ElementSpec(5, [1, 2, 69, 2, 0]),
-        "developerLink": ElementSpec(5, [1, 2, 68, 1, 4, 2], prepend_playstore_base_url),
         "privacyPolicy": ElementSpec(5, [1, 2, 99, 0, 5, 2]),
         # "developerInternalID": ElementSpec(5, [0, 12, 5, 0, 0]),
         "genre": ElementSpec(5, [1, 2, 79, 0, 0, 0]),
