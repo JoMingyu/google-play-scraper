@@ -85,8 +85,6 @@ Result of `print(result)`:
     "released": "Jul 6, 2016",
     "updated": 1654116395,
     "version": "0.239.1",
-    "recentChanges": "Trainers, here’s what’s new in Pokémon GO!\r\n\r\n- Kick off the new Season with Pokémon GO Fest on June 4, 2022, and June 5, 2022. Tickets are available now!\r\n- You can also share the fun of Pokémon GO Fest by gifting tickets to your friends!",
-    "recentChangesHTML": "Trainers, here’s what’s new in Pokémon GO!<br><br>- Kick off the new Season with Pokémon GO Fest on June 4, 2022, and June 5, 2022. Tickets are available now!<br>- You can also share the fun of Pokémon GO Fest by gifting tickets to your friends!",
     "comments": [
         "5/12: crashes when i switch between screens, fold 3. Restarts each time, VERY annoying. It's a really fun game and I enjoy the aspect of going out for more than just a breath of fresh air. However, I'm on a Galaxy fold 3 common I find this game crashes quite often. What I mean is that it doesn't fully load when I open it. I've tried for stopping it, clearing cache, and even then it's hit or miss.",
         "The game itself is a great concept, and executed well. The community is still quite active(what, 4, 5 years later?) and is updated frequently. The issue is that there are a few really bad bugs.(I'll only be able to talk about one bug due to text limit :) ) This has only happened during the last week or so, where 4/5 times that I attempt to log in it stops at the very end. Then I have to exit out of the app and retry. This sometimes has taken up to 25 MINUTES to finally get a time where it works.",

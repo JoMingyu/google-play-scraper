@@ -7,10 +7,11 @@ class TestPermission(TestCase):
     def test_reply_data_all_types(self):
         result = permissions("com.spotify.music", lang="en", country="us")
 
+        self.maxDiff = None
         self.assertDictEqual(
             {
                 "Device ID & call information": ["read phone status and identity"],
-                "Identity": ["add or remove accounts", "find accounts on the device"],
+                "Identity": ["find accounts on the device"],
                 "Storage": [
                     "modify or delete the contents of your USB storage",
                     "read the contents of your USB storage",
@@ -50,15 +51,6 @@ class TestPermission(TestCase):
 
         self.assertDictEqual(
             {
-                "Wi-Fi connection information": ["view Wi-Fi connections"],
-                "Photos/Media/Files": [
-                    "modify or delete the contents of your USB storage",
-                    "read the contents of your USB storage",
-                ],
-                "Storage": [
-                    "modify or delete the contents of your USB storage",
-                    "read the contents of your USB storage",
-                ],
                 "Other": [
                     "control vibration",
                     "full network access",

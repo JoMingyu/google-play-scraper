@@ -78,14 +78,8 @@ class TestApp(TestCase):
         self.assertTrue(result["adSupported"])
         self.assertTrue(result["containsAds"])
         self.assertEqual("Jan 7, 2014", result["released"])
-        self.assertEqual(1636693903, result["updated"])
+        self.assertEqual(1671717276, result["updated"])
         self.assertEqual("Varies with device", result["version"])
-        self.assertEqual(
-            ("- Supports the newest devices."), result["recentChanges"],
-        )
-        self.assertEqual(
-            "- Supports the newest devices.", result["recentChangesHTML"],
-        )
         self.assertTrue(result["comments"])
         # self.assertTrue(result["similarApps"])
         # self.assertTrue(result["moreByDeveloper"])
@@ -124,7 +118,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(0.99, res["price"])
+        self.assertEqual(1.59, res["price"])
 
         # TODO free app / non free app 구분
 

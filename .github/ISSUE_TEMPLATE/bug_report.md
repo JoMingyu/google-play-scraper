@@ -7,8 +7,8 @@ assignees: JoMingyu
 
 ---
 
-**google_play_scraper.VERSION**
-Write result of `google_play_scraper.VERSION`
+**Library version**
+
 
 **Describe the bug**
 A description of what the bug is.
