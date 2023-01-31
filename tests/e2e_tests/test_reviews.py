@@ -25,7 +25,10 @@ class TestReviews(TestCase):
 
         for r in result:
             self.assertTrue(
-                re.match(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", r["reviewId"])
+                re.match(
+                    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    r["reviewId"],
+                )
             )
             self.assertTrue(r["userName"])
             self.assertTrue(r["userImage"])
@@ -102,7 +105,9 @@ class TestReviews(TestCase):
                     continue
 
                 self.assertIn("안녕하세요", reply_content)
-                self.assertTrue(any(["EKKORR" in reply_content, "이꼬르" in reply_content]))
+                self.assertTrue(
+                    any(["EKKORR" in reply_content, "이꼬르" in reply_content])
+                )
                 self.assertIn("입니다", reply_content)
                 self.assertIn("감사합니다", reply_content)
 
