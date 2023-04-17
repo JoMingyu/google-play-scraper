@@ -40,6 +40,28 @@ class ElementSpec:
 
         return result
 
+def extract_categories(s, categories = []):
+    if s == None or len(s) == 0:
+        return categories
+
+    if (len(s) >= 4 and type(s[0]) is str):
+        categories.append({ 'name': s[0], 'id': s[2] })
+    else:
+        for sub in s:
+            extract_categories(sub, categories)
+
+    return categories
+
+def get_categories(s):
+    categories = extract_categories(nested_lookup(s, [118]))
+    if len(categories) == 0:
+        # add genre and genreId like GP does when there're no categories available
+        categories.append({
+          'name': nested_lookup(s, [79, 0, 0, 0]),
+          'id': nested_lookup(s, [79, 0, 0, 2]),
+        })
+
+    return categories
 
 class ElementSpecs:
 
@@ -91,6 +113,9 @@ class ElementSpecs:
         # "developerInternalID": ElementSpec(5, [0, 12, 5, 0, 0]),
         "genre": ElementSpec(5, [1, 2, 79, 0, 0, 0]),
         "genreId": ElementSpec(5, [1, 2, 79, 0, 0, 2]),
+        "categories": ElementSpec(
+            5, [1, 2], get_categories, []
+        ),
         "icon": ElementSpec(5, [1, 2, 95, 0, 3, 2]),
         "headerImage": ElementSpec(5, [1, 2, 96, 0, 3, 2]),
         "screenshots": ElementSpec(
