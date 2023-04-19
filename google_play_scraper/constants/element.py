@@ -175,6 +175,7 @@ class ElementSpecs:
         "at": ElementSpec(None, [5, 0], lambda v: datetime.fromtimestamp(v)),
         "replyContent": ElementSpec(None, [7, 1]),
         "repliedAt": ElementSpec(None, [7, 2, 0], lambda v: datetime.fromtimestamp(v)),
+        "appVersion": ElementSpec(None, [10]),
     }
 
     Permission_Type = ElementSpec(None, [0])
