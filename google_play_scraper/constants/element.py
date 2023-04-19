@@ -67,8 +67,12 @@ class ElementSpecs:
 
     Detail = {
         "title": ElementSpec(5, [1, 2, 0, 0]),
-        "description": ElementSpec(5, [1, 2, 72, 0, 1], unescape_text),
-        "descriptionHTML": ElementSpec(5, [1, 2, 72, 0, 1]),
+        "description": ElementSpec(
+            5, [1, 2], lambda s: unescape_text(nested_lookup(s, [12, 0, 0, 1]) or nested_lookup(s, [72, 0, 1]))
+        ),
+        "descriptionHTML": ElementSpec(
+            5, [1, 2], lambda s: nested_lookup(s, [12, 0, 0, 1]) or nested_lookup(s, [72, 0, 1])
+        ),
         "summary": ElementSpec(5, [1, 2, 73, 0, 1], unescape_text),
         "installs": ElementSpec(5, [1, 2, 13, 0]),
         "minInstalls": ElementSpec(5, [1, 2, 13, 1]),
