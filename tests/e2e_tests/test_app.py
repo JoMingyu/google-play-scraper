@@ -57,6 +57,10 @@ class TestApp(TestCase):
         # self.assertEqual("8524055825995721370", result["developerInternalID"])
         self.assertEqual("Simulation", result["genre"])
         self.assertEqual("GAME_SIMULATION", result["genreId"])
+        self.assertTrue(result["categories"])
+        self.assertGreaterEqual(len(result["categories"]), 1)
+        self.assertEqual("Action", result["categories"][0]["name"])
+        self.assertEqual("GAME_ACTION", result["categories"][0]["id"])
         self.assertEqual(
             "https://play-lh.googleusercontent.com/5nPD6fyJaa-EDLHdlBd9UsaAV8KkfrYvLB956eQsvIGNBWUrPeouYw8aa7kbCbY--6E",
             result["icon"],

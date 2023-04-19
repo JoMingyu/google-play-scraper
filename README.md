@@ -65,6 +65,14 @@ Result of `print(result)`:
     "privacyPolicy": "https://nianticlabs.com/privacy/pokemongo/en",
     "genre": "Adventure",
     "genreId": "GAME_ADVENTURE",
+    "categories": [
+        {"name": "Action", "id": "GAME_ACTION"},
+        {"name": "Action-adventure", "id": None},
+        {"name": "Multiplayer", "id": None},
+        {"name": "Competitive multiplayer", "id": None},
+        {"name": "Stylized", "id": None},
+        {"name": "Anime", "id": None},
+    ],
     "icon": "https://play-lh.googleusercontent.com/SVQIX_fYcu5mc4Pq-D7dgxXZdRMpNTAbRKeBJygAsIXKITHEcKckyhzLsIXMQLSRZw",
     "headerImage": "https://play-lh.googleusercontent.com/KgDQ-Kjb2B7_jDP-8KmQDNhAmP2lqAV_w3zArOCBL7YZnQ02Qqp4VTlgdocO-4MFk4s",
     "screenshots": [
