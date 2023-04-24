@@ -1,9 +1,8 @@
 from typing import Union
-
-from google_play_scraper.exceptions import NotFoundError, ExtraHTTPError
-
 from urllib.error import HTTPError
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
+
+from google_play_scraper.exceptions import ExtraHTTPError, NotFoundError
 
 
 def _urlopen(obj):

@@ -173,42 +173,45 @@ Result of `print(result)`:
 
 ```
 [
-    {
-        "userName": "Alyssa Williams",
-        "userImage": "https://lh3.googleusercontent.com/-cVEHKr7mzv8/AAAAAAAAAAI/AAAAAAAAAAA/AKF05nB2r3GUkji31m0tC4ylFNiVMpmNWA/photo.jpg",
-        "content": "This is literally the best idle game I have ever played. The penguins waddle around and live their best lives in the cutest little outfits. I just unlocked the little penguins and I have been sobbing uncontrollably for ten minutes because they are so adorable. There are only two suggestions I have for this game: more of the penguin info ads. I love them. I have learned so much about all the teeny fellas. Secondly, I would like to be able to name my 'guins so I can tell them apart.",
-        "score": 5,
-        "thumbsUpCount": 54,
-        "reviewCreatedVersion": "1.16",
-        "at": datetime.datetime(2020, 2, 24, 17, 19, 34),
-        "replyContent": "Hello, We will gradually improve the various systems in the game to enhance the player's game experience. We have recorded your suggestions and feedback to the planner. If you have any other suggestions and ideas, please feel free to contact us at penguinisle@habby.com.Thank you for playing!",
-        "repliedAt": datetime.datetime(2020, 2, 24, 18, 30, 42),
-        "reviewId": "gp:AOqpTOE0Iy5S9Je1F8W1BgCl6l_TCFP_QN4qGtRATX3PeB5VV9aZu6UHfMWdYFF1at4qZ59xxLNHFqYLql5SL-k"
-    },
-    {
-        "userName": "EasyJet 123",
-        "userImage": "https://lh3.googleusercontent.com/a-/AOh14GhE3-Fsq5KDs_kmCRGcifbNUQTOtK5DpZkJ2AiqyQ",
-        "content": "Easily my favorite game. Relaxing, with easy controls, no purchase necessary to advance... I love it. 100% recommend. I love how you can get gems continually by completing missions, and the low price of boosts are great. But how about adding new buildings like an airport, an army base, and a train station? Would be great to see these. And the building purchase price might be lowered so it's a bit easier to progress after the Igloo. Maybe...",
-        "score": 5,
-        "thumbsUpCount": 79,
-        "reviewCreatedVersion": "1.14",
-        "at": datetime.datetime(2020, 2, 12, 8, 42, 41),
-        "replyContent": None,
-        "repliedAt": None,
-        "reviewId": "gp:AOqpTOHyQo9QEPtxefmvjNuqR9VmFyBaj2FNXLvHsuH19de9bC0dT_voHWSKNGFcc10jv077wOdzBrkgLKX6pUc"
-    },
-    {
-        "userName": "Lillemann",
-        "userImage": "https://lh3.googleusercontent.com/a-/AOh14GjiVSIrx033k9HZ9Tu4BQ1iYZST0IRW8UlDCX3gdw",
-        "content": "Really good looking. And it runs super super smooth. I love the camera options when clicking the camera button. And the penguins looks absolutely awesome and I really love the limited eddition ones. That sometimes the ads are replaced with penguin facts is just awesome. I suggest that you set up some kind of leaderboard it could probobly show the players that are earning the most money per sec or something. But overall this game is a strong 10/10",
-        "score": 5,
-        "thumbsUpCount": 2,
-        "reviewCreatedVersion": "1.14",
-        "at": datetime.datetime(2020, 2, 11, 18, 8, 11),
-        "replyContent": "Thank you very much for your review concerning our game. We will try our best to do better,If you have any other feedback or suggestions, feel free to contact us at penguinisle@habby.com. Have a nice day!",
-        "repliedAt": datetime.datetime(2020, 2, 11, 18, 53, 38),
-        "reviewId": "gp:AOqpTOEGUPB6HA0DIPNp3K2yAHRK-GN96dVJ-zkhPgKpclevgt8q9nR6Pv4N_F4TIPCpMeaoTutNGOZ2CSs65Ws"
-    },
+	{
+		'reviewId': '793226de-e6cf-439f-8ea8-ea6b1f6afc9e',
+		'userName': 'LiviaBrannock',
+		'userImage': 'https: //play-lh.googleusercontent.com/a-/ACB-R5SD1-dqPnM8Vs4DU51nEPdWLc0xef_jyLYx_KW0RQ',
+		'content': "The graphics are just the cutest, this game always makes me smile. I do wish there were less reliance on ads, this definitely makes the game less relaxing. I'd love it a lot more if you could get coins by solving some sort of puzzle instead!! EDIT: With the updates there is less reliance on ads and a mini-game! If I could give this app more than 5 stars I definitely would!",
+		'score': 5,
+		'thumbsUpCount': 239,
+		'reviewCreatedVersion': '1.32.0',
+		'at': datetime.datetime(2021, 3, 25, 15, 52, 53),
+		'replyContent': None,
+		'repliedAt': None,
+		'appVersion': '1.32.0'
+	},
+	{
+		'reviewId': 'd12d8150-ea14-453a-8096-26851e557a9b',
+		'userName': 'MorganEllis',
+		'userImage': 'https: //play-lh.googleusercontent.com/a-/ACB-R5TLrLUa5NR0pKK7Np6P2ko-TNo-OCrHGy6SwvpEWW0',
+		'content': "Cute, but stopped opening after two days. Just loads then crashes. It crashes upon saving images as well. Not sure if it's server space or just poor performance, but the only way for developers to make money off of ads is for users to actually have an opportunity to watch them, so it might be worth checking out! Super cute graphics, though. Most adorable mind numbing I've experienced.",
+		'score': 5,
+		'thumbsUpCount': 12,
+		'reviewCreatedVersion': '1.27.2',
+		'at': datetime.datetime(2020, 12, 30, 7, 18, 58),
+		'replyContent': 'Hi, please update the game to the latest version 1.28.1 and try again, we have fixed it, If you still have problems, please contact us at penguinisle@habby.com to help you.',
+		'repliedAt': datetime.datetime(2020, 12, 2, 16, 36, 39),
+		'appVersion': '1.27.2'
+	},
+	{
+		'reviewId': 'ba2c136c-b800-47f3-857c-8beb6ded51bf',
+		'userName': 'AGoogleuser',
+		'userImage': 'https: //play-lh.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g',
+		'content': "PERFECT. I can't say enough. I really love everything about it. I don't mind the ads at all cuz you can choose to watch them or not, when you want to. They aren't automatic. Gameplay is super simple & very relaxing. Easy to understand & learn very quickly. The graphics are adorable, music is peaceful. The value of what you get for watching ads, spending coins, or spending gems is just right, easy to earn, lots of little features that make it great. Customer service is very quick/excellent!",
+		'score': 5,
+		'thumbsUpCount': 116,
+		'reviewCreatedVersion': '1.17',
+		'at': datetime.datetime(2020, 3, 25, 14, 32, 59),
+		'replyContent': None,
+		'repliedAt': None,
+		'appVersion': '1.17'
+	}
 ]
 ```
 

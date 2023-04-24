@@ -6,9 +6,9 @@ from urllib.parse import urlparse
 
 from google_play_scraper import Sort
 from google_play_scraper.features.reviews import (
-    reviews,
-    _fetch_review_items,
     _ContinuationToken,
+    _fetch_review_items,
+    reviews,
 )
 
 
@@ -35,6 +35,7 @@ class TestReviews(TestCase):
             self.assertTrue(r["content"])
             self.assertTrue(r["score"] >= 1)
             self.assertTrue(r["thumbsUpCount"] >= 0)
+            self.assertTrue(r["appVersion"])
 
             self.assertTrue(
                 datetime.now() - timedelta(days=7) < r["at"] < datetime.now()
@@ -113,7 +114,6 @@ class TestReviews(TestCase):
 
                 self.assertTrue(len(reply_content) > 90)
                 self.assertIsInstance(replied_at, datetime)
-                print(replied_at)
                 # self.assertTrue(
                 #     datetime(2018, 6, 1) < replied_at < datetime(2022, 1, 1)
                 # )

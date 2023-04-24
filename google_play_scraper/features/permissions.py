@@ -1,10 +1,10 @@
 import json
 from typing import Dict
 
+from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
-from google_play_scraper.constants.element import ElementSpecs
 
 
 def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, list]:

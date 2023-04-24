@@ -1,4 +1,4 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 PLAY_STORE_BASE_URL = "https://play.google.com"
 

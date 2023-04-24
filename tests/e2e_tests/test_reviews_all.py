@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from google_play_scraper.features.reviews import reviews_all, reviews
+from google_play_scraper.features.reviews import reviews, reviews_all
 
 
 class TestReviewsAll(TestCase):
