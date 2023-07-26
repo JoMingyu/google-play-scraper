@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, List
 from urllib.parse import quote
 
 from google_play_scraper.constants.element import ElementSpecs
