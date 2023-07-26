@@ -11,7 +11,7 @@ from google_play_scraper.utils.request import get
 
 def search(
     query: str, n_hits: int = 30, lang: str = "en", country: str = "us"
-) -> Dict[str, Any]:
+) -> List[Dict[str, Any]]:
     query = quote(query)
     url = Formats.Searchresults.build(query=query, lang=lang, country=country)
     try:
