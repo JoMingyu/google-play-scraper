@@ -35,7 +35,7 @@ result = app(
 
 Result of `print(result)`:
 
-```
+```python
 {
     "title": "Pokémon GO",
     "description": "New! Now you can battle other Pokémon GO Trainers online! Try the GO Battle League today!\r\n\r\nJoin Trainers across the globe who are discovering Pokémon as they explore the world around them. Pokémon GO is the global gaming sensation that has been downloaded over 1 billion times and named “Best Mobile Game” by the Game Developers Choice Awards and “Best App of the Year” by TechCrunch.\r\n_______________\r\n\r\nUncover the world of Pokémon: Explore and discover Pokémon wherever you are!\r\n \r\nCatch more Pokémon to complete your Pokédex!\r\n \r\nJourney alongside your Buddy Pokémon to help make your Pokémon stronger and earn rewards!\r\n\r\nCompete in epic Gym battles and...\r\n\r\nTeam up with other Trainers to catch powerful Pokémon during Raid Battles!\r\n \r\nIt’s time to get moving—your real-life adventures await! Let’s GO!\r\n_______________\r\n\r\nNotes: \r\n- This app is free-to-play and offers in-game purchases. It is optimized for smartphones, not tablets.\r\n- Compatible with Android devices that have 2GB RAM or more and have Android Version 6.0–10.0+ installed.\r\n- Compatibility is not guaranteed for devices without GPS capabilities or devices that are connected only to Wi-Fi networks.\r\n- Application may not run on certain devices even if they have compatible OS versions installed.\r\n- It is recommended to play while connected to a network in order to obtain accurate location information.\r\n- Compatibility information may be changed at any time.\r\n- Please visit PokemonGO.com for additional compatibility information. \r\n- Information current as of October 20, 2020.",
@@ -171,7 +171,7 @@ result, _ = reviews(
 
 Result of `print(result)`:
 
-```
+```python
 [
 	{
 		'reviewId': '793226de-e6cf-439f-8ea8-ea6b1f6afc9e',
@@ -249,7 +249,7 @@ result = permissions(
 
 Result of `print(result)`:
 
-```
+```python
 {
     "Microphone": [
         "record audio"
@@ -316,7 +316,7 @@ result = search(
 
 Result of `print(result)`:
 
-```
+```python
 [{'appId': 'com.nianticlabs.pokemongo',
   'icon': 'https://play-lh.googleusercontent.com/SVQIX_fYcu5mc4Pq-D7dgxXZdRMpNTAbRKeBJygAsIXKITHEcKckyhzLsIXMQLSRZw',
   'screenshots': ['https://play-lh.googleusercontent.com/O-OR6Mh0AoNyiaYYaa3OJ_VHGfLqWW2qNzUUZxRRodD3fqs2Pm04FatavdNbz-jsMZM',
