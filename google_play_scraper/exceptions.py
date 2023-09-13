@@ -8,3 +8,7 @@ class NotFoundError(GooglePlayScraperException):
 
 class ExtraHTTPError(GooglePlayScraperException):
     pass
+
+
+class ExtraURLError(GooglePlayScraperException):
+    pass

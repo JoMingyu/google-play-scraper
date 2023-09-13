@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict
 from urllib.parse import quote
 
 from google_play_scraper.constants.element import ElementSpecs
@@ -10,15 +10,19 @@ from google_play_scraper.utils.request import get
 
 
 def search(
-    query: str, n_hits: int = 30, lang: str = "en", country: str = "us"
-) -> List[Dict[str, Any]]:
+    query: str,
+    n_hits: int = 30,
+    lang: str = "en",
+    country: str = "us",
+    proxy: str = None,
+) -> Dict[str, Any]:
     query = quote(query)
     url = Formats.Searchresults.build(query=query, lang=lang, country=country)
     try:
-        dom = get(url)
+        dom = get(url, proxy=proxy)
     except NotFoundError:
         url = Formats.Searchresults.fallback_build(query=query, lang=lang)
-        dom = get(url)
+        dom = get(url, proxy=proxy)
 
     matches = Regex.SCRIPT.findall(dom)
 

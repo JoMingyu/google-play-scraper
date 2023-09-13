@@ -30,6 +30,7 @@ def _fetch_review_items(
     count: int,
     filter_score_with: Optional[int],
     pagination_token: Optional[str],
+    proxy: str = None,
 ):
     dom = post(
         url,
@@ -41,6 +42,7 @@ def _fetch_review_items(
             pagination_token,
         ),
         {"content-type": "application/x-www-form-urlencoded"},
+        proxy=proxy,
     )
 
     match = json.loads(Regex.REVIEWS.findall(dom)[0])
@@ -56,6 +58,7 @@ def reviews(
     count: int = 100,
     filter_score_with: int = None,
     continuation_token: _ContinuationToken = None,
+    proxy: str = None,
 ) -> Tuple[List[dict], _ContinuationToken]:
     if continuation_token is not None:
         token = continuation_token.token
@@ -89,7 +92,7 @@ def reviews(
 
         try:
             review_items, token = _fetch_review_items(
-                url, app_id, sort, _fetch_count, filter_score_with, token
+                url, app_id, sort, _fetch_count, filter_score_with, token, proxy=proxy
             )
         except (TypeError, IndexError):
             token = None
@@ -115,7 +118,7 @@ def reviews(
     )
 
 
-def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
+def reviews_all(app_id: str, sleep_milliseconds: int = 0, proxy: str = None, **kwargs):
     kwargs.pop("count", None)
     kwargs.pop("continuation_token", None)
 
@@ -128,6 +131,7 @@ def reviews_all(app_id: str, sleep_milliseconds: int = 0, **kwargs) -> list:
             app_id,
             count=MAX_COUNT_EACH_FETCH,
             continuation_token=continuation_token,
+            proxy=proxy,
             **kwargs
         )
 
