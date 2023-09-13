@@ -7,11 +7,14 @@ from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
 
 
-def permissions(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, list]:
+def permissions(
+    app_id: str, lang: str = "en", country: str = "us", proxy: str = None
+) -> Dict[str, list]:
     dom = post(
         Formats.Permissions.build(lang=lang, country=country),
         Formats.Permissions.build_body(app_id),
         {"content-type": "application/x-www-form-urlencoded"},
+        proxy=proxy,
     )
 
     matches = json.loads(Regex.PERMISSIONS.findall(dom)[0])
