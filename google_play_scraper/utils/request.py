@@ -10,9 +10,9 @@ def _urlopen(obj, proxy: str = None):
         if proxy:
             proxy_handler = ProxyHandler({"https": proxy})
             opener = build_opener(proxy_handler)
-            resp = opener.open(obj, timeout=10).read().decode("UTF-8")
+            resp = opener.open(obj, timeout=10)
         else:
-            resp = urlopen(obj, timeout=10).read().decode("UTF-8")
+            resp = urlopen(obj, timeout=10)
     except HTTPError as e:
         if e.code == 404:
             raise NotFoundError("App not found (404).")
@@ -23,7 +23,7 @@ def _urlopen(obj, proxy: str = None):
     except URLError:
         raise ExtraURLError()
 
-    return resp
+    return resp.read().decode("UTF-8")
 
 
 def post(url: str, data: Union[str, bytes], headers: dict, proxy: str = None) -> str:
