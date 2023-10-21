@@ -24,14 +24,7 @@ def search(
 
     dataset = {}
 
-    for match in matches:
-        key_match = Regex.KEY.findall(match)
-        value_match = Regex.VALUE.findall(match)
-
-        if key_match and value_match:
-            key = key_match[0]
-            value = json.loads(value_match[0])
-            dataset[key] = value
+    dataset = {key: json.loads(value) for key, value in zip(Regex.KEY.findall(match), Regex.VALUE.findall(match)) if key and value}
 
     success = False
     # different idx for different countries and languages
