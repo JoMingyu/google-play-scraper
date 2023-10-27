@@ -12,15 +12,16 @@ MAX_COUNT_EACH_FETCH = 199
 
 
 class _ContinuationToken:
-    __slots__ = "token", "lang", "country", "sort", "count", "filter_score_with"
+    __slots__ = "token", "lang", "country", "sort", "count", "filter_score_with", "filter_device_with"
 
-    def __init__(self, token, lang, country, sort, count, filter_score_with):
+    def __init__(self, token, lang, country, sort, count, filter_score_with, filter_device_with):
         self.token = token
         self.lang = lang
         self.country = country
         self.sort = sort
         self.count = count
         self.filter_score_with = filter_score_with
+        self.filter_device_with = filter_device_with
 
 
 def _fetch_review_items(
@@ -29,6 +30,7 @@ def _fetch_review_items(
     sort: int,
     count: int,
     filter_score_with: Optional[int],
+    filter_device_with: Optional[int],
     pagination_token: Optional[str],
 ):
     dom = post(
@@ -38,14 +40,14 @@ def _fetch_review_items(
             sort,
             count,
             "null" if filter_score_with is None else filter_score_with,
+            "null" if filter_device_with is None else filter_device_with,
             pagination_token,
         ),
         {"content-type": "application/x-www-form-urlencoded"},
     )
-
     match = json.loads(Regex.REVIEWS.findall(dom)[0])
 
-    return json.loads(match[0][2])[0], json.loads(match[0][2])[-1][-1]
+    return json.loads(match[0][2])[0], json.loads(match[0][2])[-2][-1]
 
 
 def reviews(
@@ -55,6 +57,7 @@ def reviews(
     sort: Sort = Sort.NEWEST,
     count: int = 100,
     filter_score_with: int = None,
+    filter_device_with: int = None,
     continuation_token: _ContinuationToken = None,
 ) -> Tuple[List[dict], _ContinuationToken]:
     if continuation_token is not None:
@@ -71,6 +74,7 @@ def reviews(
         sort = continuation_token.sort
         count = continuation_token.count
         filter_score_with = continuation_token.filter_score_with
+        filter_device_with = continuation_token.filter_device_with
     else:
         token = None
 
@@ -89,7 +93,7 @@ def reviews(
 
         try:
             review_items, token = _fetch_review_items(
-                url, app_id, sort, _fetch_count, filter_score_with, token
+                url, app_id, sort, _fetch_count, filter_score_with, filter_device_with, token
             )
         except (TypeError, IndexError):
             token = None
@@ -111,7 +115,7 @@ def reviews(
 
     return (
         result,
-        _ContinuationToken(token, lang, country, sort, count, filter_score_with),
+        _ContinuationToken(token, lang, country, sort, count, filter_score_with, filter_device_with),
     )
 
 
