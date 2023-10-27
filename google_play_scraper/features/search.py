@@ -20,18 +20,15 @@ def search(
         url = Formats.Searchresults.fallback_build(query=query, lang=lang)
         dom = get(url)
 
-    matches = Regex.SCRIPT.findall(dom)
+    matches = Regex.SCRIPT.findall(dom) #take out script blocks from dom
 
     dataset = {}
 
-    for match in matches:
-        key_match = Regex.KEY.findall(match)
-        value_match = Regex.VALUE.findall(match)
-
-        if key_match and value_match:
-            key = key_match[0]
-            value = json.loads(value_match[0])
-            dataset[key] = value
+    dataset = {key: json.loads(value) for match, key, value in zip(matches, Regex.KEY.findall(match), Regex.VALUE.findall(match)) if key and value}
+    """
+    This is to create a dictionary "dataset" that would combine key-value pairs for each match obtained from matches under the condition that the key and value are non-empty.
+    The matches variable is a list of match objects returned by the Regex.SCRIPT.findall() function. 
+    """
 
     success = False
     # different idx for different countries and languages
