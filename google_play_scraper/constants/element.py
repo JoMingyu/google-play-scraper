@@ -139,7 +139,7 @@ class ElementSpecs:
         "adSupported": ElementSpec(5, [1, 2, 48], bool),
         "containsAds": ElementSpec(5, [1, 2, 48], bool, False),
         "released": ElementSpec(5, [1, 2, 10, 0]),
-        "last_updated_on": ElementSpec(5, [1, 2, 145, 0, 0]),
+        "lastUpdatedOn": ElementSpec(5, [1, 2, 145, 0, 0]),
         "updated": ElementSpec(5, [1, 2, 145, 0, 1, 0]),
         "version": ElementSpec(
             5, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"
