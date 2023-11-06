@@ -39,7 +39,10 @@ class ElementSpec:
         return result
 
 
-def extract_categories(s, categories=[]):
+def extract_categories(s, categories=None):
+    # Init an empty list if first iteration
+    if categories == None:
+        categories = []
     if s == None or len(s) == 0:
         return categories
 
