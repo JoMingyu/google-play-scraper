@@ -29,7 +29,8 @@ from google_play_scraper import app
 result = app(
     'com.nianticlabs.pokemongo',
     lang='en', # defaults to 'en'
-    country='us' # defaults to 'us'
+    country='us', # defaults to 'us'
+    proxy=None # defaults to None
 )
 ```
 
@@ -157,7 +158,8 @@ result, continuation_token = reviews(
     country='us', # defaults to 'us'
     sort=Sort.NEWEST, # defaults to Sort.NEWEST
     count=3, # defaults to 100
-    filter_score_with=5 # defaults to None(means all score)
+    filter_score_with=5, # defaults to None(means all score)
+    proxy=None # defaults to None
 )
 
 # If you pass `continuation_token` as an argument to the reviews function at this point,
@@ -165,7 +167,8 @@ result, continuation_token = reviews(
 
 result, _ = reviews(
     'com.fantome.penguinisle',
-    continuation_token=continuation_token # defaults to None(load from the beginning)
+    continuation_token=continuation_token, # defaults to None(load from the beginning)
+    proxy=None # defaults to None
 )
 ```
 
@@ -226,6 +229,7 @@ from google_play_scraper import Sort, reviews_all
 result = reviews_all(
     'com.fantome.penguinisle',
     sleep_milliseconds=0, # defaults to 0
+    proxy=None, # defaults to None
     lang='en', # defaults to 'en'
     country='us', # defaults to 'us'
     sort=Sort.MOST_RELEVANT, # defaults to Sort.MOST_RELEVANT
@@ -244,6 +248,7 @@ result = permissions(
     'com.spotify.music',
     lang='en', # defaults to 'en'
     country='us', # defaults to 'us'
+    proxy=None # defaults to None
 )
 ```
 
@@ -310,7 +315,8 @@ result = search(
     "best Pikachu game",
     lang="en",  # defaults to 'en'
     country="us",  # defaults to 'us'
-    n_hits=3  # defaults to 30 (= Google's maximum)
+    n_hits=3,  # defaults to 30 (= Google's maximum)
+    proxy=None # defaults to None
 )
 ```
 
