@@ -98,7 +98,7 @@ class ElementSpecs:
             5, [1, 2, 78, 0], lambda container: [item[3][2]
                                                  for item in container], []
         ),
-        "video": ElementSpec(5, [1, 2, 100, 0, 0, 3, 2]),
+        "videoUrl": ElementSpec(5, [1, 2, 100, 0, 0, 3, 2]),
         "videoImage": ElementSpec(5, [1, 2, 100, 1, 0, 3, 2]),
         "contentRating": ElementSpec(5, [1, 2, 9, 0]),
         "contentRatingDescription": ElementSpec(5, [1, 2, 9, 2, 1]),
@@ -114,6 +114,10 @@ class ElementSpecs:
         "comments": ElementSpec(
             9, [0], lambda container: [item[4] for item in container], []
         ),
+        "support_phone_number": ElementSpec(5, [1, 2, 69, 3]),
+        "support_email": ElementSpec(5, [1, 2, 69, 1, 0]),
+        "website": ElementSpec(5, [1, 2, 69, 0, 5, 2]),
+        "whats_new": ElementSpec(5, [1, 2, 144, 1, 1], unescape_text),
         # "editorsChoice": ElementSpec(5, [0, 12, 15, 0], bool, False),
         # "similarApps": ElementSpec(
         #     7,
