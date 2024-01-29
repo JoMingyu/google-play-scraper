@@ -66,7 +66,11 @@ class Formats:
                 )
             else:
                 result = self.PAYLOAD_FORMAT_FOR_FIRST_PAGE.format(
-                    app_id=app_id, sort=sort, count=count, score=filter_score_with, device_id=filter_device_with
+                    app_id=app_id,
+                    sort=sort,
+                    count=count,
+                    score=filter_score_with,
+                    device_id=filter_device_with,
                 )
             return result.encode()
 

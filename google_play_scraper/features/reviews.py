@@ -12,9 +12,19 @@ MAX_COUNT_EACH_FETCH = 199
 
 
 class _ContinuationToken:
-    __slots__ = "token", "lang", "country", "sort", "count", "filter_score_with", "filter_device_with"
+    __slots__ = (
+        "token",
+        "lang",
+        "country",
+        "sort",
+        "count",
+        "filter_score_with",
+        "filter_device_with",
+    )
 
-    def __init__(self, token, lang, country, sort, count, filter_score_with, filter_device_with):
+    def __init__(
+        self, token, lang, country, sort, count, filter_score_with, filter_device_with
+    ):
         self.token = token
         self.lang = lang
         self.country = country
@@ -93,7 +103,13 @@ def reviews(
 
         try:
             review_items, token = _fetch_review_items(
-                url, app_id, sort, _fetch_count, filter_score_with, filter_device_with, token
+                url,
+                app_id,
+                sort,
+                _fetch_count,
+                filter_score_with,
+                filter_device_with,
+                token,
             )
         except (TypeError, IndexError):
             token = None
@@ -115,7 +131,9 @@ def reviews(
 
     return (
         result,
-        _ContinuationToken(token, lang, country, sort, count, filter_score_with, filter_device_with),
+        _ContinuationToken(
+            token, lang, country, sort, count, filter_score_with, filter_device_with
+        ),
     )
 
 
