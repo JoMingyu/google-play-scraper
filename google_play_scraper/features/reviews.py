@@ -70,6 +70,8 @@ def reviews(
     filter_device_with: int = None,
     continuation_token: _ContinuationToken = None,
 ) -> Tuple[List[dict], _ContinuationToken]:
+    sort = sort.value
+
     if continuation_token is not None:
         token = continuation_token.token
 
