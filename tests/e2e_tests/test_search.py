@@ -28,7 +28,7 @@ class TestSearch(TestCase):
         self.assertEqual("Niantic, Inc.", result["developer"])
         self.assertEqual("Adventure", result["genre"])
         self.assertEqual(
-            "https://play-lh.googleusercontent.com/wAWerkEu_g2_BMCl85WKqN2mxn0xW1O22nV6yJOayrMKu9pqtrLMn7S2Zd1xaykKm0g",
+            "https://play-lh.googleusercontent.com/3UpKaqsS-3LDEQJqoNLXkj61eiA-_-h77heP22dYOy-WR4PSha3O_tPK57w4wZ4jIXII",
             result["icon"],
         )
         self.assertTrue(result["screenshots"])

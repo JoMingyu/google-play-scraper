@@ -37,17 +37,9 @@ def parse_dom(dom: str, app_id: str, url: str) -> Dict[str, Any]:
     result = {}
 
     for k, spec in ElementSpecs.Detail.items():
-        if isinstance(spec, list):
-            for sub_spec in spec:
-                content = sub_spec.extract_content(dataset)
+        content = spec.extract_content(dataset)
 
-                if content is not None:
-                    result[k] = content
-                    break
-        else:
-            content = spec.extract_content(dataset)
-
-            result[k] = content
+        result[k] = content
 
     result["appId"] = app_id
     result["url"] = url

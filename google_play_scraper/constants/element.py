@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Any, Callable, List, Optional
 
-from google_play_scraper.constants.regex import Regex
 from google_play_scraper.utils import nested_lookup
 from google_play_scraper.utils.data_processors import unescape_text
 
@@ -189,11 +188,38 @@ class ElementSpecs:
         "appVersion": ElementSpec(None, [10]),
     }
 
-    Permission_Type = ElementSpec(None, [0])
-    Permission_List = ElementSpec(
+    PermissionType = ElementSpec(None, [0])
+
+    PermissionList = ElementSpec(
         None, [2], lambda container: sorted([item[1] for item in container])
     )
-    Searchresult = {
+
+    SearchResultOnTop = {
+        "appId": ElementSpec(None, [11, 0, 0]),
+        "icon": ElementSpec(None, [2, 95, 0, 3, 2]),
+        "screenshots": ElementSpec(
+            None,
+            [2, 78, 0],
+            lambda container: [item[3][2] for item in container],
+            [],
+        ),
+        "title": ElementSpec(None, [2, 0, 0]),
+        "score": ElementSpec(None, [2, 51, 0, 1]),
+        "genre": ElementSpec(None, [2, 79, 0, 0, 0]),
+        "price": ElementSpec(
+            None, [2, 57, 0, 0, 0, 0, 1, 0, 0], lambda price: (price / 1000000) or 0
+        ),
+        "free": ElementSpec(None, [2, 57, 0, 0, 0, 0, 1, 0, 0], lambda s: s == 0),
+        "currency": ElementSpec(None, [2, 57, 0, 0, 0, 0, 1, 0, 1]),
+        "video": ElementSpec(None, [2, 100, 0, 0, 3, 2]),
+        "videoImage": ElementSpec(None, [2, 100, 1, 0, 3, 2]),
+        "description": ElementSpec(None, [2, 72, 0, 1], unescape_text),
+        "descriptionHTML": ElementSpec(None, [2, 72, 0, 1]),
+        "developer": ElementSpec(None, [2, 68, 0]),
+        "installs": ElementSpec(None, [2, 13, 0]),
+    }
+
+    SearchResult = {
         "appId": ElementSpec(None, [0, 0, 0]),
         "icon": ElementSpec(None, [0, 1, 3, 2]),
         "screenshots": ElementSpec(
