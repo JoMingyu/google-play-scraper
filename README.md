@@ -33,6 +33,46 @@ result = app(
 )
 ```
 
+### If you want to use proxy
+### Example of creating BrightDataProxy object and generating session for each request
+```python
+from google_play_scraper.utils.proxies import Proxy
+import random
+from dotenv import load_dotenv
+import os 
+
+class BrightDataProxy(Proxy):
+    def __init__(self, username: str, password: str, host: str, port: int):
+        self.username = username
+        self.password = password
+        self.host = host
+        self.port = port
+
+    def get_proxy(self) -> dict:
+        return {
+            "https": f"http://{self.username}:{self.password}@{self.host}:{self.port}"
+        }
+
+session_id = ''.join(random.choice('0123456789abcdef') for _ in range(6))
+
+# Creating proxy session string
+session = os.getenv("SESSION")
+proxy_session = f"{session}-{session_id}"
+
+host=os.getenv("PROXY_HOST")
+password = os.getenv("PROXY_PASSWORD")
+port=os.getenv("PROXY_PORT")
+
+proxy = BrightDataProxy(username=proxy_session, password=password, host=host, port=port)
+
+result = app(
+    'com.nianticlabs.pokemongo',
+    lang='en', # defaults to 'en'
+    country='us', # defaults to 'us'
+    proxy=proxy
+)
+```
+
 Result of `print(result)`:
 
 ```python
