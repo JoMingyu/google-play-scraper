@@ -1,21 +1,22 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from google_play_scraper.constants.element import ElementSpecs
 from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.request import Formats
 from google_play_scraper.exceptions import NotFoundError
 from google_play_scraper.utils.request import get
+from google_play_scraper.utils.proxies import Proxy
 
 
-def app(app_id: str, lang: str = "en", country: str = "us") -> Dict[str, Any]:
+def app(app_id: str, lang: str = "en", country: str = "us", proxy: Optional[Proxy] = None) -> Dict[str, Any]:
     url = Formats.Detail.build(app_id=app_id, lang=lang, country=country)
 
     try:
-        dom = get(url)
+        dom = get(url, proxy)
     except NotFoundError:
         url = Formats.Detail.fallback_build(app_id=app_id, lang=lang)
-        dom = get(url)
+        dom = get(url, proxy)
     return parse_dom(dom=dom, app_id=app_id, url=url)
 
 

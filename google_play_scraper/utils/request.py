@@ -1,13 +1,16 @@
 from typing import Union
 from urllib.error import HTTPError
-from urllib.request import Request, urlopen
+from urllib.request import Request
+from typing import Optional
 
 from google_play_scraper.exceptions import ExtraHTTPError, NotFoundError
+from google_play_scraper.utils.proxies import Proxy
 
+import requests
 
-def _urlopen(obj):
+def _urlopen(obj, proxy: Optional[Proxy] = None):
     try:
-        resp = urlopen(obj)
+        resp = requests.get(obj, proxies=proxy.get_proxy()).text
     except HTTPError as e:
         if e.code == 404:
             raise NotFoundError("App not found(404).")
@@ -15,13 +18,13 @@ def _urlopen(obj):
             raise ExtraHTTPError(
                 "App not found. Status code {} returned.".format(e.code)
             )
-
-    return resp.read().decode("UTF-8")
+    print(resp)
+    return resp
 
 
 def post(url: str, data: Union[str, bytes], headers: dict) -> str:
     return _urlopen(Request(url, data=data, headers=headers))
 
 
-def get(url: str) -> str:
-    return _urlopen(url)
+def get(url: str, proxy: Optional[Proxy] = None) -> str:
+    return _urlopen(url, proxy)
