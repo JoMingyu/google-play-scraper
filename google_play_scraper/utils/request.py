@@ -4,6 +4,7 @@ from urllib.request import Request, urlopen
 
 from google_play_scraper.exceptions import ExtraHTTPError, NotFoundError
 
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def _urlopen(obj):
     try:
