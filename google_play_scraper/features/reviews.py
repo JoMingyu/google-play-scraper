@@ -120,7 +120,7 @@ def reviews(
                 filter_device_with,
                 token,
             )
-        except Exception as e:
+        except Exception:
             token = None
             break
 

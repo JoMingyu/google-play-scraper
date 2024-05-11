@@ -40,9 +40,9 @@ class ElementSpec:
 
 def extract_categories(s, categories=None):
     # Init an empty list if first iteration
-    if categories == None:
+    if categories is None:
         categories = []
-    if s == None or len(s) == 0:
+    if s is None or len(s) == 0:
         return categories
 
     if len(s) >= 4 and type(s[0]) is str:
