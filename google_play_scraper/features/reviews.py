@@ -56,6 +56,10 @@ def _fetch_review_items(
         {"content-type": "application/x-www-form-urlencoded"},
     )
     match = json.loads(Regex.REVIEWS.findall(dom)[0])
+    try:
+        token = json.loads(match[0][2])[-2][-1]
+    except:
+        token = None
 
     return json.loads(match[0][2])[0], json.loads(match[0][2])[-2][-1]
 
@@ -113,7 +117,7 @@ def reviews(
                 filter_device_with,
                 token,
             )
-        except (TypeError, IndexError):
+        except Exception as e:
             token = None
             break
 
@@ -129,6 +133,8 @@ def reviews(
 
         if isinstance(token, list):
             token = None
+            break
+        if token is None:
             break
 
     return (
