@@ -8,7 +8,7 @@ from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
 
-MAX_COUNT_EACH_FETCH = 199
+MAX_COUNT_EACH_FETCH = 4500
 
 
 class _ContinuationToken:
