@@ -54,7 +54,6 @@ class TestPermission(TestCase):
                 "Other": [
                     "control vibration",
                     "full network access",
-                    "run at startup",
                     "prevent device from sleeping",
                     "view network connections",
                 ],

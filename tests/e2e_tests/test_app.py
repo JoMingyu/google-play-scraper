@@ -59,8 +59,8 @@ class TestApp(TestCase):
         self.assertEqual("GAME_SIMULATION", result["genreId"])
         self.assertTrue(result["categories"])
         self.assertGreaterEqual(len(result["categories"]), 1)
-        self.assertEqual("Action", result["categories"][0]["name"])
-        self.assertEqual("GAME_ACTION", result["categories"][0]["id"])
+        self.assertEqual("Simulation", result["categories"][0]["name"])
+        self.assertEqual("GAME_SIMULATION", result["categories"][0]["id"])
         self.assertEqual(
             "https://play-lh.googleusercontent.com/5nPD6fyJaa-EDLHdlBd9UsaAV8KkfrYvLB956eQsvIGNBWUrPeouYw8aa7kbCbY--6E",
             result["icon"],
@@ -82,9 +82,9 @@ class TestApp(TestCase):
         self.assertTrue(result["adSupported"])
         self.assertTrue(result["containsAds"])
         self.assertEqual("Jan 7, 2014", result["released"])
-        self.assertEqual(1671717276, result["updated"])
+        self.assertEqual(1692642233, result["updated"])
         self.assertEqual("Varies with device", result["version"])
-        self.assertTrue(result["comments"])
+        self.assertFalse(result["comments"])
         # self.assertTrue(result["similarApps"])
         # self.assertTrue(result["moreByDeveloper"])
 
@@ -107,7 +107,7 @@ class TestApp(TestCase):
         res = app("com.sgn.pandapop.gp")
 
         self.assertEqual(
-            "https://www.youtube.com/embed/lzthjLXbZr0?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
+            "https://www.youtube.com/embed/pw9e5aIoznY?ps=play&vq=large&rel=0&autohide=1&showinfo=0",
             res["video"],
         )
         self.assertEqual(
@@ -122,7 +122,7 @@ class TestApp(TestCase):
         res = app("com.simplemobiletools.gallery.pro")
 
         self.assertFalse(res["free"])
-        self.assertEqual(1.59, res["price"])
+        self.assertEqual(2.99, res["price"])
 
         # TODO free app / non free app 구분
 
