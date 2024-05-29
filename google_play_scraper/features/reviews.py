@@ -8,7 +8,7 @@ from google_play_scraper.constants.regex import Regex
 from google_play_scraper.constants.request import Formats
 from google_play_scraper.utils.request import post
 
-MAX_COUNT_EACH_FETCH = 199
+MAX_COUNT_EACH_FETCH = 4500
 
 
 class _ContinuationToken:
@@ -56,8 +56,15 @@ def _fetch_review_items(
         {"content-type": "application/x-www-form-urlencoded"},
     )
     match = json.loads(Regex.REVIEWS.findall(dom)[0])
+    try:
+        token = json.loads(match[0][2])[-2][-1]
+    except:
+        token = None
 
-    return json.loads(match[0][2])[0], json.loads(match[0][2])[-2][-1]
+    results = json.loads(match[0][2])
+    if len(results) == 0 or len(results[0]) == 0:
+        return [], token
+    return results[0], token
 
 
 def reviews(
@@ -113,7 +120,7 @@ def reviews(
                 filter_device_with,
                 token,
             )
-        except (TypeError, IndexError):
+        except Exception:
             token = None
             break
 
@@ -129,6 +136,8 @@ def reviews(
 
         if isinstance(token, list):
             token = None
+            break
+        if token is None:
             break
 
     return (

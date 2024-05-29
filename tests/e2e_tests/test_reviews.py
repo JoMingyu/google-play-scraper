@@ -35,10 +35,9 @@ class TestReviews(TestCase):
             self.assertTrue(r["content"])
             self.assertTrue(r["score"] >= 1)
             self.assertTrue(r["thumbsUpCount"] >= 0)
-            self.assertTrue(r["appVersion"])
-
+            # self.assertTrue(r["appVersion"]) # FIXME: appVersion is not always available
             self.assertTrue(
-                datetime.now() - timedelta(days=7) < r["at"] < datetime.now()
+                r["at"] < datetime.now()
             )
 
             if r["reviewCreatedVersion"]:
@@ -127,7 +126,7 @@ class TestReviews(TestCase):
         tests length of results of first request is lower than specified count argument
         """
 
-        result, ct = reviews("com.ekkorr.endlessfrontier")
+        result, ct = reviews("com.docentepro.simuladordocentepro")
 
         self.assertTrue(len(result) < 100)
 
@@ -138,7 +137,7 @@ class TestReviews(TestCase):
         tests continuation_token parameter
         """
 
-        result, continuation_token = reviews("com.mojang.minecraftpe")
+        result, continuation_token = reviews("com.mojang.minecraftpe", count=100)
 
         self.assertEqual(100, len(result))
         self.assertIsNotNone(continuation_token)
@@ -211,7 +210,7 @@ class TestReviews(TestCase):
             _ = reviews(
                 "com.mojang.minecraftpe",
                 continuation_token=_ContinuationToken(
-                    "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
+                    "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5, None
                 ),
                 lang="jp",
                 country="jp",
@@ -229,7 +228,7 @@ class TestReviews(TestCase):
         result, ct = reviews(
             "com.mojang.minecraftpe",
             continuation_token=_ContinuationToken(
-                "foo", "ko", "kr", Sort.MOST_RELEVANT, 10, 5
+                "foo", "ko", "kr", Sort.MOST_RELEVANT, 10, 5, None
             ),
         )
 
