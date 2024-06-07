@@ -36,9 +36,7 @@ class TestReviews(TestCase):
             self.assertTrue(r["score"] >= 1)
             self.assertTrue(r["thumbsUpCount"] >= 0)
             # self.assertTrue(r["appVersion"]) # FIXME: appVersion is not always available
-            self.assertTrue(
-                r["at"] < datetime.now()
-            )
+            self.assertTrue(r["at"] < datetime.now())
 
             if r["reviewCreatedVersion"]:
                 review_created_version_contained_review_count += 1

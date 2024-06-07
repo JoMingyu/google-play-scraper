@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "google-play-scraper"
-version = "1.2.6"
+version = "1.2.7"
 description = "Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python without any external dependencies!"
 authors = ["JoMingyu <mingyu.planb@gmail.com>"]
 license = "MIT"

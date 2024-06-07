@@ -35,10 +35,10 @@ def post(url: str, data: Union[str, bytes], headers: dict) -> str:
         except Exception as e:
             last_exception = e
             continue
-        if 'com.google.play.gateway.proto.PlayGatewayError' in resp:
+        if "com.google.play.gateway.proto.PlayGatewayError" in resp:
             rate_exceeded_count += 1
-            last_exception = Exception('com.google.play.gateway.proto.PlayGatewayError')
-            time.sleep(RATE_LIMIT_DELAY*rate_exceeded_count)
+            last_exception = Exception("com.google.play.gateway.proto.PlayGatewayError")
+            time.sleep(RATE_LIMIT_DELAY * rate_exceeded_count)
             continue
         return resp
     raise last_exception
