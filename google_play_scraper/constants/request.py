@@ -110,7 +110,44 @@ class Formats:
         def build_body(self, *args):
             return None
 
+    class _DataSafety(Format):
+        URL_FORMAT = (
+            "{}/_/PlayStoreUi/data/batchexecute"
+            "?rpcids=Ws7gDc"
+            "&source-path=%2Fstore%2Fapps%2Fdatasafety"
+            "&hl={{lang}}"
+            "&gl={{country}}"
+            "&soc-app=121"
+            "&soc-platform=1"
+            "&soc-device=1"
+        ).format(PLAY_STORE_BASE_URL)
+
+        def build(self, lang: str, country: str) -> str:
+            return self.URL_FORMAT.format(lang=lang, country=country)
+
+        PAYLOAD_FORMAT = (
+            "f.req=%5B%5B%5B%22Ws7gDc%22%2C%22"
+            "%5Bnull%2Cnull%2C%5B%5B1%2C69%2C70%2C96%2C100%2C138%5D%5D%2C"
+            "%5B%5B%5B1%2Cnull%2C1%5D%2Cnull%2C%5B%5B%5B%5D%5D%5D%2C"
+            "null%2Cnull%2Cnull%2Cnull%2C%5Bnull%2C2%5D%2C"
+            "null%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C"
+            "null%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2C"
+            "%5B1%5D%5D%2C"
+            "%5Bnull%2C%5B%5B%5B%5D%5D%5D%2Cnull%2Cnull%2C%5B1%5D%5D%2C"
+            "%5Bnull%2C%5B%5B%5B%5D%5D%5D%2Cnull%2C%5B1%5D%5D%2C"
+            "%5Bnull%2C%5B%5B%5B%5D%5D%5D%5D%2C"
+            "null%2Cnull%2Cnull%2Cnull%2C"
+            "%5B%5B%5B%5B%5D%5D%5D%5D%2C"
+            "%5B%5B%5B%5B%5D%5D%5D%5D%5D%2C"
+            "null%2C%5B%5B%5C%22{app_id}%5C%22%2C7%5D%5D%5D%22"
+            "%2Cnull%2C%221%22%5D%5D%5D&"
+        )
+
+        def build_body(self, app_id: str) -> bytes:
+            return self.PAYLOAD_FORMAT.format(app_id=app_id).encode()
+
     Detail = _Detail()
     Reviews = _Reviews()
     Permissions = _Permissions()
     Searchresults = _Searchresults()
+    DataSafety = _DataSafety()

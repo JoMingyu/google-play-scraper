@@ -401,5 +401,46 @@ Result of `print(result)`:
   'installs': '10,000,000+'}]
 ```
 
+### App Data Safety
+`data_safety` returns the privacy and security information declared by the developer in the Google Play data safety section.
+
+```python
+from google_play_scraper import data_safety
+
+result = data_safety(
+    'com.spotify.music',
+    lang='en',    # defaults to 'en'
+    country='us'  # defaults to 'us'
+)
+```
+
+Result of `print(result)`:
+
+```python
+{
+    "privacyPolicyUrl": "https://www.spotify.com/legal/privacy-policy/",
+    "sharedData": [
+        {
+            "category": "Personal info",
+            "items": [
+                {"data": "Name", "optional": False, "purpose": "App functionality, Personalization"}
+            ]
+        }
+    ],
+    "collectedData": [
+        {
+            "category": "Location",
+            "items": [
+                {"data": "Approximate location", "optional": True, "purpose": "App functionality"}
+            ]
+        }
+    ],
+    "securityPractices": [
+        {"practice": "Data is encrypted in transit", "description": "..."},
+        {"practice": "You can request that data be deleted", "description": "..."}
+    ]
+}
+```
+
 ## Changes
 Change logs are here : [CHANGELOG.md](CHANGELOG.md)

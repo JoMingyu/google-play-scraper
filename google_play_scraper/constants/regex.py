@@ -8,3 +8,4 @@ class Regex:
     VALUE = re.compile(r"data:([\s\S]*?), sideChannel: {}}\);<\/")
     REVIEWS = re.compile(r"\)]}'\n\n([\s\S]+)")
     PERMISSIONS = re.compile(r"\)]}'\n\n([\s\S]+)")
+    DATA_SAFETY = re.compile(r"\)]}'\n\n([\s\S]+)")

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Union
 
 from google_play_scraper.utils import nested_lookup
 from google_play_scraper.utils.data_processors import unescape_text
@@ -9,8 +9,8 @@ class ElementSpec:
     def __init__(
         self,
         ds_num: Optional[int],
-        data_map: List[int],
-        post_processor: Callable = None,
+        data_map: List[Union[int, str]],
+        post_processor: Optional[Callable] = None,
         fallback_value: Any = None,
     ):
         self.ds_num = ds_num
@@ -66,6 +66,15 @@ def get_categories(s):
         )
 
     return categories
+
+
+def resolve_specs(data: Any, mappings: Dict[str, ElementSpec]) -> Dict[str, Any]:
+    result = {}
+
+    for key, spec in mappings.items():
+        result[key] = spec.extract_content(data)
+
+    return result
 
 
 class ElementSpecs:
@@ -239,4 +248,69 @@ class ElementSpecs:
         "descriptionHTML": ElementSpec(None, [0, 13, 1]),
         "developer": ElementSpec(None, [0, 14]),
         "installs": ElementSpec(None, [0, 15]),
+    }
+
+    DataSafetySharedDataElement = {
+        "data": ElementSpec(None, [0]),
+        "optional": ElementSpec(None, [1]),
+        "purpose": ElementSpec(None, [2]),
+    }
+
+    DataSafetySharedData = {
+        "category": ElementSpec(None, [0, 1]),
+        "items": ElementSpec(
+            None,
+            [4],
+            lambda v: [
+                resolve_specs(e, ElementSpecs.DataSafetySharedDataElement) for e in v
+            ],
+        ),
+    }
+
+    DataSafetyCollectedDataElement = {
+        "data": ElementSpec(None, [0]),
+        "optional": ElementSpec(None, [1]),
+        "purpose": ElementSpec(None, [2]),
+    }
+
+    DataSafetyCollectedData = {
+        "category": ElementSpec(None, [0, 1]),
+        "items": ElementSpec(
+            None,
+            [4],
+            lambda v: [
+                resolve_specs(e, ElementSpecs.DataSafetyCollectedDataElement) for e in v
+            ],
+        ),
+    }
+
+    DataSafetySecurityPractices = {
+        "practice": ElementSpec(None, [1]),
+        "description": ElementSpec(None, [2, 1]),
+    }
+
+    DataSafety = {
+        "privacyPolicyUrl": ElementSpec(None, [1, 2, 1, "100", 0, 5, 2]),
+        "sharedData": ElementSpec(
+            None,
+            [1, 2, 1, "138", 4, 0, 0],
+            lambda v: [resolve_specs(e, ElementSpecs.DataSafetySharedData) for e in v],
+            fallback_value=[],
+        ),
+        "collectedData": ElementSpec(
+            None,
+            [1, 2, 1, "138", 4, 1, 0],
+            lambda v: [
+                resolve_specs(e, ElementSpecs.DataSafetyCollectedData) for e in v
+            ],
+            fallback_value=[],
+        ),
+        "securityPractices": ElementSpec(
+            None,
+            [1, 2, 1, "138", 9, 2],
+            lambda v: [
+                resolve_specs(e, ElementSpecs.DataSafetySecurityPractices) for e in v
+            ],
+            fallback_value=[],
+        ),
     }
